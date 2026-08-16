@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c ' *)",
+      "Bash(cd \"c:/Users/dpbis/Downloads/1786319385513_synthetic_data/synthetic_data\" && cat .claude/settings.json && echo \"---local---\" && cat .claude/settings.local.json && echo \"=== parent ===\" && ls -la \"c:/Users/dpbis/Downloads\" | head -60)",
+      "Read(//c/Users/dpbis/Downloads/**)",
+      "Bash(cd \"c:/Users/dpbis/Downloads\" && grep -nE \"emotion|EMOTION|anxious\" \"1786319363373_generate_synthetic_data.py\" | head -40)"
+    ]
+  }
+}
