@@ -1,0 +1,13 @@
+Focus Bridge - Room 30 Explorers
+David Nguyen - Maple Ridge Elementary
+Changes between 2026-07-31 and 2026-08-07
+
+3 resolved.
+5 students unchanged.
+
+RESOLVED (3)
+  Elowen: info -> not flagged
+  Finn: medium -> not flagged
+  Jun: medium -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

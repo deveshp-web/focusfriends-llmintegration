@@ -1,0 +1,77 @@
+{
+  "generated_at": "2026-08-30T11:20:55",
+  "reference_time": "2026-07-31T13:08:00",
+  "cutoff": "2026-07-01T13:08:00",
+  "config": {
+    "streak_length": 4,
+    "recency_days": 30,
+    "streak_window_days": 7,
+    "min_distinct_days": 2,
+    "repeated_valences": [
+      "positive"
+    ],
+    "density_trigger_enabled": true,
+    "same_day_cluster_enabled": true,
+    "same_day_alert_length": 6,
+    "trigger_channels": {
+      "density": "watch",
+      "negative": "alert",
+      "repeated": "positive",
+      "same_day_cluster": "watch"
+    },
+    "negative_emotions": [
+      "angry",
+      "anxious",
+      "confused",
+      "frustrated",
+      "overwhelmed",
+      "sad",
+      "scared"
+    ]
+  },
+  "totals": {
+    "students_scanned": 4437,
+    "students_flagged": 3073,
+    "classrooms_with_flags": 220,
+    "by_channel": {
+      "alert": 2193,
+      "positive": 648,
+      "watch": 232
+    },
+    "by_priority": {
+      "medium": 533,
+      "info": 648,
+      "high": 1660,
+      "watch": 232
+    },
+    "students_by_trigger": {
+      "negative": 2185,
+      "density": 1578,
+      "repeated": 919,
+      "same_day_cluster": 797
+    },
+    "recent_emotion_counts": {
+      "happy": 80504,
+      "calm": 55882,
+      "okay": 50335,
+      "frustrated": 38215,
+      "excited": 33623,
+      "anxious": 32517,
+      "overwhelmed": 24751,
+      "sad": 22566,
+      "angry": 21158
+    },
+    "dropped_entries": {},
+    "unmatched_classroom_codes": []
+  },
+  "judge_case_populations": {
+    "at_window_edge": 1056,
+    "barely_multi_day": 2091,
+    "dense_but_unflagged": 0,
+    "one_short": 2206,
+    "one_short_corroborated": 264,
+    "repeated_positive": 1096,
+    "same_day_only": 1007,
+    "watch_only": 180
+  }
+}

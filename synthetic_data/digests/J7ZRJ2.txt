@@ -1,0 +1,19 @@
+Focus Bridge - Room 19 Learners
+Carlos Fischer - Riverside SPED Cooperative
+Changes between 2026-07-31 and 2026-08-07
+
+2 eased, 1 resolved.
+13 students unchanged.
+
+EASED (2)
+  Ben: high -> medium
+      5 negative check-ins in a row over 3 days
+      Suggested: 🌀 Go back to Fidget Spinner
+  Kai: medium -> watch
+      34% of recent check-ins negative, never four in a row
+      Suggested: 🌧️ Kai has not opened Watch Rain yet
+
+RESOLVED (1)
+  Emmy: info -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

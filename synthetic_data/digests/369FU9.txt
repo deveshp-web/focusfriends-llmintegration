@@ -1,0 +1,12 @@
+Focus Bridge - Room 26 Friends
+Maria Cohen - Sunrise Learning Center
+Changes between 2026-07-31 and 2026-08-07
+
+2 resolved.
+11 students unchanged.
+
+RESOLVED (2)
+  Hugo: medium -> not flagged
+  Theo: medium -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

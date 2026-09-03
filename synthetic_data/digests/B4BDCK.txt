@@ -1,0 +1,17 @@
+Focus Bridge - Room 7 Explorers
+David Ahmed - Sunrise Learning Center
+Changes between 2026-07-31 and 2026-08-07
+
+1 eased, 2 resolved.
+13 students unchanged.
+
+EASED (1)
+  Oliver: medium -> watch
+      46% of recent check-ins negative, never four in a row
+      Suggested: 🌬️ Oliver has not opened Deep Breathing yet
+
+RESOLVED (2)
+  Kayla: info -> not flagged
+  Oliver: info -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

@@ -1,0 +1,13 @@
+Focus Bridge - Room 3 Friends
+Emily Torres - Willow Creek Academy
+Changes between 2026-07-31 and 2026-08-07
+
+3 resolved.
+13 students unchanged.
+
+RESOLVED (3)
+  Emmy: medium -> not flagged
+  Sadie: medium -> not flagged
+  Wren: medium -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

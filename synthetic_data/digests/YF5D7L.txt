@@ -1,0 +1,19 @@
+Focus Bridge - Room 2 Stars
+James Kim - Harmony Special Education Center
+Changes between 2026-07-31 and 2026-08-07
+
+1 eased, 4 resolved.
+22 students unchanged.
+
+EASED (1)
+  Felix: high -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🌬️ Felix has not opened Deep Breathing yet
+
+RESOLVED (4)
+  Dario: medium -> not flagged
+  Jayden: medium -> not flagged
+  Jun: info -> not flagged
+  Theo: info -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

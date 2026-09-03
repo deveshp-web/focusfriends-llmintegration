@@ -1,0 +1,18 @@
+Focus Bridge - Room 19 Stars
+Emily Smith - Sunrise Learning Center
+Changes between 2026-07-31 and 2026-08-07
+
+1 eased, 3 resolved.
+15 students unchanged.
+
+EASED (1)
+  Priya: high -> medium
+      6 negative check-ins in a row over 2 days
+      Suggested: 🖐️ Priya has not opened 5-4-3-2-1 yet
+
+RESOLVED (3)
+  Amara: medium -> not flagged
+  Ben: info -> not flagged
+  Finn: info -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

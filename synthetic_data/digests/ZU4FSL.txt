@@ -1,0 +1,29 @@
+Focus Bridge - Room 15 Explorers
+James Patel - Cedar Park Elementary
+Changes between 2026-07-31 and 2026-08-07
+
+5 eased, 2 resolved.
+16 students unchanged.
+
+EASED (5)
+  Beckett: watch -> info
+      7 "happy" check-ins in a row
+      Suggested: Say this one out loud
+  Gabriel: high -> medium
+      7 negative check-ins in a row over 2 days
+      Suggested: 🌌 Go back to Starry Night
+  Hana: medium -> watch
+      25% of recent check-ins negative, never four in a row
+      Suggested: 🌬️ Go back to Deep Breathing
+  Jun: high -> medium
+      6 negative check-ins in a row over 2 days
+      Suggested: 🖐️ Jun has not opened 5-4-3-2-1 yet
+  Malik: high -> medium
+      6 negative check-ins in a row over 2 days
+      Suggested: 🌧️ Go back to Watch Rain
+
+RESOLVED (2)
+  Priya: watch -> not flagged
+  Zara: medium -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

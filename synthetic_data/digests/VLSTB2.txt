@@ -1,0 +1,16 @@
+Focus Bridge - Room 24 Stars
+Emily Chen - Riverside SPED Cooperative
+Changes between 2026-07-31 and 2026-08-07
+
+2 eased.
+12 students unchanged.
+
+EASED (2)
+  Chloe: medium -> info
+      6 "happy" check-ins in a row
+      Suggested: Say this one out loud
+  Noor: high -> medium
+      5 negative check-ins in a row over 2 days
+      Suggested: 🌀 Go back to Fidget Spinner
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

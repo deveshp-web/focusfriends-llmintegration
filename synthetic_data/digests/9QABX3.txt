@@ -1,0 +1,12 @@
+Focus Bridge - Room 22 Learners
+David Fischer - Sunrise Learning Center
+Changes between 2026-07-31 and 2026-08-07
+
+2 resolved.
+21 students unchanged.
+
+RESOLVED (2)
+  Rosa: info -> not flagged
+  Rosa: medium -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

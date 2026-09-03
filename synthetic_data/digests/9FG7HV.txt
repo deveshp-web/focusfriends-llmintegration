@@ -1,0 +1,19 @@
+Focus Bridge - Room 4 Learners
+Lisa Torres - Willow Creek Academy
+Changes between 2026-07-31 and 2026-08-07
+
+2 eased, 1 resolved.
+18 students unchanged.
+
+EASED (2)
+  Camila: high -> medium
+      5 negative check-ins in a row over 2 days
+      Suggested: 🫧 Camila has not opened Pop Bubbles yet
+  Felix: high -> medium
+      5 negative check-ins in a row over 2 days
+      Suggested: 🌬️ Felix has not opened Deep Breathing yet
+
+RESOLVED (1)
+  Nadia: medium -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

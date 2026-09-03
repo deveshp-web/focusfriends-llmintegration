@@ -1,0 +1,22 @@
+Focus Bridge - Room 16 Champions
+Rachel Cohen - Harmony Special Education Center
+Changes between 2026-07-31 and 2026-08-07
+
+3 eased, 1 resolved.
+11 students unchanged.
+
+EASED (3)
+  Kai: medium -> watch
+      25% of recent check-ins negative, never four in a row
+      Suggested: 🖐️ Kai has not opened 5-4-3-2-1 yet
+  Kayla: high -> medium
+      8 negative check-ins in a row over 2 days
+      Suggested: 🌀 Go back to Fidget Spinner
+  Yusuf: watch -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
+
+RESOLVED (1)
+  Hugo: info -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

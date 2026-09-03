@@ -1,0 +1,16 @@
+Focus Bridge - Room 24 Friends
+Robert Fischer - Northgate Elementary
+Changes between 2026-07-31 and 2026-08-07
+
+2 eased.
+13 students unchanged.
+
+EASED (2)
+  Beckett: high -> medium
+      5 negative check-ins in a row over 3 days
+      Suggested: 🖐️ Beckett has not opened 5-4-3-2-1 yet
+  Maya: high -> medium
+      5 negative check-ins in a row over 2 days
+      Suggested: 🌌 Maya has not opened Starry Night yet
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

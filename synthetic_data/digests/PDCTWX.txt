@@ -1,0 +1,14 @@
+Focus Bridge - Room 27 Learners
+Daniel Kim - Bright Horizons School
+Changes between 2026-07-31 and 2026-08-07
+
+4 resolved.
+8 students unchanged.
+
+RESOLVED (4)
+  Elowen: watch -> not flagged
+  Kai: info -> not flagged
+  Nadia: medium -> not flagged
+  Priya: medium -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

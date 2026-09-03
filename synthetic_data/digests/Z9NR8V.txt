@@ -1,0 +1,16 @@
+Focus Bridge - Room 28 Champions
+Michael Fischer - Northgate Elementary
+Changes between 2026-07-31 and 2026-08-07
+
+2 eased.
+14 students unchanged.
+
+EASED (2)
+  Nadia: high -> medium
+      5 negative check-ins in a row over 3 days
+      Suggested: 🌬️ Nadia has not opened Deep Breathing yet
+  Omar: high -> watch
+      56% of recent check-ins negative, never four in a row
+      Suggested: 🌌 Omar has not opened Starry Night yet
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

@@ -1,0 +1,16 @@
+Focus Bridge - Room 16 Stars
+Ashley Chen - Harmony Special Education Center
+Changes between 2026-07-31 and 2026-08-07
+
+1 eased, 1 resolved.
+17 students unchanged.
+
+EASED (1)
+  Layla: watch -> info
+      4 "calm" check-ins in a row
+      Suggested: Say this one out loud
+
+RESOLVED (1)
+  Kai: info -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

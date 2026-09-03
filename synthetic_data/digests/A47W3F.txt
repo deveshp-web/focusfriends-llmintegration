@@ -1,0 +1,20 @@
+Focus Bridge - Room 27 Friends
+Jennifer Chen - Harmony Special Education Center
+Changes between 2026-07-31 and 2026-08-07
+
+2 eased, 2 resolved.
+16 students unchanged.
+
+EASED (2)
+  Diego: medium -> watch
+      48% of recent check-ins negative, never four in a row
+      Suggested: 🌧️ Go back to Watch Rain
+  Omar: high -> medium
+      5 negative check-ins in a row over 2 days
+      Suggested: 🌧️ Omar has not opened Watch Rain yet
+
+RESOLVED (2)
+  Finn: info -> not flagged
+  Jayden: info -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

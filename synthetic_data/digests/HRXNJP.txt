@@ -1,0 +1,19 @@
+Focus Bridge - Room 8 Friends
+Andrew Ahmed - Bright Horizons School
+Changes between 2026-07-31 and 2026-08-07
+
+2 eased, 1 resolved.
+9 students unchanged.
+
+EASED (2)
+  Hana: high -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🫧 Hana has not opened Pop Bubbles yet
+  Leo: high -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🌬️ Leo has not opened Deep Breathing yet
+
+RESOLVED (1)
+  Ibrahim: watch -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

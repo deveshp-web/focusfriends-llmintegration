@@ -1,0 +1,17 @@
+Focus Bridge - Room 30 Champions
+Priya Patel - Oakdale Elementary
+Changes between 2026-07-31 and 2026-08-07
+
+1 eased, 2 resolved.
+13 students unchanged.
+
+EASED (1)
+  Nadia: high -> medium
+      5 negative check-ins in a row over 2 days
+      Suggested: 🌌 Nadia has not opened Starry Night yet
+
+RESOLVED (2)
+  Wren: medium -> not flagged
+  Zara: info -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

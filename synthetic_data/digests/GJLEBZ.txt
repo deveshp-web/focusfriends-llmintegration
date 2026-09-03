@@ -1,0 +1,17 @@
+Focus Bridge - Room 27 Learners
+Daniel Rossi - Sunrise Learning Center
+Changes between 2026-07-31 and 2026-08-07
+
+1 eased, 2 resolved.
+11 students unchanged.
+
+EASED (1)
+  Camila: high -> medium
+      5 negative check-ins in a row over 2 days
+      Suggested: 🌬️ Camila has not opened Deep Breathing yet
+
+RESOLVED (2)
+  Ben: watch -> not flagged
+  Jayden: info -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

@@ -1,0 +1,20 @@
+Focus Bridge - Room 30 Champions
+James Fischer - Willow Creek Academy
+Changes between 2026-07-31 and 2026-08-07
+
+1 eased, 5 resolved.
+7 students unchanged.
+
+EASED (1)
+  Milo: high -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🖐️ Milo has not opened 5-4-3-2-1 yet
+
+RESOLVED (5)
+  Ava: watch -> not flagged
+  Ben: info -> not flagged
+  Oliver: info -> not flagged
+  Sadie: info -> not flagged
+  Sadie: info -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

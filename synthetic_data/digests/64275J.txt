@@ -1,0 +1,16 @@
+Focus Bridge - Room 6 Stars
+Jennifer Lopez - Riverside SPED Cooperative
+Changes between 2026-07-31 and 2026-08-07
+
+1 eased, 1 resolved.
+12 students unchanged.
+
+EASED (1)
+  Maya: high -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🖐️ Maya has not opened 5-4-3-2-1 yet
+
+RESOLVED (1)
+  Fatima: info -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

@@ -1,0 +1,13 @@
+Focus Bridge - Room 24 Learners
+Sarah Torres - Bright Horizons School
+Changes between 2026-07-31 and 2026-08-07
+
+3 resolved.
+14 students unchanged.
+
+RESOLVED (3)
+  Dario: high -> not flagged
+  Kayla: info -> not flagged
+  Quinn: watch -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

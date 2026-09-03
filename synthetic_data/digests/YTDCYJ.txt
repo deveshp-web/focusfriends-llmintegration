@@ -1,0 +1,19 @@
+Focus Bridge - Room 22 Stars
+Emily Ahmed - Riverside SPED Cooperative
+Changes between 2026-07-31 and 2026-08-07
+
+2 eased, 1 resolved.
+19 students unchanged.
+
+EASED (2)
+  Emmy: high -> watch
+      54% of recent check-ins negative, never four in a row
+      Suggested: 🌀 Go back to Fidget Spinner
+  Jasper: high -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🌀 Jasper has not opened Fidget Spinner yet
+
+RESOLVED (1)
+  Zara: info -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

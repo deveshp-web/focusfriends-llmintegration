@@ -1,0 +1,22 @@
+Focus Bridge - Room 24 Stars
+Lisa Kim - Riverside SPED Cooperative
+Changes between 2026-07-31 and 2026-08-07
+
+3 eased, 1 resolved.
+13 students unchanged.
+
+EASED (3)
+  Emmy: high -> medium
+      5 negative check-ins in a row over 3 days
+      Suggested: 🖐️ Emmy has not opened 5-4-3-2-1 yet
+  Fatima: high -> medium
+      4 negative check-ins in a row over 3 days
+      Suggested: 🌌 Fatima has not opened Starry Night yet
+  Finn: high -> medium
+      5 negative check-ins in a row over 2 days
+      Suggested: 🌬️ Go back to Deep Breathing
+
+RESOLVED (1)
+  Jayden: info -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

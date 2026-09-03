@@ -1,0 +1,12 @@
+Focus Bridge - Room 16 Stars
+Sarah Nguyen - Harmony Special Education Center
+Changes between 2026-07-31 and 2026-08-07
+
+2 resolved.
+10 students unchanged.
+
+RESOLVED (2)
+  Kai: info -> not flagged
+  Milo: medium -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

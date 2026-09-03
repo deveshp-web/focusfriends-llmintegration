@@ -1,0 +1,26 @@
+Focus Bridge - Room 4 Stars
+David Cohen - Sunrise Learning Center
+Changes between 2026-07-31 and 2026-08-07
+
+4 eased, 2 resolved.
+15 students unchanged.
+
+EASED (4)
+  Ben: high -> medium
+      5 negative check-ins in a row over 2 days
+      Suggested: 🌧️ Ben has not opened Watch Rain yet
+  Camila: medium -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
+  Ezra: high -> medium
+      6 negative check-ins in a row over 2 days
+      Suggested: 🌀 Go back to Fidget Spinner
+  Luca: high -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🌬️ Go back to Deep Breathing
+
+RESOLVED (2)
+  Gabriel: medium -> not flagged
+  Sadie: medium -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

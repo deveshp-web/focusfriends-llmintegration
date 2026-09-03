@@ -1,0 +1,11 @@
+Focus Bridge - Room 29 Learners
+Carlos Patel - Bright Horizons School
+Changes between 2026-07-31 and 2026-08-07
+
+1 resolved.
+13 students unchanged.
+
+RESOLVED (1)
+  Oliver: medium -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

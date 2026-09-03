@@ -1,0 +1,13 @@
+Focus Bridge - Room 26 Champions
+Jennifer Cohen - Bright Horizons School
+Changes between 2026-07-31 and 2026-08-07
+
+3 resolved.
+16 students unchanged.
+
+RESOLVED (3)
+  Emmy: watch -> not flagged
+  Isla: info -> not flagged
+  Maya: watch -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

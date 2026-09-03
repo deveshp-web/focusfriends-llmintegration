@@ -1,0 +1,16 @@
+Focus Bridge - Room 7 Friends
+Daniel Lopez - Cedar Park Elementary
+Changes between 2026-07-31 and 2026-08-07
+
+1 eased, 1 resolved.
+9 students unchanged.
+
+EASED (1)
+  Ezra: medium -> watch
+      45% of recent check-ins negative, never four in a row
+      Suggested: 🌀 Go back to Fidget Spinner
+
+RESOLVED (1)
+  Oliver: info -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

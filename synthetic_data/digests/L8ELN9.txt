@@ -1,0 +1,19 @@
+Focus Bridge - Room 4 Stars
+Robert Rossi - Lincoln Elementary
+Changes between 2026-07-31 and 2026-08-07
+
+2 eased, 1 resolved.
+21 students unchanged.
+
+EASED (2)
+  Chloe: high -> medium
+      5 negative check-ins in a row over 2 days
+      Suggested: 🖐️ Chloe has not opened 5-4-3-2-1 yet
+  Nadia: high -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🌬️ Go back to Deep Breathing
+
+RESOLVED (1)
+  Beckett: high -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

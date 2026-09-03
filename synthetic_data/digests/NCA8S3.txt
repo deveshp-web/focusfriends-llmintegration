@@ -1,0 +1,16 @@
+Focus Bridge - Room 22 Stars
+Rachel Chen - Willow Creek Academy
+Changes between 2026-07-31 and 2026-08-07
+
+1 eased, 1 resolved.
+9 students unchanged.
+
+EASED (1)
+  Leo: high -> medium
+      5 negative check-ins in a row over 2 days - clustered around Clean Up
+      Suggested: Clean Up is where this shows up
+
+RESOLVED (1)
+  Oliver: info -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

@@ -1,0 +1,20 @@
+Focus Bridge - Room 3 Champions
+David Lopez - Cedar Park Elementary
+Changes between 2026-07-31 and 2026-08-07
+
+2 eased, 2 resolved.
+16 students unchanged.
+
+EASED (2)
+  Ibrahim: medium -> watch
+      40% of recent check-ins negative, never four in a row
+      Suggested: 🫧 Ibrahim has not opened Pop Bubbles yet
+  Jasper: high -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🖐️ Jasper has not opened 5-4-3-2-1 yet
+
+RESOLVED (2)
+  Ezra: medium -> not flagged
+  Mabel: medium -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

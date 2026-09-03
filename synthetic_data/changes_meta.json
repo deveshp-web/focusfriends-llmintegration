@@ -1,0 +1,17 @@
+{
+  "generated_at": "2026-08-30T11:21:14",
+  "window": {
+    "prev_end": "2026-07-31",
+    "now_end": "2026-08-07"
+  },
+  "previous_suffix": "_prev",
+  "previous_flagged": 3073,
+  "current_flagged": 2842,
+  "totals": {
+    "unchanged": 2665,
+    "eased": 177,
+    "resolved": 231
+  },
+  "classrooms": 220,
+  "classrooms_with_changes": 182
+}

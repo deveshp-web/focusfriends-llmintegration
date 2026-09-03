@@ -1,0 +1,13 @@
+Focus Bridge - Room 14 Friends
+Ashley Smith - Oakdale Elementary
+Changes between 2026-07-31 and 2026-08-07
+
+1 eased.
+19 students unchanged.
+
+EASED (1)
+  Fatima: high -> medium
+      6 negative check-ins in one day (2026-07-13)
+      Suggested: Find out what happened on 2026-07-13
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

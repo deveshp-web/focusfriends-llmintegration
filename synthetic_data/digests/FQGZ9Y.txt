@@ -1,0 +1,16 @@
+Focus Bridge - Room 28 Learners
+Rachel Kim - Bright Horizons School
+Changes between 2026-07-31 and 2026-08-07
+
+2 eased.
+5 students unchanged.
+
+EASED (2)
+  Felix: high -> medium
+      5 negative check-ins in a row over 2 days
+      Suggested: 🖐️ Felix has not opened 5-4-3-2-1 yet
+  Noor: medium -> watch
+      30% of recent check-ins negative, never four in a row
+      Suggested: 🌀 Noor has not opened Fidget Spinner yet
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

@@ -1,0 +1,19 @@
+Focus Bridge - Room 2 Stars
+Jennifer Lopez - Sunrise Learning Center
+Changes between 2026-07-31 and 2026-08-07
+
+3 eased.
+15 students unchanged.
+
+EASED (3)
+  Finn: high -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🖐️ Finn has not opened 5-4-3-2-1 yet
+  Layla: high -> medium
+      5 negative check-ins in a row over 2 days
+      Suggested: 🌀 Go back to Fidget Spinner
+  Noor: high -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🖐️ Noor has not opened 5-4-3-2-1 yet
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

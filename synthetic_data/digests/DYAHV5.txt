@@ -1,0 +1,16 @@
+Focus Bridge - Room 19 Champions
+Maria Nguyen - Sunrise Learning Center
+Changes between 2026-07-31 and 2026-08-07
+
+2 eased.
+16 students unchanged.
+
+EASED (2)
+  Emmy: high -> medium
+      7 negative check-ins in a row over 2 days - clustered around Lunch
+      Suggested: Lunch is where this shows up
+  Ezra: medium -> watch
+      31% of recent check-ins negative, never four in a row
+      Suggested: 🌀 Ezra has not opened Fidget Spinner yet
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

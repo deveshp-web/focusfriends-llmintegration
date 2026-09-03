@@ -1,0 +1,16 @@
+Focus Bridge - Room 28 Stars
+Sarah Nguyen - Northgate Elementary
+Changes between 2026-07-31 and 2026-08-07
+
+1 eased, 1 resolved.
+12 students unchanged.
+
+EASED (1)
+  Diego: medium -> watch
+      40% of recent check-ins negative, never four in a row
+      Suggested: 🌬️ Go back to Deep Breathing
+
+RESOLVED (1)
+  Chloe: info -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

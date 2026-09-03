@@ -1,0 +1,16 @@
+Focus Bridge - Room 10 Friends
+Emily Rossi - Northgate Elementary
+Changes between 2026-07-31 and 2026-08-07
+
+2 eased.
+14 students unchanged.
+
+EASED (2)
+  Noor: high -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🌧️ Go back to Watch Rain
+  Omar: high -> medium
+      7 negative check-ins in a row over 2 days
+      Suggested: 🌧️ Go back to Watch Rain
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

@@ -1,0 +1,16 @@
+Focus Bridge - Room 29 Learners
+Lisa Smith - Maple Ridge Elementary
+Changes between 2026-07-31 and 2026-08-07
+
+2 eased.
+11 students unchanged.
+
+EASED (2)
+  Beckett: high -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🖐️ Beckett has not opened 5-4-3-2-1 yet
+  Grace: high -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🖐️ Grace has not opened 5-4-3-2-1 yet
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

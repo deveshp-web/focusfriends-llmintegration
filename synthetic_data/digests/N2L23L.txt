@@ -1,0 +1,17 @@
+Focus Bridge - Room 19 Friends
+Rachel Garcia - Willow Creek Academy
+Changes between 2026-07-31 and 2026-08-07
+
+1 eased, 2 resolved.
+11 students unchanged.
+
+EASED (1)
+  Milo: watch -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
+
+RESOLVED (2)
+  Diego: medium -> not flagged
+  Zion: high -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

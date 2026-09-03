@@ -1,0 +1,19 @@
+Focus Bridge - Room 28 Stars
+Daniel Okafor - Northgate Elementary
+Changes between 2026-07-31 and 2026-08-07
+
+2 eased, 1 resolved.
+9 students unchanged.
+
+EASED (2)
+  Aiden: high -> medium
+      5 negative check-ins in a row over 2 days
+      Suggested: 🖐️ Aiden has not opened 5-4-3-2-1 yet
+  Jun: medium -> watch
+      26% of recent check-ins negative, never four in a row
+      Suggested: 🌌 Jun has not opened Starry Night yet
+
+RESOLVED (1)
+  Malik: medium -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

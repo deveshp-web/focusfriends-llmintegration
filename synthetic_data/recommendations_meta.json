@@ -1,0 +1,61 @@
+{
+  "generated_at": "2026-08-30T11:21:13",
+  "detector_run": "2026-08-30T11:21:06",
+  "reference_time": "2026-08-07T13:08:00",
+  "cutoff": "2026-07-08T13:08:00",
+  "config": {
+    "task_window_minutes": 15,
+    "min_task_hits": 3,
+    "min_task_excess": 0.15,
+    "task_max_p": 0.05,
+    "min_task_exposure": 5,
+    "time_max_p": 0.05,
+    "time_min_excess": 0.15,
+    "aac_low_ratio": 0.35,
+    "caps": {
+      "alert": 4,
+      "watch": 2,
+      "positive": 1
+    },
+    "room_task_min_students": 3,
+    "room_task_min_share": 0.25
+  },
+  "totals": {
+    "students_advised": 2842,
+    "classrooms": 220,
+    "recommendations": 8436,
+    "students_with_task_cluster": 52,
+    "task_clusters_corroborated_by_notes": 1,
+    "by_category": {
+      "regulation": 2277,
+      "escalate": 1566,
+      "document": 1563,
+      "story": 1320,
+      "motivation": 858,
+      "celebrate": 565,
+      "communication": 178,
+      "antecedent": 58,
+      "monitor": 51
+    },
+    "by_rule": {
+      "regulation_tool": 2277,
+      "escalate_repeat_episodes": 1417,
+      "story_assign": 1320,
+      "document_context": 1173,
+      "motivation_tokens": 858,
+      "celebrate": 565,
+      "document_note": 390,
+      "communication_aac": 178,
+      "escalate_long_streak": 101,
+      "antecedent_task": 52,
+      "monitor_watch": 51,
+      "escalate_acute_cluster": 48,
+      "antecedent_time": 6
+    },
+    "room_rules": {
+      "room_documentation": 101,
+      "room_trend": 5
+    },
+    "dropped_entries": {}
+  }
+}

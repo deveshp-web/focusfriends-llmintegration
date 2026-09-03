@@ -1,0 +1,16 @@
+Focus Bridge - Room 17 Stars
+Daniel Cohen - Oakdale Elementary
+Changes between 2026-07-31 and 2026-08-07
+
+1 eased, 1 resolved.
+18 students unchanged.
+
+EASED (1)
+  Quinn: high -> medium
+      5 negative check-ins in a row over 2 days
+      Suggested: 🌧️ Go back to Watch Rain
+
+RESOLVED (1)
+  Ines: watch -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

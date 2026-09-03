@@ -1,0 +1,16 @@
+Focus Bridge - Room 3 Stars
+Daniel Fischer - Oakdale Elementary
+Changes between 2026-07-31 and 2026-08-07
+
+2 eased.
+10 students unchanged.
+
+EASED (2)
+  Gabriel: high -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🌀 Go back to Fidget Spinner
+  Kai: high -> medium
+      8 negative check-ins in a row over 2 days
+      Suggested: 🫧 Kai has not opened Pop Bubbles yet
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

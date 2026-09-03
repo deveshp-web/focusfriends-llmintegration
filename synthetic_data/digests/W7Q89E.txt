@@ -1,0 +1,17 @@
+Focus Bridge - Room 3 Friends
+Emily Garcia - Oakdale Elementary
+Changes between 2026-07-31 and 2026-08-07
+
+1 eased, 2 resolved.
+14 students unchanged.
+
+EASED (1)
+  Grace: high -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🖐️ Grace has not opened 5-4-3-2-1 yet
+
+RESOLVED (2)
+  Chloe: medium -> not flagged
+  Leo: info -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

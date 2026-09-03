@@ -1,0 +1,16 @@
+Focus Bridge - Room 1 Friends
+Michael Torres - Riverside SPED Cooperative
+Changes between 2026-07-31 and 2026-08-07
+
+2 eased.
+6 students unchanged.
+
+EASED (2)
+  Camila: high -> medium
+      6 negative check-ins in a row over 2 days
+      Suggested: 🖐️ Camila has not opened 5-4-3-2-1 yet
+  Gabriel: high -> medium
+      6 negative check-ins in a row over 2 days - clustered around Clean Up
+      Suggested: Clean Up is where this shows up
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

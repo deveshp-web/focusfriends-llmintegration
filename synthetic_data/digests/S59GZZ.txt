@@ -1,0 +1,15 @@
+Focus Bridge - Room 22 Champions
+Sarah Johnson - Cedar Park Elementary
+Changes between 2026-07-31 and 2026-08-07
+
+5 resolved.
+14 students unchanged.
+
+RESOLVED (5)
+  Ines: info -> not flagged
+  Jasper: info -> not flagged
+  Milo: watch -> not flagged
+  Priya: medium -> not flagged
+  Theo: info -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

@@ -1,0 +1,17 @@
+Focus Bridge - Room 23 Friends
+Carlos Patel - Harmony Special Education Center
+Changes between 2026-07-31 and 2026-08-07
+
+1 eased, 2 resolved.
+10 students unchanged.
+
+EASED (1)
+  Priya: high -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🌌 Go back to Starry Night
+
+RESOLVED (2)
+  Ava: info -> not flagged
+  Yusuf: medium -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

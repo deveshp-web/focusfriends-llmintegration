@@ -1,0 +1,21 @@
+Focus Bridge - Room 24 Stars
+Emily Smith - Bright Horizons School
+Changes between 2026-07-31 and 2026-08-07
+
+2 eased, 3 resolved.
+19 students unchanged.
+
+EASED (2)
+  Layla: high -> medium
+      5 negative check-ins in a row over 2 days
+      Suggested: 🫧 Layla has not opened Pop Bubbles yet
+  Priya: medium -> info
+      4 "calm" check-ins in a row
+      Suggested: Say this one out loud
+
+RESOLVED (3)
+  Ines: medium -> not flagged
+  Jasper: info -> not flagged
+  Sadie: info -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

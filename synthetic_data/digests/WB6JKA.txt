@@ -1,0 +1,19 @@
+Focus Bridge - Room 1 Champions
+Ashley Fischer - Maple Ridge Elementary
+Changes between 2026-07-31 and 2026-08-07
+
+1 eased, 4 resolved.
+13 students unchanged.
+
+EASED (1)
+  Leo: high -> medium
+      5 negative check-ins in a row over 2 days
+      Suggested: 🌌 Leo has not opened Starry Night yet
+
+RESOLVED (4)
+  Beckett: medium -> not flagged
+  Finn: medium -> not flagged
+  Milo: info -> not flagged
+  Nadia: info -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

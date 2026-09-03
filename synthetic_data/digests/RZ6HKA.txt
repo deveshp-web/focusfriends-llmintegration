@@ -1,0 +1,19 @@
+Focus Bridge - Room 7 Stars
+Kevin Johnson - Sunrise Learning Center
+Changes between 2026-07-31 and 2026-08-07
+
+2 eased, 1 resolved.
+7 students unchanged.
+
+EASED (2)
+  Diego: high -> medium
+      5 negative check-ins in a row over 3 days
+      Suggested: 🫧 Diego has not opened Pop Bubbles yet
+  Maya: high -> medium
+      4 negative check-ins in a row over 3 days
+      Suggested: 🫧 Maya has not opened Pop Bubbles yet
+
+RESOLVED (1)
+  Rosa: medium -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

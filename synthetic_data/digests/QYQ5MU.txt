@@ -1,0 +1,25 @@
+Focus Bridge - Room 22 Explorers
+Michael Brown - Northgate Elementary
+Changes between 2026-07-31 and 2026-08-07
+
+2 eased, 7 resolved.
+8 students unchanged.
+
+EASED (2)
+  Omar: high -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🫧 Omar has not opened Pop Bubbles yet
+  Yusuf: medium -> watch
+      45% of recent check-ins negative, never four in a row - clustered around Transition to Gym
+      Suggested: Transition to Gym is where this shows up
+
+RESOLVED (7)
+  Camila: medium -> not flagged
+  Kayla: watch -> not flagged
+  Kayla: medium -> not flagged
+  Layla: medium -> not flagged
+  Mabel: watch -> not flagged
+  Mabel: medium -> not flagged
+  Yusuf: watch -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

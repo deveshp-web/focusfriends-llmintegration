@@ -1,0 +1,13 @@
+Focus Bridge - Room 12 Friends
+Kevin Lopez - Harmony Special Education Center
+Changes between 2026-07-31 and 2026-08-07
+
+1 eased.
+12 students unchanged.
+
+EASED (1)
+  Omar: high -> medium
+      4 negative check-ins in a row over 3 days
+      Suggested: 🌧️ Omar has not opened Watch Rain yet
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

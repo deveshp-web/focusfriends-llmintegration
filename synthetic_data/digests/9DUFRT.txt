@@ -1,0 +1,13 @@
+Focus Bridge - Room 6 Champions
+David Ahmed - Maple Ridge Elementary
+Changes between 2026-07-31 and 2026-08-07
+
+3 resolved.
+14 students unchanged.
+
+RESOLVED (3)
+  Jayden: info -> not flagged
+  Milo: medium -> not flagged
+  Quinn: watch -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

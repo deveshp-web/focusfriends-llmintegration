@@ -1,0 +1,12 @@
+Focus Bridge - Room 5 Stars
+Michael Torres - Lincoln Elementary
+Changes between 2026-07-31 and 2026-08-07
+
+2 resolved.
+17 students unchanged.
+
+RESOLVED (2)
+  Jun: medium -> not flagged
+  Quinn: medium -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

@@ -1,0 +1,15 @@
+Focus Bridge - Room 2 Friends
+Andrew Rossi - Riverside SPED Cooperative
+Changes between 2026-07-31 and 2026-08-07
+
+5 resolved.
+8 students unchanged.
+
+RESOLVED (5)
+  Camila: medium -> not flagged
+  Kai: info -> not flagged
+  Mabel: medium -> not flagged
+  Nadia: info -> not flagged
+  Yusuf: medium -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

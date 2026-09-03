@@ -1,0 +1,14 @@
+Focus Bridge - Room 14 Champions
+Maria Torres - Cedar Park Elementary
+Changes between 2026-07-31 and 2026-08-07
+
+4 resolved.
+16 students unchanged.
+
+RESOLVED (4)
+  Amara: high -> not flagged
+  Ben: watch -> not flagged
+  Fatima: info -> not flagged
+  Ibrahim: info -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

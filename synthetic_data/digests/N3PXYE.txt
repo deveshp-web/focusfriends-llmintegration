@@ -1,0 +1,13 @@
+Focus Bridge - Room 30 Explorers
+Maria Smith - Harmony Special Education Center
+Changes between 2026-07-31 and 2026-08-07
+
+1 eased.
+7 students unchanged.
+
+EASED (1)
+  Nadia: high -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🖐️ Nadia has not opened 5-4-3-2-1 yet
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

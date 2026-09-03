@@ -1,0 +1,16 @@
+Focus Bridge - Room 16 Friends
+Jennifer Chen - Cedar Park Elementary
+Changes between 2026-07-31 and 2026-08-07
+
+2 eased.
+21 students unchanged.
+
+EASED (2)
+  Theo: high -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🌀 Theo has not opened Fidget Spinner yet
+  Zara: high -> watch
+      48% of recent check-ins negative, never four in a row
+      Suggested: 🖐️ Zara has not opened 5-4-3-2-1 yet
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

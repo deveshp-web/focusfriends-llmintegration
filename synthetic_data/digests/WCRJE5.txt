@@ -1,0 +1,16 @@
+Focus Bridge - Room 24 Champions
+Robert Smith - Riverside SPED Cooperative
+Changes between 2026-07-31 and 2026-08-07
+
+1 eased, 1 resolved.
+18 students unchanged.
+
+EASED (1)
+  Fatima: high -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🌀 Go back to Fidget Spinner
+
+RESOLVED (1)
+  Jasper: watch -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

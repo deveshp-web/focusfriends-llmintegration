@@ -1,0 +1,19 @@
+Focus Bridge - Room 23 Stars
+David Nguyen - Willow Creek Academy
+Changes between 2026-07-31 and 2026-08-07
+
+2 eased, 1 resolved.
+8 students unchanged.
+
+EASED (2)
+  Hana: watch -> info
+      5 "happy" check-ins in a row
+      Suggested: Say this one out loud
+  Quinn: medium -> watch
+      29% of recent check-ins negative, never four in a row
+      Suggested: 🫧 Quinn has not opened Pop Bubbles yet
+
+RESOLVED (1)
+  Sadie: info -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

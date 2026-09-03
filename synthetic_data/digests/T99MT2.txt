@@ -1,0 +1,16 @@
+Focus Bridge - Room 15 Explorers
+Lisa Johnson - Riverside SPED Cooperative
+Changes between 2026-07-31 and 2026-08-07
+
+2 eased.
+20 students unchanged.
+
+EASED (2)
+  Isla: high -> medium
+      5 negative check-ins in a row over 3 days
+      Suggested: 🫧 Isla has not opened Pop Bubbles yet
+  Mabel: high -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🌬️ Mabel has not opened Deep Breathing yet
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

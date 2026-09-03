@@ -1,0 +1,716 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Focus Bridge — Teacher Insights</title>
+<style>
+/* Palette: the data-viz reference instance. Light values on :root, dark
+   redefined under both the OS media query and an explicit theme stamp so a
+   toggle wins in either direction. Every colour below is a role, never a
+   raw hex in the body of the sheet. */
+:root {
+  color-scheme: light;
+  --surface:      #fcfcfb;
+  --plane:        #f9f9f7;
+  --ink:          #0b0b0b;
+  --ink-2:        #52514e;
+  --muted:        #898781;
+  --grid:         #e1e0d9;
+  --baseline:     #c3c2b7;
+  --border:       rgba(11,11,11,.10);
+  --shadow:       rgba(11,11,11,.06);
+  /* Status — fixed in both modes, never themed, never used for a series. */
+  --good:     #0ca30c;
+  --warning:  #fab219;
+  --serious:  #ec835a;
+  --critical: #d03b3b;
+  /* Diverging pair for check-in valence: two poles + a neutral midpoint. */
+  --pos:      #2a78d6;
+  --neg:      #e34948;
+  --neutral:  #f0efec;
+  --seq:      #2a78d6;
+  --wash:     rgba(42,120,214,.08);
+}
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    color-scheme: dark;
+    --surface:  #1a1a19;
+    --plane:    #0d0d0d;
+    --ink:      #ffffff;
+    --ink-2:    #c3c2b7;
+    --muted:    #898781;
+    --grid:     #2c2c2a;
+    --baseline: #383835;
+    --border:   rgba(255,255,255,.10);
+    --shadow:   rgba(0,0,0,.4);
+    --pos:      #3987e5;
+    --neg:      #e66767;
+    --neutral:  #383835;
+    --seq:      #3987e5;
+    --wash:     rgba(57,135,229,.12);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --surface:  #1a1a19;
+  --plane:    #0d0d0d;
+  --ink:      #ffffff;
+  --ink-2:    #c3c2b7;
+  --muted:    #898781;
+  --grid:     #2c2c2a;
+  --baseline: #383835;
+  --border:   rgba(255,255,255,.10);
+  --shadow:   rgba(0,0,0,.4);
+  --pos:      #3987e5;
+  --neg:      #e66767;
+  --neutral:  #383835;
+  --seq:      #3987e5;
+  --wash:     rgba(57,135,229,.12);
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--plane);
+  color: var(--ink);
+  font: 15px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+h1, h2, h3 { margin: 0; font-weight: 650; letter-spacing: -.01em; }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px 72px; }
+
+/* ------------------------------------------------------------------ header */
+header {
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  position: sticky; top: 0; z-index: 20;
+}
+.head-in {
+  max-width: 1180px; margin: 0 auto; padding: 14px 24px;
+  display: flex; gap: 16px; align-items: center; flex-wrap: wrap;
+}
+.brand { font-size: 15px; font-weight: 700; letter-spacing: -.01em; }
+.brand span { color: var(--muted); font-weight: 500; }
+.head-sp { flex: 1 1 auto; }
+select, input[type=search], .btn {
+  font: inherit; font-size: 13px; color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--border); border-radius: 8px;
+  padding: 7px 10px;
+}
+select { max-width: 340px; }
+.btn { cursor: pointer; }
+.btn:hover { background: var(--wash); }
+.btn[aria-pressed="true"] { background: var(--wash); border-color: var(--seq); font-weight: 650; }
+
+/* ------------------------------------------------------------- room header */
+.room-head { padding: 26px 0 18px; }
+.room-head h1 { font-size: 25px; }
+.room-sub { color: var(--ink-2); font-size: 14px; margin-top: 5px; }
+.room-sub code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  background: var(--wash); padding: 1px 6px; border-radius: 5px; font-size: 12px;
+}
+
+/* --------------------------------------------------------------- stat tiles */
+/* A handful of headline numbers is a KPI row, not a bar chart. */
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(132px, 1fr)); gap: 10px; }
+.kpi {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 11px; padding: 13px 14px;
+}
+.kpi .v { font-size: 27px; font-weight: 680; line-height: 1.1; letter-spacing: -.02em; }
+.kpi .l { font-size: 11.5px; color: var(--muted); margin-top: 3px;
+          text-transform: uppercase; letter-spacing: .05em; font-weight: 600; }
+.kpi .m { font-size: 12px; color: var(--ink-2); margin-top: 5px; }
+.kpi[data-status] { border-left: 3px solid var(--baseline); }
+.kpi[data-status="critical"] { border-left-color: var(--critical); }
+.kpi[data-status="warning"]  { border-left-color: var(--warning); }
+.kpi[data-status="good"]     { border-left-color: var(--good); }
+
+/* ----------------------------------------------------------------- sections */
+.sec { margin-top: 34px; }
+.sec-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 12px; }
+.sec-head h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); }
+.sec-head .n { font-size: 13px; color: var(--muted); }
+.sec-note { font-size: 13px; color: var(--ink-2); margin: -4px 0 14px; max-width: 78ch; }
+
+/* ------------------------------------------------------------- room advice */
+.room-rec {
+  background: var(--surface); border: 1px solid var(--border);
+  border-left: 3px solid var(--seq);
+  border-radius: 11px; padding: 15px 17px; margin-bottom: 10px;
+}
+.room-rec h3 { font-size: 15.5px; margin-bottom: 5px; }
+.room-rec p { margin: 0; color: var(--ink-2); font-size: 14px; max-width: 82ch; }
+
+/* ---------------------------------------------------------- activity chart */
+/* Single series, magnitude — sequential one hue, direct-labelled, no legend. */
+.chart { background: var(--surface); border: 1px solid var(--border);
+         border-radius: 11px; padding: 16px 18px; }
+.chart h3 { font-size: 14px; margin-bottom: 3px; }
+.chart .cap { font-size: 12.5px; color: var(--muted); margin-bottom: 14px; }
+.bar-row { display: grid; grid-template-columns: 132px 1fr 34px; gap: 10px;
+           align-items: center; margin-bottom: 7px; }
+.bar-row .name { font-size: 13px; color: var(--ink-2); text-align: right;
+                 overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bar-track { background: var(--grid); border-radius: 3px; height: 15px; }
+.bar-fill { background: var(--seq); height: 100%; border-radius: 0 4px 4px 0; min-width: 3px; }
+.bar-row .val { font-size: 12.5px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+
+/* ------------------------------------------------------------ student card */
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 17px 19px; margin-bottom: 11px;
+}
+.card-top { display: flex; align-items: center; gap: 11px; flex-wrap: wrap; }
+.card-top .nm { font-size: 17px; font-weight: 660; letter-spacing: -.01em; }
+.why { color: var(--ink-2); font-size: 13.5px; margin: 7px 0 0; }
+
+/* Status is never colour alone: a dot, a word, and ink text. */
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  border: 1px solid var(--border); border-radius: 999px; padding: 3px 9px 3px 7px;
+  color: var(--ink-2); background: var(--plane);
+}
+.chip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--baseline); flex: none; }
+.chip[data-p="high"]   .dot { background: var(--critical); }
+.chip[data-p="medium"] .dot { background: var(--serious); }
+.chip[data-p="watch"]  .dot { background: var(--warning); }
+.chip[data-p="info"]   .dot { background: var(--good); }
+.tag { font-size: 11px; color: var(--muted); border: 1px solid var(--border);
+       border-radius: 6px; padding: 2px 7px; text-transform: uppercase;
+       letter-spacing: .05em; font-weight: 600; }
+
+/* ------------------------------------------------------------ check-in strip */
+/* Diverging encoding: positive and negative are poles, neutral is the
+   midpoint and recedes — an "okay" check-in is the absence of signal. It
+   keeps a hairline ring so it still reads as a mark rather than a hole. */
+.strip-wrap { margin-top: 13px; }
+.strip { display: flex; gap: 2px; align-items: flex-end; overflow-x: auto; padding-bottom: 2px; }
+.cell { width: 13px; height: 22px; border-radius: 3px; flex: none; cursor: default; }
+.cell[data-v="positive"] { background: var(--pos); }
+.cell[data-v="negative"] { background: var(--neg); }
+.cell[data-v="neutral"]  { background: var(--neutral); box-shadow: inset 0 0 0 1px var(--border); }
+.cell[data-v="unknown"]  { background: transparent; box-shadow: inset 0 0 0 1px var(--baseline); }
+.cell:hover { outline: 2px solid var(--ink); outline-offset: 1px; }
+.legend { display: flex; gap: 14px; margin-top: 8px; font-size: 11.5px; color: var(--muted); flex-wrap: wrap; }
+.legend-sec { margin: 0 0 12px; padding: 7px 12px; background: var(--surface);
+              border: 1px solid var(--border); border-radius: 9px; }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px;
+            margin-right: 5px; vertical-align: -1px; }
+.strip-cap { font-size: 11.5px; color: var(--muted); margin-bottom: 5px; }
+
+/* ------------------------------------------------------- recommendation list */
+.recs { margin-top: 15px; border-top: 1px solid var(--border); padding-top: 13px; }
+.rec { display: grid; grid-template-columns: 22px 1fr; gap: 11px; padding: 9px 0; }
+.rec + .rec { border-top: 1px dashed var(--border); }
+.rec .num {
+  width: 21px; height: 21px; border-radius: 6px; background: var(--wash);
+  color: var(--seq); font-size: 11.5px; font-weight: 700;
+  display: grid; place-items: center; margin-top: 1px;
+}
+.rec h4 { margin: 0 0 3px; font-size: 14.5px; font-weight: 650; }
+.rec p { margin: 0; color: var(--ink-2); font-size: 13.5px; max-width: 80ch; }
+.ev { margin: 7px 0 0; padding: 0; list-style: none; }
+.ev li { font-size: 12.5px; color: var(--muted); padding-left: 14px; position: relative; }
+.ev li::before { content: "—"; position: absolute; left: 0; }
+.rec-cat { font-size: 10.5px; text-transform: uppercase; letter-spacing: .06em;
+           color: var(--muted); font-weight: 700; margin-left: 8px; }
+
+.meta-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+.meta-row .tag { text-transform: none; letter-spacing: 0; font-weight: 500;
+                 color: var(--ink-2); font-size: 12px; }
+
+/* ------------------------------------------------------------ alerts panel */
+/* The panel a teacher reads first. Two questions, kept separate because they
+   are answered by different evidence: who is moving the wrong way inside this
+   window, and what has changed since the last run. */
+/* align-items:start so a panel with little to say stays short instead of
+   stretching to match its neighbour and leaving a hole. */
+.alerts { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+          gap: 11px; margin-top: 20px; align-items: start; }
+.panel { background: var(--surface); border: 1px solid var(--border);
+         border-radius: 12px; padding: 15px 17px; }
+.panel > h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .07em;
+              color: var(--muted); margin-bottom: 4px; }
+.panel .lede { font-size: 13px; color: var(--ink-2); margin: 0 0 11px; }
+.panel .big { font-size: 30px; font-weight: 680; letter-spacing: -.02em;
+              line-height: 1.05; }
+.mvmt { display: flex; flex-wrap: wrap; gap: 6px; }
+.mvmt a, .mvmt .static { font-size: 12.5px; text-decoration: none; color: var(--ink);
+          background: var(--plane); border: 1px solid var(--border);
+          border-radius: 999px; padding: 3px 10px; }
+.mvmt a { cursor: pointer; }
+.mvmt a:hover { background: var(--wash); border-color: var(--seq); }
+.mvmt .static { color: var(--muted); border-style: dashed; }
+.tally { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 10px; }
+.tally span { font-size: 12px; color: var(--ink-2); background: var(--plane);
+              border: 1px solid var(--border); border-radius: 7px; padding: 3px 9px; }
+.tally b { font-variant-numeric: tabular-nums; color: var(--ink); }
+.none { font-size: 13px; color: var(--muted); margin: 0; }
+
+/* Change badges: a word plus a direction arrow, so the movement is never
+   carried by colour alone. */
+.badge { font-size: 10.5px; font-weight: 700; letter-spacing: .06em;
+         text-transform: uppercase; border-radius: 6px; padding: 2px 7px;
+         border: 1px solid var(--border); color: var(--ink-2); background: var(--plane); }
+.badge[data-k="escalated"] { border-color: var(--critical); color: var(--critical); }
+.badge[data-k="new"]       { border-color: var(--serious);  color: var(--serious); }
+.badge[data-k="eased"]     { border-color: var(--good);     color: var(--good); }
+.badge[data-k="worsening"] { border-color: var(--critical); color: var(--critical); }
+.badge[data-k="improving"] { border-color: var(--good);     color: var(--good); }
+
+/* --------------------------------------------------------------- controls */
+.controls { display: flex; gap: 9px; align-items: center; flex-wrap: wrap;
+            margin: 26px 0 4px; }
+.controls .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: .06em;
+                 color: var(--muted); font-weight: 650; }
+
+/* Printed for a meeting: drop the chrome, keep the evidence, avoid splitting a
+   student across a page break. */
+@media print {
+  header, .controls, #tip, .foot .noprint { display: none !important; }
+  body { background: #fff; }
+  .card, .panel, .chart, .room-rec { break-inside: avoid; box-shadow: none; }
+  details { display: block !important; }
+  details > summary { list-style: none; }
+  .wrap { max-width: none; padding: 0; }
+}
+
+/* ------------------------------------------------------------------- table */
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th, td { text-align: left; padding: 9px 11px; border-bottom: 1px solid var(--border);
+         vertical-align: top; }
+th { font-size: 11px; text-transform: uppercase; letter-spacing: .05em;
+     color: var(--muted); font-weight: 650; }
+.tbl-wrap { background: var(--surface); border: 1px solid var(--border);
+            border-radius: 11px; overflow-x: auto; }
+
+/* ----------------------------------------------------------------- tooltip */
+#tip {
+  position: fixed; z-index: 60; pointer-events: none; opacity: 0;
+  transition: opacity .1s; background: var(--ink); color: var(--surface);
+  font-size: 12px; padding: 5px 9px; border-radius: 7px; white-space: nowrap;
+  box-shadow: 0 4px 14px var(--shadow);
+}
+.empty { color: var(--muted); font-size: 14px; padding: 26px 0; }
+details > summary { cursor: pointer; }
+.foot { margin-top: 46px; padding-top: 18px; border-top: 1px solid var(--border);
+        font-size: 12px; color: var(--muted); max-width: 84ch; }
+
+/* Colour is never the only channel; under forced colours the marks keep their
+   distinction through borders and angle. */
+@media (forced-colors: active) {
+  .cell { forced-color-adjust: none; border: 1px solid CanvasText; }
+  .cell[data-v="negative"] { background: CanvasText; }
+  .cell[data-v="positive"] { background: Canvas; }
+  .cell[data-v="neutral"]  { background: Canvas; opacity: .4; }
+  .chip .dot { border: 1px solid CanvasText; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="head-in">
+    <div class="brand">Focus Bridge <span>· Teacher Insights</span></div>
+    <select id="room" aria-label="Choose a classroom"></select>
+    <div class="head-sp"></div>
+    <input type="search" id="q" placeholder="Find a student" aria-label="Find a student">
+    <button class="btn" id="view" aria-pressed="false">Table view</button>
+    <button class="btn" id="theme" aria-label="Switch colour theme">Theme</button>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="room-head">
+    <h1 id="r-name">—</h1>
+    <div class="room-sub" id="r-sub"></div>
+  </div>
+  <div class="kpis" id="kpis"></div>
+  <div id="body"></div>
+  <div class="foot" id="foot"></div>
+</div>
+
+<div id="tip" role="tooltip"></div>
+
+<script>
+const DATA = /*__PAYLOAD__*/null;
+
+const VAL = {};                       // emotion char -> {name, valence}
+DATA.emotions.forEach((e, i) => { VAL[String.fromCharCode(97 + i)] = e; });
+
+const PRI = {
+  high:   { label: "High",     rank: 0 },
+  medium: { label: "Medium",   rank: 1 },
+  watch:  { label: "Watch",    rank: 2 },
+  info:   { label: "Positive", rank: 3 }
+};
+const LEGEND = `<div class="legend legend-sec">
+  <span>Check-in strip:</span>
+  <span><i style="background:var(--neg)"></i>Negative</span>
+  <span><i style="background:var(--neutral);box-shadow:inset 0 0 0 1px var(--border)"></i>Neutral</span>
+  <span><i style="background:var(--pos)"></i>Positive</span>
+  <span><i style="box-shadow:inset 0 0 0 1px var(--baseline)"></i>Unreadable</span></div>`;
+const CHANNELS = [
+  { id: "alert",    title: "Alert queue",
+    note: "The students the detector expects you to read. Ordered by priority." },
+  { id: "watch",    title: "Watch",
+    note: "Concern-shaped but never four negatives in a row. Context, not a call to act." },
+  { id: "positive", title: "Going well",
+    note: "Good stretches worth naming to a student — and the baseline a future flag is compared against." }
+];
+
+const esc = s => String(s).replace(/[&<>"]/g, c =>
+  ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+let roomIndex = 0, tableView = false, query = "", focus = "all", sortBy = "priority";
+
+const CHANGE_WORD = { escalated: "↑ escalated", new: "↑ new", eased: "↓ eased",
+                      resolved: "✓ resolved" };
+
+/* Who is moving the wrong way inside this window. Independent of any previous
+   run, which matters because run-over-run change is one-directional on this
+   corpus — see the note in the footer. */
+function movers(room, dir) {
+  return room.st.filter(id => DATA.students[id].tr === dir)
+    .sort((a, b) => (PRI[DATA.students[a].p].rank - PRI[DATA.students[b].p].rank)
+                 || (DATA.students[b].td - DATA.students[a].td));
+}
+
+function alertsPanel(room) {
+  const worse = movers(room, "worsening");
+  const better = movers(room, "improving");
+  const highWorse = worse.filter(id => DATA.students[id].p === "high");
+
+  let attention = `<div class="panel">
+    <h3>Needs attention now</h3>`;
+  if (worse.length) {
+    attention += `<div class="big">${worse.length}</div>
+      <p class="lede">student${worse.length > 1 ? "s are" : " is"} more negative in the
+      second half of this window than the first${highWorse.length
+        ? ` — ${highWorse.length} of them already high priority` : ""}.</p>
+      <div class="mvmt">${worse.slice(0, 10).map(id =>
+        `<a data-jump="${id}">${esc(DATA.students[id].n)}
+          <b>+${Math.round(DATA.students[id].td * 100)}pp</b></a>`).join("")}</div>`;
+  } else {
+    attention += `<p class="none">No student here is more negative in the second half
+      of this window than the first.${better.length
+        ? ` ${better.length} ${better.length > 1 ? "are" : "is"} moving the other way.`
+        : ""}</p>`
+      + (better.length ? `<div class="mvmt" style="margin-top:9px">${better.slice(0, 6)
+        .map(id => `<a data-jump="${id}">${esc(DATA.students[id].n)}
+          <b>${Math.round(DATA.students[id].td * 100)}pp</b></a>`).join("")}</div>` : "");
+  }
+  attention += `</div>`;
+
+  /* Run-over-run change. Shown second and stated plainly: on this dataset the
+     comparison can only improve, so an empty "escalated" column is not news. */
+  let since = `<div class="panel"><h3>Since your last check</h3>`;
+  const m = DATA.meta.changes;
+  if (!m) {
+    since += `<p class="none">No previous run to compare against. Generate one with
+      <code>detect_patterns.py --reference &lt;date&gt; --suffix _prev</code>,
+      then <code>notify.py</code>.</p>`;
+  } else if (!room.cg) {
+    since += `<p class="lede">Comparing ${m.prev} to ${m.now}.</p>
+      <p class="none">Nothing in this room changed standing between the two runs.</p>`;
+  } else {
+    const c = room.cg.n;
+    since += `<p class="lede">Comparing ${m.prev} to ${m.now}.</p>
+      <div class="tally">` + ["escalated", "new", "eased", "resolved"].map(k =>
+        `<span>${CHANGE_WORD[k].replace(/^[↑↓✓] /, "")} <b>${c[k] || 0}</b></span>`).join("")
+      + `<span>unchanged <b>${c.unchanged || 0}</b></span></div>
+      <div class="mvmt">${room.cg.s.slice(0, 10).map(st =>
+        // A resolved student is not in the current run and so has no card to
+        // reach; making them look clickable promises a jump that cannot happen.
+        st.k === "resolved"
+          ? `<span class="static">${esc(st.n)} <b>${st.f} → ${st.t}</b></span>`
+          : `<a data-jump="${st.i}">${esc(st.n)} <b>${st.f} → ${st.t}</b></a>`
+      ).join("")}</div>`
+      + (room.cg.n.resolved ? `<p class="none" style="margin-top:9px">Resolved
+        students are no longer flagged, so they have no card below.</p>` : "");
+  }
+  since += `</div>`;
+  return `<div class="alerts">${attention}${since}</div>`;
+}
+
+function controls(counts) {
+  const chip = (k, label, n) =>
+    `<button class="btn" data-focus="${k}" aria-pressed="${focus === k}">${label}`
+    + (n === undefined ? "" : ` (${n})`) + `</button>`;
+  return `<div class="controls">
+    <span class="lbl">Show</span>
+    ${chip("all", "Everyone", counts.all)}
+    ${chip("worsening", "Trending down", counts.worsening)}
+    ${chip("changed", "Changed since last run", counts.changed)}
+    ${chip("undocumented", "No notes", counts.undocumented)}
+    <span class="lbl" style="margin-left:8px">Sort</span>
+    <select id="sort" aria-label="Sort students">
+      <option value="priority"${sortBy === "priority" ? " selected" : ""}>Priority</option>
+      <option value="trend"${sortBy === "trend" ? " selected" : ""}>Steepest decline</option>
+      <option value="name"${sortBy === "name" ? " selected" : ""}>Name</option>
+    </select>
+  </div>`;
+}
+
+/* ------------------------------------------------------------------ chrome */
+function fillPicker() {
+  document.getElementById("room").innerHTML = DATA.rooms.map((r, i) =>
+    `<option value="${i}">${esc(r.n)} — ${esc(r.t)} (${r.k.flagged} flagged`
+    + (r.k.high ? `, ${r.k.high} high` : "") + `)</option>`).join("");
+}
+
+function kpi(value, label, note, status) {
+  return `<div class="kpi"${status ? ` data-status="${status}"` : ""}>
+    <div class="v">${value}</div><div class="l">${esc(label)}</div>
+    ${note ? `<div class="m">${esc(note)}</div>` : ""}</div>`;
+}
+
+/* ------------------------------------------------------------ check-in strip */
+function strip(s) {
+  if (!s.em) return "";
+  const cells = [...s.em].map((ch, i) => {
+    const e = VAL[ch];
+    const v = e ? e.v : "unknown";
+    const d = s.ed.substr(i * 8, 8);
+    const when = `${d.substr(0,2)}/${d.substr(2,2)} ${d.substr(4,2)}:${d.substr(6,2)}`;
+    return `<div class="cell" data-v="${v}" data-t="${when} · ${e ? e.n : "unreadable"}"></div>`;
+  }).join("");
+  return `<div class="strip-wrap">
+    <div class="strip-cap">Last ${[...s.em].length} check-ins, oldest first</div>
+    <div class="strip">${cells}</div></div>`;
+}
+
+/* ------------------------------------------------------------ student card */
+function card(id, s) {
+  const p = PRI[s.p] || PRI.info;
+  const tags = [];
+  if (s.tc) tags.push(`${s.tc[0].t}: ${Math.round(s.tc[0].r * 100)}% of check-ins`
+    + ` flagged vs ${Math.round(s.tc[0].u * 100)}% overall`);
+  if (s.tm) tags.push(`${Math.round(s.tm.r * 100)}% flagged ${s.tm.p}`
+    + ` vs ${Math.round(s.tm.u * 100)}% overall`);
+  if (s.tr === "worsening" || s.tr === "improving") {
+    tags.push(`${Math.round(s.fh * 100)}% → ${Math.round(s.sh * 100)}% negative,`
+      + ` first half to second`);
+  }
+  tags.push(s.nc === 0 ? "no notes on file" : `${s.nc} note${s.nc > 1 ? "s" : ""} on file`);
+
+  // Movement badges: the word carries the meaning, the colour only reinforces it.
+  const badges = [];
+  if (s.tr === "worsening" || s.tr === "improving")
+    badges.push(`<span class="badge" data-k="${s.tr}">${s.tr === "worsening"
+      ? "↓ trending down" : "↑ trending up"}</span>`);
+  if (s.cg && s.cg.k !== "unchanged")
+    badges.push(`<span class="badge" data-k="${s.cg.k}" title="${esc(s.cg.f)} → ${esc(s.cg.t)}"
+      >${CHANGE_WORD[s.cg.k]}</span>`);
+
+  const recs = s.rc.map((r, i) => `<div class="rec">
+      <div class="num">${i + 1}</div>
+      <div>
+        <h4>${esc(r.h)}<span class="rec-cat">${esc(r.c)}</span></h4>
+        <p>${esc(r.d)}</p>
+        <ul class="ev">${r.e.map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+      </div></div>`).join("");
+
+  return `<article class="card" id="s-${id}">
+    <div class="card-top">
+      <span class="nm">${esc(s.n)}</span>
+      <span class="chip" data-p="${s.p}"><span class="dot"></span>${p.label}</span>
+      ${badges.join("")}
+      <span class="tag">${esc(id.slice(-6))}</span>
+    </div>
+    <p class="why">${esc(s.w)}</p>
+    ${strip(s)}
+    <div class="meta-row">${tags.map(t => `<span class="tag">${esc(t)}</span>`).join("")}</div>
+    ${recs ? `<div class="recs">${recs}</div>` : ""}
+  </article>`;
+}
+
+/* ------------------------------------------------------------- table view */
+function table(ids) {
+  const rows = ids.map(id => {
+    const s = DATA.students[id];
+    const top = s.rc[0];
+    return `<tr>
+      <td>${esc(s.n)}</td>
+      <td>${(PRI[s.p] || PRI.info).label}</td>
+      <td>${esc(s.w)}</td>
+      <td>${s.tr === "steady" ? "—" : esc(s.tr)}</td>
+      <td>${s.cg && s.cg.k !== "unchanged" ? esc(s.cg.f) + " → " + esc(s.cg.t) : "—"}</td>
+      <td>${top ? esc(top.h) : "—"}</td>
+      <td style="font-variant-numeric:tabular-nums">${s.nc}</td></tr>`;
+  }).join("");
+  return `<div class="tbl-wrap"><table>
+    <thead><tr><th>Student</th><th>Priority</th><th>Why flagged</th><th>Trend</th>
+    <th>Since last run</th><th>First recommendation</th><th>Notes</th></tr></thead>
+    <tbody>${rows}</tbody></table></div>`;
+}
+
+/* ------------------------------------------------------- activity bar chart */
+function taskChart(room) {
+  if (!room.tk || room.tk.length < 2) return "";
+  const max = room.tk[0][1];
+  const rows = room.tk.map(([task, n]) => `<div class="bar-row">
+      <div class="name" title="${esc(task)}">${esc(task)}</div>
+      <div class="bar-track"><div class="bar-fill" style="width:${(n / max * 100).toFixed(1)}%"></div></div>
+      <div class="val">${n}</div></div>`).join("");
+  return `<div class="sec"><div class="chart">
+    <h3>Where distress clusters across this room</h3>
+    <div class="cap">Flagged students whose check-ins cluster around each activity,
+      each measured against that student's own baseline.</div>
+    ${rows}</div></div>`;
+}
+
+/* ------------------------------------------------------------------ render */
+function render() {
+  const room = DATA.rooms[roomIndex];
+  document.getElementById("r-name").textContent = room.n;
+  document.getElementById("r-sub").innerHTML =
+    `${esc(room.t)}${room.s ? " · " + esc(room.s) : ""} · <code>${esc(room.c)}</code>`;
+
+  const k = room.k;
+  document.getElementById("kpis").innerHTML =
+      kpi(k.flagged, "Flagged", "of this room's students")
+    + kpi(k.high, "High priority", "repeat or sustained episodes", k.high ? "critical" : null)
+    + kpi(k.alert, "Alert channel", "expected reading", k.alert ? "critical" : null)
+    + kpi(k.watch, "Watch", "context only", k.watch ? "warning" : null)
+    + kpi(k.positive, "Going well", "worth naming", k.positive ? "good" : null)
+    + kpi(k.undoc, "Undocumented", "alert students with no notes", k.undoc ? "warning" : null);
+
+  const q = query.trim().toLowerCase();
+  const matchesFocus = s =>
+      focus === "all" ? true
+    : focus === "worsening" ? s.tr === "worsening"
+    : focus === "changed" ? !!(s.cg && s.cg.k !== "unchanged")
+    : focus === "undocumented" ? s.nc === 0
+    : true;
+  const counts = {
+    all: room.st.length,
+    worsening: room.st.filter(id => DATA.students[id].tr === "worsening").length,
+    changed: room.st.filter(id => { const c = DATA.students[id].cg;
+                                    return c && c.k !== "unchanged"; }).length,
+    undocumented: room.st.filter(id => DATA.students[id].nc === 0).length,
+  };
+
+  let visible = room.st.filter(id => {
+    const s = DATA.students[id];
+    if (!matchesFocus(s)) return false;
+    return !q || s.n.toLowerCase().includes(q) || s.w.toLowerCase().includes(q);
+  });
+  // Priority is the default because it is the detector's own ordering; the
+  // other two exist for the two questions the default cannot answer.
+  if (sortBy === "name") {
+    visible = visible.slice().sort((a, b) =>
+      DATA.students[a].n.localeCompare(DATA.students[b].n));
+  } else if (sortBy === "trend") {
+    visible = visible.slice().sort((a, b) => DATA.students[b].td - DATA.students[a].td);
+  }
+
+  let html = alertsPanel(room) + controls(counts);
+  if (room.rr.length) {
+    html += `<div class="sec"><div class="sec-head"><h2>Change once, not per student</h2>
+      <span class="n">${room.rr.length}</span></div>
+      <div class="sec-note">Patterns that only appear across the room. These are the
+      recommendations you act on a single time.</div>`
+      + room.rr.map(r => `<div class="room-rec"><h3>${esc(r.h)}</h3><p>${esc(r.d)}</p>
+          <ul class="ev">${r.e.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>`).join("")
+      + `</div>`;
+  }
+  html += taskChart(room);
+
+  for (const ch of CHANNELS) {
+    const ids = visible.filter(id => DATA.students[id].ch === ch.id);
+    if (!ids.length) continue;
+    const open = ch.id === "alert" || tableView || q;
+    const inner = tableView ? table(ids)
+      : ids.map(id => card(id, DATA.students[id])).join("");
+    html += `<div class="sec"><details ${open ? "open" : ""}>
+      <summary><div class="sec-head" style="display:inline-flex">
+        <h2>${ch.title}</h2><span class="n">${ids.length} student${ids.length > 1 ? "s" : ""}</span>
+      </div></summary>
+      <div class="sec-note">${ch.note}</div>
+      ${tableView ? "" : LEGEND}${inner}</details></div>`;
+  }
+  if (!visible.length) {
+    html += `<div class="empty">No student in this room matches `
+      + (query ? `“${esc(query)}”` : "that filter")
+      + (focus !== "all" ? ` under <b>${esc(focus)}</b>` : "") + `.</div>`;
+  }
+
+  document.getElementById("body").innerHTML = html;
+  const m = DATA.meta;
+  document.getElementById("foot").innerHTML =
+    `Window ${m.window_start} to ${m.window_end} (${m.recency_days} days). `
+    + `${m.students_flagged.toLocaleString()} of ${m.students_scanned.toLocaleString()} students flagged across all rooms. `
+    + `A pattern is ${m.streak_length}+ consecutive negative check-ins. An activity is named only when the `
+    + `check-ins within ${m.task_window} minutes of it go badly more often than that student's day goes badly `
+    + `overall — a rate against their own rate, so a busy activity is not mistaken for a hard one. `
+    + `Detector run ${esc(m.detector_run)}; recommendations ${esc(m.advice_run)}. `
+    + `Every recommendation is a rule with a stated trigger — disagree with it where your own read differs.`
+    + (m.changes ? `<br><br><b>On the “since your last check” comparison:</b> in this `
+      + `synthetic dataset, sliding the 30-day window forward only ever removes flagged students `
+      + `— across four weekly reference dates no student was newly flagged at any step. That is an `
+      + `artefact of how the data was generated (each student's episodes are front-loaded), not `
+      + `evidence that classrooms are improving. Read the escalation counts as “nothing to report `
+      + `from this corpus”, not as good news.` : "");
+}
+
+/* -------------------------------------------------------------- interaction */
+const tip = document.getElementById("tip");
+document.addEventListener("mouseover", e => {
+  const cell = e.target.closest(".cell");
+  if (!cell) { tip.style.opacity = 0; return; }
+  tip.textContent = cell.dataset.t;
+  const r = cell.getBoundingClientRect();
+  tip.style.opacity = 1;
+  tip.style.left = Math.min(r.left, innerWidth - tip.offsetWidth - 10) + "px";
+  tip.style.top = (r.top - tip.offsetHeight - 7) + "px";
+});
+document.getElementById("room").addEventListener("change", e => {
+  roomIndex = +e.target.value; focus = "all"; render(); scrollTo(0, 0);
+});
+
+// Delegated so the handlers survive every re-render.
+document.addEventListener("click", e => {
+  const chip = e.target.closest("[data-focus]");
+  if (chip) { focus = chip.dataset.focus; render(); return; }
+  const jump = e.target.closest("[data-jump]");
+  if (jump) {
+    // A name in the alerts panel has to reach its card even when the current
+    // filter or a collapsed channel would hide it.
+    focus = "all";
+    render();
+    const card = document.getElementById("s-" + jump.dataset.jump);
+    if (card) {
+      const box = card.closest("details");
+      if (box) box.open = true;
+      card.scrollIntoView({ behavior: "smooth", block: "center" });
+      card.style.outline = "2px solid var(--seq)";
+      card.style.outlineOffset = "3px";
+      setTimeout(() => { card.style.outline = ""; }, 2000);
+    }
+  }
+});
+document.addEventListener("change", e => {
+  if (e.target.id === "sort") { sortBy = e.target.value; render(); }
+});
+document.getElementById("q").addEventListener("input", e => { query = e.target.value; render(); });
+document.getElementById("view").addEventListener("click", e => {
+  tableView = !tableView;
+  e.target.setAttribute("aria-pressed", tableView);
+  e.target.textContent = tableView ? "Card view" : "Table view";
+  render();
+});
+document.getElementById("theme").addEventListener("click", () => {
+  const dark = matchMedia("(prefers-color-scheme: dark)").matches;
+  const cur = document.documentElement.getAttribute("data-theme") || (dark ? "dark" : "light");
+  document.documentElement.setAttribute("data-theme", cur === "dark" ? "light" : "dark");
+});
+
+fillPicker();
+render();
+</script>
+</body>
+</html>

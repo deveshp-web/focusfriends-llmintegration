@@ -1,0 +1,16 @@
+Focus Bridge - Room 16 Learners
+Daniel Okafor - Lincoln Elementary
+Changes between 2026-07-31 and 2026-08-07
+
+1 eased, 1 resolved.
+11 students unchanged.
+
+EASED (1)
+  Beckett: high -> medium
+      5 negative check-ins in a row over 2 days
+      Suggested: 🌀 Go back to Fidget Spinner
+
+RESOLVED (1)
+  Kai: medium -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

@@ -1,0 +1,20 @@
+Focus Bridge - Room 5 Friends
+Lisa Walsh - Willow Creek Academy
+Changes between 2026-07-31 and 2026-08-07
+
+2 eased, 2 resolved.
+14 students unchanged.
+
+EASED (2)
+  Leo: high -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🌌 Leo has not opened Starry Night yet
+  Omar: high -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🫧 Omar has not opened Pop Bubbles yet
+
+RESOLVED (2)
+  Fatima: info -> not flagged
+  Layla: info -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

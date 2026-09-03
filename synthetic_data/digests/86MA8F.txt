@@ -1,0 +1,19 @@
+Focus Bridge - Room 15 Stars
+Rachel Patel - Sunrise Learning Center
+Changes between 2026-07-31 and 2026-08-07
+
+3 eased.
+19 students unchanged.
+
+EASED (3)
+  Jasper: medium -> watch
+      52% of recent check-ins negative, never four in a row
+      Suggested: 🌌 Go back to Starry Night
+  Milo: high -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🌌 Go back to Starry Night
+  Zion: high -> medium
+      5 negative check-ins in a row over 2 days
+      Suggested: 🌀 Go back to Fidget Spinner
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

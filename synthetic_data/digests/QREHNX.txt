@@ -1,0 +1,12 @@
+Focus Bridge - Room 4 Friends
+Carlos Torres - Oakdale Elementary
+Changes between 2026-07-31 and 2026-08-07
+
+2 resolved.
+14 students unchanged.
+
+RESOLVED (2)
+  Ibrahim: info -> not flagged
+  Ibrahim: high -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

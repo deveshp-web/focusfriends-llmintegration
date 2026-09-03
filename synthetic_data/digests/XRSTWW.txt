@@ -1,0 +1,16 @@
+Focus Bridge - Room 13 Stars
+Kevin Patel - Bright Horizons School
+Changes between 2026-07-31 and 2026-08-07
+
+2 eased.
+12 students unchanged.
+
+EASED (2)
+  Hugo: high -> medium
+      5 negative check-ins in a row over 2 days
+      Suggested: 🌌 Go back to Starry Night
+  Leo: high -> watch
+      32% of recent check-ins negative, never four in a row
+      Suggested: 🖐️ Leo has not opened 5-4-3-2-1 yet
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

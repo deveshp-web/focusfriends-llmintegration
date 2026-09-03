@@ -1,0 +1,16 @@
+Focus Bridge - Room 14 Learners
+Robert Ahmed - Willow Creek Academy
+Changes between 2026-07-31 and 2026-08-07
+
+1 eased, 1 resolved.
+5 students unchanged.
+
+EASED (1)
+  Nadia: medium -> watch
+      39% of recent check-ins negative, never four in a row
+      Suggested: 🖐️ Nadia has not opened 5-4-3-2-1 yet
+
+RESOLVED (1)
+  Felix: high -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

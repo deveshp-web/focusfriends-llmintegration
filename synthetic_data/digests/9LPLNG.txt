@@ -1,0 +1,18 @@
+Focus Bridge - Room 15 Champions
+Maria Walsh - Northgate Elementary
+Changes between 2026-07-31 and 2026-08-07
+
+1 eased, 3 resolved.
+3 students unchanged.
+
+EASED (1)
+  Nadia: high -> medium
+      5 negative check-ins in a row over 2 days
+      Suggested: 🖐️ Nadia has not opened 5-4-3-2-1 yet
+
+RESOLVED (3)
+  Hugo: info -> not flagged
+  Kayla: info -> not flagged
+  Omar: info -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

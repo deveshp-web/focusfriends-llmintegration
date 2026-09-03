@@ -1,0 +1,14 @@
+Focus Bridge - Room 19 Friends
+Maria Lopez - Oakdale Elementary
+Changes between 2026-07-31 and 2026-08-07
+
+4 resolved.
+13 students unchanged.
+
+RESOLVED (4)
+  Dario: medium -> not flagged
+  Emmy: medium -> not flagged
+  Oliver: high -> not flagged
+  Theo: info -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

@@ -1,0 +1,20 @@
+Focus Bridge - Room 15 Learners
+Jennifer Rossi - Cedar Park Elementary
+Changes between 2026-07-31 and 2026-08-07
+
+2 eased, 2 resolved.
+7 students unchanged.
+
+EASED (2)
+  Felix: high -> medium
+      4 negative check-ins in a row over 3 days
+      Suggested: 🖐️ Felix has not opened 5-4-3-2-1 yet
+  Grace: high -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🖐️ Grace has not opened 5-4-3-2-1 yet
+
+RESOLVED (2)
+  Ezra: info -> not flagged
+  Sana: medium -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

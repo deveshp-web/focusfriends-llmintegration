@@ -1,0 +1,19 @@
+Focus Bridge - Room 8 Champions
+Priya Nguyen - Lincoln Elementary
+Changes between 2026-07-31 and 2026-08-07
+
+3 eased.
+7 students unchanged.
+
+EASED (3)
+  Quinn: medium -> info
+      6 "happy" check-ins in a row
+      Suggested: Say this one out loud
+  Quinn: high -> medium
+      5 negative check-ins in a row over 3 days
+      Suggested: 🌀 Quinn has not opened Fidget Spinner yet
+  Zara: high -> medium
+      5 negative check-ins in a row over 3 days
+      Suggested: 🫧 Zara has not opened Pop Bubbles yet
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

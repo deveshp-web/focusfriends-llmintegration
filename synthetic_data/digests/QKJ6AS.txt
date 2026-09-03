@@ -1,0 +1,19 @@
+Focus Bridge - Room 20 Champions
+Michael Lopez - Harmony Special Education Center
+Changes between 2026-07-31 and 2026-08-07
+
+2 eased, 1 resolved.
+6 students unchanged.
+
+EASED (2)
+  Ines: high -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🫧 Ines has not opened Pop Bubbles yet
+  Omar: high -> medium
+      5 negative check-ins in a row over 2 days
+      Suggested: 🌬️ Omar has not opened Deep Breathing yet
+
+RESOLVED (1)
+  Milo: info -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

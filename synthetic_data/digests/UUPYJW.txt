@@ -1,0 +1,11 @@
+Focus Bridge - Room 7 Learners
+Lisa Brown - Harmony Special Education Center
+Changes between 2026-07-31 and 2026-08-07
+
+1 resolved.
+8 students unchanged.
+
+RESOLVED (1)
+  Fatima: info -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

@@ -1,0 +1,12 @@
+Focus Bridge - Room 24 Champions
+Robert Brown - Riverside SPED Cooperative
+Changes between 2026-07-31 and 2026-08-07
+
+2 resolved.
+10 students unchanged.
+
+RESOLVED (2)
+  Isla: info -> not flagged
+  Zion: watch -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.
