@@ -6,7 +6,7 @@ Changes between 2026-07-31 and 2026-08-07
 14 students unchanged.
 
 RESOLVED (2)
-  Ibrahim: info -> not flagged
   Ibrahim: high -> not flagged
+  Ibrahim: info -> not flagged
 
 Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

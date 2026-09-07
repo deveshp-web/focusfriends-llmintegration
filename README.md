@@ -22,6 +22,9 @@ Run them in that order from inside `synthetic_data/`. Each stage reads the
 previous stage's output and writes its own, so any of them can be re-run alone
 after a threshold change. Nothing needs a network, a database or a build step.
 
+Every stage also accepts `--data-dir DIR` to run against a different corpus
+(a test fixture, a second dataset), or `$FOCUSBRIDGE_DATA_DIR` to set it once.
+
 ### 1. `detect_patterns.py` — detection
 
 Flags students whose recent emotion check-ins form a pattern. Findings go to one
@@ -48,7 +51,7 @@ including, in the app's own note templates, a task they already named as a
 trigger), `stories.jsonl` (which social stories this classroom already owns) and
 the student's calm-corner history, AAC use and token progress.
 
-Fourteen rules across escalation, antecedent, regulation, communication, story,
+Fifteen rules across escalation, antecedent, regulation, communication, story,
 motivation and documentation, plus four room-level rules for things you change
 once instead of per student. Channel caps mirror the alert-fatigue logic
 upstream: 4 recommendations for an alert student, 2 for watch, 1 for positive.
@@ -56,8 +59,8 @@ upstream: 4 recommendations for an alert student, 2 for watch, 1 for positive.
 **Every correlation compares a rate against that student's own rate** — of the
 check-ins around Reading, how many went badly, versus how often their check-ins
 go badly at all. This matters more than any threshold in the file, and the long
-comment above `MIN_TASK_EXCESS` records the three ways of getting it wrong that
-were tried first.
+comment above `min_task_excess` in `focusbridge/recommend/settings.py` records
+the three ways of getting it wrong that were tried first.
 
 ### 3. `notify.py` — what changed
 
@@ -92,6 +95,66 @@ last run — then room-wide recommendations, then the alert queue, with watch an
 positive collapsed. Filters for trending-down / changed / undocumented, a table
 view, print styling, and light and dark themes.
 
+### Side channels
+
+Neither is part of the four stages, and nothing depends on either:
+
+    python review_flags.py               # mark flags reviewed / dismissed / acted on
+    streamlit run viewer.py              # the same, with a UI
+    python generate_insights.py --limit 5  # optional LLM gloss, via a local Ollama model
+
+## How the code is organised
+
+The four entry-point scripts are thin; the code lives in the `focusbridge`
+package, laid out so that each module has one job and the four stages never
+import each other:
+
+    focusbridge/
+      core/           shared foundations — depends on nothing but the stdlib
+        paths.py        every filename in the project, in one place
+        jsonio.py       the one way this project reads and writes JSON
+        vocabulary.py   the emotion words and what they mean
+        timeline.py     timestamps, check-ins, and the O(1) window index
+        triage.py       channels, priorities, sort orders, display names
+        cli.py          the argparse options every stage shares
+
+      detect/         stage 1   settings, rules, summarize, judge, pipeline
+      recommend/      stage 2   settings, stats, phrasing, context,
+                                student_rules, room_rules, pipeline
+      notify/         stage 3   diff, digest, pipeline
+      dashboard/      stage 4   payload, render, pipeline
+      review/         the teacher response loop (store, cli)
+
+    tests/            unittest suite over the pure functions
+    legacy/           the pre-refactor scripts, kept for reference
+
+Every dependency arrow points inward, toward `core/`. Anything two stages both
+need lives there, which is what lets you change one stage without reading the
+other three.
+
+**Where to start reading**, if the code is new to you:
+
+1. `focusbridge/__init__.py` — the map, and why it is shaped this way
+2. `focusbridge/core/vocabulary.py` — the words everything else is built on
+3. `focusbridge/core/timeline.py` — how a raw check-in becomes comparable
+4. `focusbridge/detect/rules.py` — the four rules, heavily commented
+
+Each package's `__init__.py` explains what that stage does and which file to
+open next.
+
+## Tests
+
+    cd synthetic_data
+    python -m unittest discover -s tests -t .
+
+71 tests, standard library only, no fixtures on disk. They cover the pure
+functions — the rules, the parsing, the statistics, the diff — because that is
+where the decisions live and they can be checked against a seven-entry list
+instead of a 153 MB file. The window index is additionally checked against a
+slow, obviously-correct implementation over randomised input, because the
+failure mode of a wrong optimisation is silently different answers rather than
+a crash.
+
 ## Regenerating everything
 
     cd synthetic_data
@@ -101,8 +164,9 @@ view, print styling, and light and dark themes.
     python notify.py
     python dashboard.py
 
-Roughly four minutes end to end, dominated by two passes over the 153 MB
-`students.jsonl`. Python 3.9+, standard library only.
+Roughly four minutes end to end, dominated by the passes over the 153 MB
+`students.jsonl`. Passing `--reference` to the second command skips one of them.
+Python 3.9+, standard library only.
 
 ## Files
 
@@ -115,6 +179,7 @@ Roughly four minutes end to end, dominated by two passes over the 153 MB
 | `changes.jsonl` `digests/` | change feed and per-teacher digests |
 | `dashboard.html` `dashboard_template.html` | the rendered dashboard and its template |
 | `judge_prompt.md` `judge_cases.jsonl` | the LLM-as-a-judge audit trail |
+| `flag_reviews.jsonl` | append-only log of teacher review actions |
 
 `students.jsonl` is tracked with Git LFS — it is over GitHub's 100 MB per-file
 limit. Clone with `git lfs install` first, or the file arrives as a pointer.

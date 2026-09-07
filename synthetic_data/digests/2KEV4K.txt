@@ -11,10 +11,10 @@ EASED (3)
       Suggested: 🌀 Noor has not opened Fidget Spinner yet
   Sana: high -> medium
       4 negative check-ins in a row over 2 days
-      Suggested: 🌀 Go back to Fidget Spinner
+      Suggested: 🖐️ Sana has not opened 5-4-3-2-1 yet
   Sana: high -> medium
       4 negative check-ins in a row over 2 days
-      Suggested: 🖐️ Sana has not opened 5-4-3-2-1 yet
+      Suggested: 🌀 Go back to Fidget Spinner
 
 RESOLVED (2)
   Hana: medium -> not flagged

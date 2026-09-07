@@ -1,1 +1,19 @@
+# Line endings.
+#
+# Everything this repo tracks is either source or a data file with a defined
+# format, and the pipeline writes LF on every platform (see the NEWLINE constant
+# in synthetic_data/focusbridge/core/jsonio.py).
+#
+# Without the rule below, a clone on Windows checks these files out as CRLF -
+# and the very next pipeline run rewrites all 200 of them back to LF, producing
+# 200 "modified" files with no content change whatsoever. Pinning eol=lf makes
+# the working tree agree with what the code writes, so `git status` only ever
+# reports things that actually changed.
+#
+# `text=auto` still auto-detects binaries, so the app icons are left alone.
+* text=auto eol=lf
+
+# students.jsonl is 160 MB, over GitHub's 100 MB per-file limit, so it is stored
+# with Git LFS. `-text` disables all newline conversion for it, and this line
+# must come AFTER the wildcard above in order to win.
 students.jsonl filter=lfs diff=lfs merge=lfs -text

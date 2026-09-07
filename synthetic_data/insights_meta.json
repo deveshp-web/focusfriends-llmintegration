@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-30T11:21:06",
+  "generated_at": "2026-09-06T18:21:27",
   "reference_time": "2026-08-07T13:08:00",
   "cutoff": "2026-07-08T13:08:00",
   "config": {
@@ -13,6 +13,8 @@
     "density_trigger_enabled": true,
     "same_day_cluster_enabled": true,
     "same_day_alert_length": 6,
+    "high_priority_min_length": 6,
+    "high_priority_min_days": 3,
     "trigger_channels": {
       "density": "watch",
       "negative": "alert",

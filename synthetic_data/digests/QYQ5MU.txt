@@ -15,8 +15,8 @@ EASED (2)
 
 RESOLVED (7)
   Camila: medium -> not flagged
-  Kayla: watch -> not flagged
   Kayla: medium -> not flagged
+  Kayla: watch -> not flagged
   Layla: medium -> not flagged
   Mabel: watch -> not flagged
   Mabel: medium -> not flagged

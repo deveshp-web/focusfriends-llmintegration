@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-30T11:20:55",
+  "generated_at": "2026-09-06T18:21:17",
   "reference_time": "2026-07-31T13:08:00",
   "cutoff": "2026-07-01T13:08:00",
   "config": {
@@ -13,6 +13,8 @@
     "density_trigger_enabled": true,
     "same_day_cluster_enabled": true,
     "same_day_alert_length": 6,
+    "high_priority_min_length": 6,
+    "high_priority_min_days": 3,
     "trigger_channels": {
       "density": "watch",
       "negative": "alert",
@@ -45,9 +47,9 @@
       "watch": 232
     },
     "students_by_trigger": {
-      "negative": 2185,
       "density": 1578,
       "repeated": 919,
+      "negative": 2185,
       "same_day_cluster": 797
     },
     "recent_emotion_counts": {

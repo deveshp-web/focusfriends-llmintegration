@@ -15,3 +15,16 @@ recommendations_meta_prev.json
 
 # Single-room dashboards are throwaway views of committed data.
 demo_room.html
+
+# macOS directory metadata, which arrives with any file copied off a Mac.
+.DS_Store
+
+# Local teacher review state, not pipeline output. It accumulates as people use
+# review_flags.py or the Streamlit viewer, and can carry names and free-text
+# notes, so it stays on the machine that produced it.
+flag_reviews.jsonl
+
+# Optional LLM gloss from generate_insights.py. It needs a local Ollama model to
+# reproduce, so committing it would put an artefact in the tree that a fresh
+# clone cannot regenerate.
+insights_with_suggestions.jsonl
