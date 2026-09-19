@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Focus Bridge — engine verification</title>
+<!--
+  Runs fb-insights.js over the sample rooms and diffs the result against
+  expected.json, which tools/verify_engine.py produced by running the real
+  Python pipeline over those same records.
+
+  Open this file directly (file:// is fine — everything is a classic script tag,
+  nothing is fetched) after running:
+
+      python tools/verify_engine.py
+
+  A green header means the browser engine and the Python pipeline agree on
+  every student in every sample room: channel, priority, the line explaining
+  why they are flagged, the trajectory, the correlations, and the exact list of
+  recommendation rules that fired, in order.
+-->
+<style>
+:root{color-scheme:light;--ink:#1A3A2A;--muted:#7a8a80;--line:#dfe8e2;--bg:#F0F9F4;
+      --ok:#1A6B3C;--okbg:#E8F8F0;--bad:#B3261E;--badbg:#FDECEA;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+     font:14px/1.6 "Nunito",system-ui,-apple-system,"Segoe UI",sans-serif;padding:24px}
+.wrap{max-width:1000px;margin:0 auto}
+h1{font-size:20px;font-weight:900;margin:0 0 4px}
+.sub{color:var(--muted);font-weight:700;font-size:13px;margin-bottom:18px}
+.banner{border-radius:16px;padding:16px 20px;font-weight:900;font-size:16px;margin-bottom:18px}
+.banner.ok{background:var(--okbg);color:var(--ok);border:2px solid #A8E6CF}
+.banner.bad{background:var(--badbg);color:var(--bad);border:2px solid #f5c2bd}
+.banner .note{display:block;font-size:13px;font-weight:700;margin-top:6px;opacity:.85}
+.card{background:#fff;border-radius:16px;padding:16px 18px;margin-bottom:12px;
+      box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.card h2{font-size:15px;font-weight:900;margin:0 0 10px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;font-weight:800;color:var(--muted);padding:6px 10px;
+   border-bottom:1.5px solid var(--line);white-space:nowrap}
+td{padding:6px 10px;border-bottom:1px solid #f2f6f3;vertical-align:top}
+tr.fail td{background:var(--badbg)}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px}
+.tick{color:var(--ok);font-weight:900}
+.cross{color:var(--bad);font-weight:900}
+.small{font-size:12px;color:var(--muted);font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Focus Bridge — engine verification</h1>
+  <div class="sub">fb-insights.js (browser) against focusbridge/ (Python), over the same sample records.</div>
+  <div id="out">Loading…</div>
+</div>
+
+<script src="../fb-insights.js"></script>
+<script src="../demo-data.js"></script>
+<script src="expected.js"></script>
+<script>
+(function () {
+  var out = document.getElementById("out");
+
+  function fail(message) {
+    out.innerHTML = '<div class="banner bad">' + message + '</div>';
+  }
+  if (!window.FBI) return fail("fb-insights.js did not load.");
+  if (!window.FB_DEMO_ROOMS) return fail("demo-data.js did not load. Run tools/export_demo_rooms.py.");
+  if (!window.FB_EXPECTED) {
+    return fail('expected.js did not load.<span class="note">Run <code>python tools/verify_engine.py</code> first — it writes both expected.json and expected.js.</span>');
+  }
+
+  /* Comparisons are on values a human would read off the two screens, not on
+     internal structures: if the port disagrees anywhere that changes what a
+     teacher sees, one of these fires. */
+  var CHECKS = [
+    ["channel",    function (s) { return s.channel; }],
+    ["priority",   function (s) { return s.priority; }],
+    ["why",        function (s) { return s.why; }],
+    ["trajectory", function (s) { return s.trajectory.direction !== undefined
+                                    ? s.trajectory.direction : s.trajectory; }],
+    ["notes",      function (s) { return s.noteCount; }],
+    ["dominant",   function (s) { return s.dominantEmotion || null; }],
+    ["tasks",      function (s) { return (s.taskClusters || []).map(function (t) {
+                                    return t.task !== undefined ? t.task : t; }).join("|"); }],
+    ["time",       function (s) { return s.timeCluster
+                                    ? (s.timeCluster.bucket || s.timeCluster) : null; }],
+    ["rules",      function (s) { return (s.recommendations || []).map(function (r) {
+                                    return r.id !== undefined ? r.id : r; }).join(" > "); }]
+  ];
+
+  var html = "", failures = 0, compared = 0;
+
+  FB_DEMO_ROOMS.rooms.forEach(function (room) {
+    var expected = FB_EXPECTED.rooms[room.code];
+    if (!expected) {
+      html += '<div class="card"><h2>' + room.code +
+              '</h2><div class="small">no expected results for this room — re-run verify_engine.py</div></div>';
+      failures++;
+      return;
+    }
+
+    var actual = FBI.analyseClassroom({
+      classroom: room.classroom,
+      roster: room.roster,
+      students: room.students,
+      notes: room.notes,
+      stories: room.stories
+    });
+
+    var rows = "", roomFailures = 0;
+
+    /* Dashes are normalised before comparing. The engine writes an em dash
+       where the Python writes a hyphen, because the rest of the app's copy
+       uses em dashes and the Insights tab should not read as a different
+       product — a deliberate typographic choice, not a difference in what
+       either one concluded. Everything else is compared literally, including
+       every percentage, which is how the half-even rounding difference was
+       found. */
+    function normalise(value) {
+      return String(value).replace(/\s[—–-]\s/g, " - ");
+    }
+
+    function compare(label, got, want) {
+      compared++;
+      var ok = normalise(got) === normalise(want);
+      if (!ok) { failures++; roomFailures++; }
+      return '<tr class="' + (ok ? "" : "fail") + '"><td>' + label +
+             '</td><td>' + (ok ? '<span class="tick">=</span>' : '<span class="cross">≠</span>') +
+             '</td><td><code>' + escapeHtml(String(want)) +
+             '</code></td><td><code>' + escapeHtml(String(got)) + '</code></td></tr>';
+    }
+
+    // Room-level: the counts on the KPI tiles, and which room rules fired.
+    ["flagged", "alert", "watch", "positive", "high", "undoc"].forEach(function (key) {
+      rows += compare("count · " + key, actual.room.counts[key], expected.counts[key]);
+    });
+    rows += compare("room rules",
+      actual.room.recommendations.map(function (r) { return r.id; }).join(" > "),
+      expected.roomRecommendations.join(" > "));
+    // The reading order itself: two engines can agree on every student and
+    // still present them in a different order, which is a real difference.
+    rows += compare("student order", actual.room.order.join(","), expected.order.join(","));
+
+    // Per student.
+    Object.keys(expected.students).forEach(function (id) {
+      var want = expected.students[id];
+      var got = actual.students[id];
+      if (!got) {
+        rows += compare("MISSING · " + want.name, "(not flagged)", want.priority);
+        return;
+      }
+      CHECKS.forEach(function (check) {
+        rows += compare(want.name + " · " + check[0], check[1](got), check[1](want));
+      });
+    });
+    // And the other direction: a student the browser flagged that Python did not.
+    Object.keys(actual.students).forEach(function (id) {
+      if (!expected.students[id]) {
+        rows += compare("EXTRA · " + actual.students[id].name,
+                        actual.students[id].priority, "(not flagged)");
+      }
+    });
+
+    html += '<div class="card"><h2>' + escapeHtml(room.classroom.name) + " · " + room.code +
+      ' <span class="small">' + (roomFailures ? roomFailures + " mismatched" : "all match") +
+      "</span></h2>" +
+      '<div class="small" style="margin-bottom:8px">window ends ' +
+        actual.meta.windowEnd.toISOString().slice(0, 10) + " (Python: " +
+        expected.reference.slice(0, 10) + ") · " +
+        actual.room.counts.flagged + " flagged of " + actual.meta.studentsScanned +
+      "</div>" +
+      (roomFailures
+        ? '<table><thead><tr><th>Check</th><th></th><th>Python</th><th>Browser</th></tr></thead><tbody>' +
+          rows.split("</tr>").filter(function (r) { return r.indexOf('class="fail"') !== -1; })
+              .join("</tr>") + "</tr></tbody></table>"
+        : '<div class="small">Every check-in, channel, priority, correlation and ' +
+          'recommendation list agrees with the Python pipeline.</div>') +
+      "</div>";
+  });
+
+  out.innerHTML =
+    '<div class="banner ' + (failures ? "bad" : "ok") + '">' +
+    (failures
+      ? failures + " of " + compared + " checks disagree with the Python pipeline."
+      : "All " + compared + " checks agree with the Python pipeline.") +
+    '<span class="note">' + FB_DEMO_ROOMS.rooms.length +
+    " sample rooms · channel, priority, why-flagged, trajectory, note counts, " +
+    "dominant emotion, activity and time correlations, room rules, reading order, " +
+    "and the exact ordered list of recommendation rules for every student." +
+    "</span></div>" + html;
+
+  function escapeHtml(text) {
+    return text.replace(/[&<>"]/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+    });
+  }
+})();
+</script>
+</body>
+</html>

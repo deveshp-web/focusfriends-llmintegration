@@ -28,3 +28,7 @@ flag_reviews.jsonl
 # reproduce, so committing it would put an artefact in the tree that a fresh
 # clone cannot regenerate.
 insights_with_suggestions.jsonl
+
+# Working index written by the CodeAtlas editor tooling. Machine-generated from
+# the source that is already tracked, and rewritten on every scan.
+.codeatlas/

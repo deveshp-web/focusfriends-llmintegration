@@ -1,0 +1,1062 @@
+{
+ "generated_at": "2026-09-19T12:22:17",
+ "note": "Produced by the Python focusbridge package over the records in demo-data.js. verify.html diffs fb-insights.js against this.",
+ "rooms": {
+  "DYAHV5": {
+   "code": "DYAHV5",
+   "reference": "2026-08-07T12:52:00",
+   "windowStart": "2026-07-08T12:52:00",
+   "counts": {
+    "flagged": 18,
+    "alert": 12,
+    "watch": 2,
+    "positive": 4,
+    "high": 10,
+    "undoc": 3
+   },
+   "roomRecommendations": [
+    "room_documentation"
+   ],
+   "order": [
+    "stu_ef9e5cbb8441",
+    "stu_3432bd2e6cf4",
+    "stu_4555271a4ccf",
+    "stu_951e12a32df2",
+    "stu_08ed4b824a03",
+    "stu_47b03bf38687",
+    "stu_898dca6df847",
+    "stu_baab0a62d360",
+    "stu_0b8908cba9fd",
+    "stu_b1821d722dd8",
+    "stu_43cec02c0abd",
+    "stu_7f23140489f4",
+    "stu_daf3dc5e3f07",
+    "stu_ef5d97d9b972",
+    "stu_4c8ed76c2025",
+    "stu_4eca52757043",
+    "stu_a30524c3dfa2",
+    "stu_c99de7cc65e5"
+   ],
+   "students": {
+    "stu_ef9e5cbb8441": {
+     "name": "Leo",
+     "channel": "alert",
+     "priority": "high",
+     "why": "22 negative check-ins in a row over 6 days, across 8 separate episodes",
+     "trajectory": "steady",
+     "delta": -0.029,
+     "noteCount": 1,
+     "dominantEmotion": "anxious",
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "escalate_repeat_episodes",
+      "escalate_acute_cluster",
+      "regulation_tool",
+      "story_assign"
+     ],
+     "headlines": [
+      "Bring this one to your support team",
+      "Find out what happened on 2026-07-09",
+      "🖐️ Leo has not opened 5-4-3-2-1 yet",
+      "Assign \"Getting a Haircut\""
+     ]
+    },
+    "stu_3432bd2e6cf4": {
+     "name": "Oliver",
+     "channel": "alert",
+     "priority": "high",
+     "why": "5 negative check-ins in a row over 2 days, across 4 separate episodes - clustered around Transition to Gym",
+     "trajectory": "steady",
+     "delta": -0.066,
+     "noteCount": 0,
+     "dominantEmotion": "anxious",
+     "taskClusters": [
+      "Transition to Gym"
+     ],
+     "timeCluster": null,
+     "recommendations": [
+      "escalate_repeat_episodes",
+      "antecedent_task",
+      "regulation_tool",
+      "communication_aac"
+     ],
+     "headlines": [
+      "Bring this one to your support team",
+      "Transition to Gym is where this shows up",
+      "🖐️ Oliver has not opened 5-4-3-2-1 yet",
+      "This may be a communication gap, not a mood"
+     ]
+    },
+    "stu_4555271a4ccf": {
+     "name": "Kai",
+     "channel": "alert",
+     "priority": "high",
+     "why": "40 negative check-ins in a row over 9 days, across 4 separate episodes",
+     "trajectory": "steady",
+     "delta": 0.039,
+     "noteCount": 3,
+     "dominantEmotion": "frustrated",
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "escalate_repeat_episodes",
+      "regulation_tool",
+      "motivation_tokens",
+      "document_context"
+     ],
+     "headlines": [
+      "Bring this one to your support team",
+      "🌀 Go back to Fidget Spinner",
+      "The token board is out of reach right now",
+      "Your notes already have context on this"
+     ]
+    },
+    "stu_951e12a32df2": {
+     "name": "Zion",
+     "channel": "alert",
+     "priority": "high",
+     "why": "8 negative check-ins in a row over 3 days, across 4 separate episodes",
+     "trajectory": "steady",
+     "delta": -0.087,
+     "noteCount": 3,
+     "dominantEmotion": "frustrated",
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "escalate_repeat_episodes",
+      "regulation_tool",
+      "motivation_tokens",
+      "document_context"
+     ],
+     "headlines": [
+      "Bring this one to your support team",
+      "🫧 Zion has not opened Pop Bubbles yet",
+      "The token board is out of reach right now",
+      "Your notes already have context on this"
+     ]
+    },
+    "stu_08ed4b824a03": {
+     "name": "Hana",
+     "channel": "alert",
+     "priority": "high",
+     "why": "7 negative check-ins in a row over 2 days, across 3 separate episodes",
+     "trajectory": "improving",
+     "delta": -0.187,
+     "noteCount": 0,
+     "dominantEmotion": "anxious",
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "escalate_repeat_episodes",
+      "regulation_tool",
+      "story_assign",
+      "document_note"
+     ],
+     "headlines": [
+      "Bring this one to your support team",
+      "🖐️ Hana has not opened 5-4-3-2-1 yet",
+      "Assign \"Getting a Haircut\"",
+      "Nothing on file for this period"
+     ]
+    },
+    "stu_47b03bf38687": {
+     "name": "Kayla",
+     "channel": "alert",
+     "priority": "high",
+     "why": "4 negative check-ins in a row over 2 days, across 3 separate episodes",
+     "trajectory": "improving",
+     "delta": -0.169,
+     "noteCount": 1,
+     "dominantEmotion": "frustrated",
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "escalate_repeat_episodes",
+      "regulation_tool",
+      "motivation_tokens",
+      "document_context"
+     ],
+     "headlines": [
+      "Bring this one to your support team",
+      "🌀 Kayla has not opened Fidget Spinner yet",
+      "The token board is out of reach right now",
+      "Your notes already have context on this"
+     ]
+    },
+    "stu_898dca6df847": {
+     "name": "Kai",
+     "channel": "alert",
+     "priority": "high",
+     "why": "9 negative check-ins in a row over 3 days, across 3 separate episodes",
+     "trajectory": "steady",
+     "delta": -0.114,
+     "noteCount": 2,
+     "dominantEmotion": "sad",
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "escalate_repeat_episodes",
+      "regulation_tool",
+      "story_assign",
+      "motivation_tokens"
+     ],
+     "headlines": [
+      "Bring this one to your support team",
+      "🌌 Kai has not opened Starry Night yet",
+      "Assign \"Meeting a New Friend\"",
+      "The token board is out of reach right now"
+     ]
+    },
+    "stu_baab0a62d360": {
+     "name": "Ibrahim",
+     "channel": "alert",
+     "priority": "high",
+     "why": "11 negative check-ins in a row over 4 days, across 3 separate episodes",
+     "trajectory": "improving",
+     "delta": -0.254,
+     "noteCount": 2,
+     "dominantEmotion": "frustrated",
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "escalate_repeat_episodes",
+      "regulation_tool",
+      "motivation_tokens",
+      "document_context"
+     ],
+     "headlines": [
+      "Bring this one to your support team",
+      "🌀 Go back to Fidget Spinner",
+      "The token board is out of reach right now",
+      "Your notes already have context on this"
+     ]
+    },
+    "stu_0b8908cba9fd": {
+     "name": "Jun",
+     "channel": "alert",
+     "priority": "high",
+     "why": "5 negative check-ins in a row over 2 days, across 2 separate episodes",
+     "trajectory": "steady",
+     "delta": -0.109,
+     "noteCount": 2,
+     "dominantEmotion": "frustrated",
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "escalate_repeat_episodes",
+      "regulation_tool",
+      "document_context"
+     ],
+     "headlines": [
+      "Bring this one to your support team",
+      "🫧 Jun has not opened Pop Bubbles yet",
+      "Your notes already have context on this"
+     ]
+    },
+    "stu_b1821d722dd8": {
+     "name": "Ibrahim",
+     "channel": "alert",
+     "priority": "high",
+     "why": "7 negative check-ins in a row over 3 days",
+     "trajectory": "steady",
+     "delta": -0.073,
+     "noteCount": 1,
+     "dominantEmotion": "frustrated",
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "escalate_long_streak",
+      "regulation_tool",
+      "motivation_tokens",
+      "document_context"
+     ],
+     "headlines": [
+      "Sustained run - worth a second pair of eyes",
+      "🌀 Go back to Fidget Spinner",
+      "The token board is out of reach right now",
+      "Your notes already have context on this"
+     ]
+    },
+    "stu_43cec02c0abd": {
+     "name": "Emmy",
+     "channel": "alert",
+     "priority": "medium",
+     "why": "7 negative check-ins in a row over 2 days - clustered around Lunch",
+     "trajectory": "steady",
+     "delta": 0.149,
+     "noteCount": 0,
+     "dominantEmotion": "anxious",
+     "taskClusters": [
+      "Lunch"
+     ],
+     "timeCluster": null,
+     "recommendations": [
+      "antecedent_task",
+      "regulation_tool",
+      "story_assign",
+      "document_note"
+     ],
+     "headlines": [
+      "Lunch is where this shows up",
+      "🖐️ Emmy has not opened 5-4-3-2-1 yet",
+      "Assign \"Meeting a New Friend\"",
+      "Nothing on file for this period"
+     ]
+    },
+    "stu_7f23140489f4": {
+     "name": "Gabriel",
+     "channel": "alert",
+     "priority": "medium",
+     "why": "5 negative check-ins in a row over 2 days",
+     "trajectory": "worsening",
+     "delta": 0.201,
+     "noteCount": 2,
+     "dominantEmotion": "anxious",
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "regulation_tool",
+      "communication_aac",
+      "story_assign",
+      "motivation_tokens"
+     ],
+     "headlines": [
+      "🖐️ Gabriel has not opened 5-4-3-2-1 yet",
+      "This may be a communication gap, not a mood",
+      "Assign \"Getting a Haircut\"",
+      "The token board is out of reach right now"
+     ]
+    },
+    "stu_daf3dc5e3f07": {
+     "name": "Ezra",
+     "channel": "watch",
+     "priority": "watch",
+     "why": "31% of recent check-ins negative, never four in a row",
+     "trajectory": "steady",
+     "delta": -0.056,
+     "noteCount": 2,
+     "dominantEmotion": "frustrated",
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "regulation_tool",
+      "motivation_tokens"
+     ],
+     "headlines": [
+      "🌀 Ezra has not opened Fidget Spinner yet",
+      "The token board is out of reach right now"
+     ]
+    },
+    "stu_ef5d97d9b972": {
+     "name": "Zara",
+     "channel": "watch",
+     "priority": "watch",
+     "why": "28% of recent check-ins negative, never four in a row",
+     "trajectory": "steady",
+     "delta": 0.047,
+     "noteCount": 5,
+     "dominantEmotion": "overwhelmed",
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "regulation_tool",
+      "story_assign"
+     ],
+     "headlines": [
+      "🌌 Zara has not opened Starry Night yet",
+      "Assign \"My First Fire Drill\""
+     ]
+    },
+    "stu_4c8ed76c2025": {
+     "name": "Priya",
+     "channel": "positive",
+     "priority": "info",
+     "why": "4 \"happy\" check-ins in a row",
+     "trajectory": "steady",
+     "delta": 0.041,
+     "noteCount": 3,
+     "dominantEmotion": null,
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "celebrate"
+     ],
+     "headlines": [
+      "Say this one out loud"
+     ]
+    },
+    "stu_4eca52757043": {
+     "name": "Hana",
+     "channel": "positive",
+     "priority": "info",
+     "why": "7 \"happy\" check-ins in a row",
+     "trajectory": "steady",
+     "delta": -0.046,
+     "noteCount": 3,
+     "dominantEmotion": null,
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "celebrate"
+     ],
+     "headlines": [
+      "Say this one out loud"
+     ]
+    },
+    "stu_a30524c3dfa2": {
+     "name": "Milo",
+     "channel": "positive",
+     "priority": "info",
+     "why": "4 \"happy\" check-ins in a row",
+     "trajectory": "steady",
+     "delta": 0.003,
+     "noteCount": 0,
+     "dominantEmotion": null,
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "celebrate"
+     ],
+     "headlines": [
+      "Say this one out loud"
+     ]
+    },
+    "stu_c99de7cc65e5": {
+     "name": "Elowen",
+     "channel": "positive",
+     "priority": "info",
+     "why": "5 \"happy\" check-ins in a row",
+     "trajectory": "steady",
+     "delta": -0.061,
+     "noteCount": 3,
+     "dominantEmotion": null,
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "celebrate"
+     ],
+     "headlines": [
+      "Say this one out loud"
+     ]
+    }
+   }
+  },
+  "W39DTP": {
+   "code": "W39DTP",
+   "reference": "2026-08-07T10:25:00",
+   "windowStart": "2026-07-08T10:25:00",
+   "counts": {
+    "flagged": 12,
+    "alert": 9,
+    "watch": 1,
+    "positive": 2,
+    "high": 8,
+    "undoc": 3
+   },
+   "roomRecommendations": [
+    "room_trend",
+    "room_documentation"
+   ],
+   "order": [
+    "stu_82f747bd6233",
+    "stu_05fe43c6d1d1",
+    "stu_6c2d450d13c5",
+    "stu_7fd837c519c6",
+    "stu_f4be0172565b",
+    "stu_4deecc0cd952",
+    "stu_830a37763711",
+    "stu_9b53b85c1393",
+    "stu_23f6b8ff4867",
+    "stu_3e0444477be9",
+    "stu_ddaf5b35726c",
+    "stu_fecf65447fbe"
+   ],
+   "students": {
+    "stu_82f747bd6233": {
+     "name": "Ezra",
+     "channel": "alert",
+     "priority": "high",
+     "why": "11 negative check-ins in a row over 6 days, across 4 separate episodes",
+     "trajectory": "steady",
+     "delta": 0.086,
+     "noteCount": 0,
+     "dominantEmotion": "frustrated",
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "escalate_repeat_episodes",
+      "regulation_tool",
+      "story_assign",
+      "motivation_tokens"
+     ],
+     "headlines": [
+      "Bring this one to your support team",
+      "🌀 Go back to Fidget Spinner",
+      "Assign \"Indoor Recess Day\"",
+      "The token board is out of reach right now"
+     ]
+    },
+    "stu_05fe43c6d1d1": {
+     "name": "Quinn",
+     "channel": "alert",
+     "priority": "high",
+     "why": "27 negative check-ins in a row over 12 days, across 3 separate episodes",
+     "trajectory": "steady",
+     "delta": 0.083,
+     "noteCount": 1,
+     "dominantEmotion": "anxious",
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "escalate_repeat_episodes",
+      "regulation_tool",
+      "story_assign",
+      "document_context"
+     ],
+     "headlines": [
+      "Bring this one to your support team",
+      "🖐️ Quinn has not opened 5-4-3-2-1 yet",
+      "Assign \"Picture Day\"",
+      "Your notes already have context on this"
+     ]
+    },
+    "stu_6c2d450d13c5": {
+     "name": "Finn",
+     "channel": "alert",
+     "priority": "high",
+     "why": "23 negative check-ins in a row over 10 days, across 3 separate episodes",
+     "trajectory": "worsening",
+     "delta": 0.185,
+     "noteCount": 1,
+     "dominantEmotion": "frustrated",
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "escalate_repeat_episodes",
+      "regulation_tool",
+      "story_assign",
+      "document_context"
+     ],
+     "headlines": [
+      "Bring this one to your support team",
+      "🌀 Go back to Fidget Spinner",
+      "Assign \"Indoor Recess Day\"",
+      "Your notes already have context on this"
+     ]
+    },
+    "stu_7fd837c519c6": {
+     "name": "Mabel",
+     "channel": "alert",
+     "priority": "high",
+     "why": "7 negative check-ins in a row over 3 days, across 3 separate episodes",
+     "trajectory": "worsening",
+     "delta": 0.291,
+     "noteCount": 5,
+     "dominantEmotion": "overwhelmed",
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "escalate_repeat_episodes",
+      "regulation_tool",
+      "story_assign",
+      "document_context"
+     ],
+     "headlines": [
+      "Bring this one to your support team",
+      "🌬️ Mabel has not opened Deep Breathing yet",
+      "Assign \"Field Trip Day\"",
+      "Your notes already have context on this"
+     ]
+    },
+    "stu_f4be0172565b": {
+     "name": "Maya",
+     "channel": "alert",
+     "priority": "high",
+     "why": "9 negative check-ins in a row over 4 days, across 3 separate episodes",
+     "trajectory": "steady",
+     "delta": -0.08,
+     "noteCount": 0,
+     "dominantEmotion": "frustrated",
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "escalate_repeat_episodes",
+      "regulation_tool",
+      "story_assign",
+      "document_note"
+     ],
+     "headlines": [
+      "Bring this one to your support team",
+      "🌀 Go back to Fidget Spinner",
+      "Assign \"Indoor Recess Day\"",
+      "Nothing on file for this period"
+     ]
+    },
+    "stu_4deecc0cd952": {
+     "name": "Emmy",
+     "channel": "alert",
+     "priority": "high",
+     "why": "5 negative check-ins in a row over 2 days, across 2 separate episodes",
+     "trajectory": "steady",
+     "delta": -0.109,
+     "noteCount": 4,
+     "dominantEmotion": "anxious",
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "escalate_repeat_episodes",
+      "regulation_tool",
+      "story_assign",
+      "document_context"
+     ],
+     "headlines": [
+      "Bring this one to your support team",
+      "🖐️ Emmy has not opened 5-4-3-2-1 yet",
+      "Assign \"Picture Day\"",
+      "Your notes already have context on this"
+     ]
+    },
+    "stu_830a37763711": {
+     "name": "Zion",
+     "channel": "alert",
+     "priority": "high",
+     "why": "29 negative check-ins in a row over 15 days, across 2 separate episodes",
+     "trajectory": "steady",
+     "delta": -0.103,
+     "noteCount": 1,
+     "dominantEmotion": "frustrated",
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "escalate_repeat_episodes",
+      "regulation_tool",
+      "story_assign",
+      "document_context"
+     ],
+     "headlines": [
+      "Bring this one to your support team",
+      "🌀 Go back to Fidget Spinner",
+      "Assign \"Indoor Recess Day\"",
+      "Your notes already have context on this"
+     ]
+    },
+    "stu_9b53b85c1393": {
+     "name": "Milo",
+     "channel": "alert",
+     "priority": "high",
+     "why": "6 negative check-ins in a row over 3 days, across 2 separate episodes",
+     "trajectory": "steady",
+     "delta": -0.111,
+     "noteCount": 1,
+     "dominantEmotion": "anxious",
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "escalate_repeat_episodes",
+      "regulation_tool",
+      "communication_aac",
+      "story_assign"
+     ],
+     "headlines": [
+      "Bring this one to your support team",
+      "🖐️ Milo has not opened 5-4-3-2-1 yet",
+      "This may be a communication gap, not a mood",
+      "Assign \"Picture Day\""
+     ]
+    },
+    "stu_23f6b8ff4867": {
+     "name": "Luca",
+     "channel": "alert",
+     "priority": "medium",
+     "why": "5 negative check-ins in a row over 2 days",
+     "trajectory": "steady",
+     "delta": 0.06,
+     "noteCount": 0,
+     "dominantEmotion": "frustrated",
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "regulation_tool",
+      "story_assign",
+      "document_note"
+     ],
+     "headlines": [
+      "🫧 Luca has not opened Pop Bubbles yet",
+      "Assign \"Indoor Recess Day\"",
+      "Nothing on file for this period"
+     ]
+    },
+    "stu_3e0444477be9": {
+     "name": "Ezra",
+     "channel": "watch",
+     "priority": "watch",
+     "why": "39% of recent check-ins negative, never four in a row",
+     "trajectory": "worsening",
+     "delta": 0.179,
+     "noteCount": 1,
+     "dominantEmotion": "anxious",
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "regulation_tool",
+      "story_assign"
+     ],
+     "headlines": [
+      "🌬️ Ezra has not opened Deep Breathing yet",
+      "Assign \"Picture Day\""
+     ]
+    },
+    "stu_ddaf5b35726c": {
+     "name": "Sana",
+     "channel": "positive",
+     "priority": "info",
+     "why": "4 \"happy\" check-ins in a row",
+     "trajectory": "steady",
+     "delta": 0.067,
+     "noteCount": 2,
+     "dominantEmotion": null,
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "celebrate"
+     ],
+     "headlines": [
+      "Say this one out loud"
+     ]
+    },
+    "stu_fecf65447fbe": {
+     "name": "Chloe",
+     "channel": "positive",
+     "priority": "info",
+     "why": "4 \"happy\" check-ins in a row",
+     "trajectory": "steady",
+     "delta": 0.009,
+     "noteCount": 2,
+     "dominantEmotion": null,
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "celebrate"
+     ],
+     "headlines": [
+      "Say this one out loud"
+     ]
+    }
+   }
+  },
+  "XDZYTL": {
+   "code": "XDZYTL",
+   "reference": "2026-08-07T12:02:00",
+   "windowStart": "2026-07-08T12:02:00",
+   "counts": {
+    "flagged": 13,
+    "alert": 9,
+    "watch": 1,
+    "positive": 3,
+    "high": 6,
+    "undoc": 3
+   },
+   "roomRecommendations": [
+    "room_documentation"
+   ],
+   "order": [
+    "stu_103b56a6f498",
+    "stu_bf077b676915",
+    "stu_57ae5e27490c",
+    "stu_e91b5544ebef",
+    "stu_3bdfb199cd9c",
+    "stu_60d1d130f2c9",
+    "stu_76aaab335d79",
+    "stu_9deb574469e3",
+    "stu_f96cc6e8993f",
+    "stu_e5cafb197af9",
+    "stu_3aa64cc4031a",
+    "stu_9a04b6ab3bb9",
+    "stu_bf79c7fba674"
+   ],
+   "students": {
+    "stu_103b56a6f498": {
+     "name": "Amara",
+     "channel": "alert",
+     "priority": "high",
+     "why": "17 negative check-ins in a row over 5 days, across 6 separate episodes",
+     "trajectory": "steady",
+     "delta": -0.003,
+     "noteCount": 0,
+     "dominantEmotion": "frustrated",
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "escalate_repeat_episodes",
+      "regulation_tool",
+      "document_note"
+     ],
+     "headlines": [
+      "Bring this one to your support team",
+      "🌀 Go back to Fidget Spinner",
+      "Nothing on file for this period"
+     ]
+    },
+    "stu_bf077b676915": {
+     "name": "Ezra",
+     "channel": "alert",
+     "priority": "high",
+     "why": "7 negative check-ins in a row over 2 days, across 5 separate episodes",
+     "trajectory": "steady",
+     "delta": 0.039,
+     "noteCount": 0,
+     "dominantEmotion": "frustrated",
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "escalate_repeat_episodes",
+      "regulation_tool",
+      "motivation_tokens",
+      "document_note"
+     ],
+     "headlines": [
+      "Bring this one to your support team",
+      "🌀 Ezra has not opened Fidget Spinner yet",
+      "The token board is out of reach right now",
+      "Nothing on file for this period"
+     ]
+    },
+    "stu_57ae5e27490c": {
+     "name": "Noor",
+     "channel": "alert",
+     "priority": "high",
+     "why": "5 negative check-ins in a row over 2 days, across 4 separate episodes - clustered around Clean Up",
+     "trajectory": "steady",
+     "delta": -0.017,
+     "noteCount": 2,
+     "dominantEmotion": "overwhelmed",
+     "taskClusters": [
+      "Clean Up"
+     ],
+     "timeCluster": null,
+     "recommendations": [
+      "escalate_repeat_episodes",
+      "antecedent_task",
+      "regulation_tool",
+      "story_assign"
+     ],
+     "headlines": [
+      "Bring this one to your support team",
+      "Clean Up is where this shows up",
+      "🌌 Go back to Starry Night",
+      "Assign \"Substitute Teacher Day\""
+     ]
+    },
+    "stu_e91b5544ebef": {
+     "name": "Finn",
+     "channel": "alert",
+     "priority": "high",
+     "why": "6 negative check-ins in a row over 2 days, across 2 separate episodes",
+     "trajectory": "steady",
+     "delta": 0.015,
+     "noteCount": 0,
+     "dominantEmotion": "overwhelmed",
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "escalate_repeat_episodes",
+      "regulation_tool",
+      "story_assign",
+      "document_note"
+     ],
+     "headlines": [
+      "Bring this one to your support team",
+      "🌌 Finn has not opened Starry Night yet",
+      "Assign \"Substitute Teacher Day\"",
+      "Nothing on file for this period"
+     ]
+    },
+    "stu_3bdfb199cd9c": {
+     "name": "Luca",
+     "channel": "alert",
+     "priority": "high",
+     "why": "9 negative check-ins in a row over 4 days",
+     "trajectory": "steady",
+     "delta": 0.075,
+     "noteCount": 2,
+     "dominantEmotion": "frustrated",
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "escalate_long_streak",
+      "regulation_tool",
+      "document_context"
+     ],
+     "headlines": [
+      "Sustained run - worth a second pair of eyes",
+      "🌀 Go back to Fidget Spinner",
+      "Your notes already have context on this"
+     ]
+    },
+    "stu_60d1d130f2c9": {
+     "name": "Jun",
+     "channel": "alert",
+     "priority": "high",
+     "why": "6 negative check-ins in a row over 3 days",
+     "trajectory": "steady",
+     "delta": 0.074,
+     "noteCount": 3,
+     "dominantEmotion": "frustrated",
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "escalate_long_streak",
+      "regulation_tool",
+      "document_context"
+     ],
+     "headlines": [
+      "Sustained run - worth a second pair of eyes",
+      "🌀 Jun has not opened Fidget Spinner yet",
+      "Your notes already have context on this"
+     ]
+    },
+    "stu_76aaab335d79": {
+     "name": "Omar",
+     "channel": "alert",
+     "priority": "medium",
+     "why": "4 negative check-ins in a row over 3 days",
+     "trajectory": "steady",
+     "delta": 0.033,
+     "noteCount": 5,
+     "dominantEmotion": "sad",
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "regulation_tool",
+      "document_context"
+     ],
+     "headlines": [
+      "🌧️ Omar has not opened Watch Rain yet",
+      "Your notes already have context on this"
+     ]
+    },
+    "stu_9deb574469e3": {
+     "name": "Dario",
+     "channel": "alert",
+     "priority": "medium",
+     "why": "6 negative check-ins in a row over 2 days",
+     "trajectory": "steady",
+     "delta": -0.082,
+     "noteCount": 2,
+     "dominantEmotion": "sad",
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "regulation_tool",
+      "document_context"
+     ],
+     "headlines": [
+      "🫧 Dario has not opened Pop Bubbles yet",
+      "Your notes already have context on this"
+     ]
+    },
+    "stu_f96cc6e8993f": {
+     "name": "Fatima",
+     "channel": "alert",
+     "priority": "medium",
+     "why": "4 negative check-ins in a row over 3 days - clustered around Transition to Gym",
+     "trajectory": "steady",
+     "delta": 0.013,
+     "noteCount": 3,
+     "dominantEmotion": "overwhelmed",
+     "taskClusters": [
+      "Transition to Gym"
+     ],
+     "timeCluster": null,
+     "recommendations": [
+      "antecedent_task",
+      "regulation_tool",
+      "story_assign",
+      "motivation_tokens"
+     ],
+     "headlines": [
+      "Transition to Gym is where this shows up",
+      "🌌 Go back to Starry Night",
+      "Assign \"Substitute Teacher Day\"",
+      "The token board is out of reach right now"
+     ]
+    },
+    "stu_e5cafb197af9": {
+     "name": "Noor",
+     "channel": "watch",
+     "priority": "watch",
+     "why": "40% of recent check-ins negative, never four in a row",
+     "trajectory": "steady",
+     "delta": -0.008,
+     "noteCount": 2,
+     "dominantEmotion": "angry",
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "regulation_tool",
+      "motivation_tokens"
+     ],
+     "headlines": [
+      "🫧 Noor has not opened Pop Bubbles yet",
+      "The token board is out of reach right now"
+     ]
+    },
+    "stu_3aa64cc4031a": {
+     "name": "Ibrahim",
+     "channel": "positive",
+     "priority": "info",
+     "why": "4 \"excited\" check-ins in a row",
+     "trajectory": "steady",
+     "delta": 0.037,
+     "noteCount": 1,
+     "dominantEmotion": null,
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "celebrate"
+     ],
+     "headlines": [
+      "Say this one out loud"
+     ]
+    },
+    "stu_9a04b6ab3bb9": {
+     "name": "Kai",
+     "channel": "positive",
+     "priority": "info",
+     "why": "6 \"calm\" check-ins in a row",
+     "trajectory": "steady",
+     "delta": -0.075,
+     "noteCount": 2,
+     "dominantEmotion": null,
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "celebrate"
+     ],
+     "headlines": [
+      "Say this one out loud"
+     ]
+    },
+    "stu_bf79c7fba674": {
+     "name": "Nadia",
+     "channel": "positive",
+     "priority": "info",
+     "why": "4 \"calm\" check-ins in a row",
+     "trajectory": "steady",
+     "delta": 0.006,
+     "noteCount": 2,
+     "dominantEmotion": null,
+     "taskClusters": [],
+     "timeCluster": null,
+     "recommendations": [
+      "celebrate"
+     ],
+     "headlines": [
+      "Say this one out loud"
+     ]
+    }
+   }
+  }
+ }
+}

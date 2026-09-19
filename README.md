@@ -1,15 +1,21 @@
 # Focus Bridge — synthetic data, emotion detection, and the teacher dashboard
 
-Two things live here:
+Three things live here:
 
     focusbridge_sourcecode/   the Focus Bridge app (single-file React/Babel build)
     synthetic_data/           a synthetic corpus and the pipeline that reads it
+    integrated_version/       the app with the pipeline's insights built into it
 
 Focus Bridge is a classroom app for special-education students: they check in
 with how they feel, work through a picture schedule, use a calm corner and read
 social stories. `synthetic_data/` holds a generated corpus of 4,437 students
 across 220 classrooms, and a four-stage pipeline that turns their emotion
 check-ins into something a teacher can act on.
+
+`integrated_version/` is the third thing, and the newest: the app with those
+same rules ported into the browser, so a teacher sees the analysis of their own
+class on a tab of their own dashboard instead of in a separately generated HTML
+file. It has its own README.
 
 ## The pipeline
 
@@ -126,7 +132,6 @@ import each other:
       review/         the teacher response loop (store, cli)
 
     tests/            unittest suite over the pure functions
-    legacy/           the pre-refactor scripts, kept for reference
 
 Every dependency arrow points inward, toward `core/`. Anything two stages both
 need lives there, which is what lets you change one stage without reading the
@@ -183,6 +188,38 @@ Python 3.9+, standard library only.
 
 `students.jsonl` is tracked with Git LFS — it is over GitHub's 100 MB per-file
 limit. Clone with `git lfs install` first, or the file arrives as a pointer.
+
+## The app with the insights built in
+
+`integrated_version/` is the Focus Bridge app plus an **Insights** tab on the
+teacher dashboard, showing the same analysis this pipeline produces — but for
+the classroom the teacher currently has open, computed in the browser, live.
+
+    cd integrated_version
+    # open index.html, then: Teachers -> Load a sample classroom -> Insights
+
+The rules are ported into `fb-insights.js` rather than called over a network,
+because check-ins are children's emotional records and the app's whole privacy
+posture is that they stay where the teacher put them. The cost of that choice is
+that the detection and recommendation rules now exist **twice** — here in Python
+and there in JavaScript — so a threshold changed in one has to be changed in the
+other.
+
+That is checked rather than remembered:
+
+    cd integrated_version
+    python tools/smoke_test.py
+
+`tools/verify_engine.py` runs *these* stages over the same records the browser
+sees and writes the result out; `tools/verify.html` then diffs the port against
+it, student by student, across channel, priority, both correlations, room rules,
+reading order and every recommendation id. Two more pages check that the screen
+renders and that the journey through it works. All three run headless from that
+one command.
+
+See `integrated_version/README.md` for what changed in the app, and for one bug
+this integration turned up in `recommend/context.py` that only shows on live app
+data.
 
 ## A caveat that applies to all of it
 

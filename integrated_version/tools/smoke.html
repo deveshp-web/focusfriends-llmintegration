@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Focus Bridge — Insights smoke test</title>
+<!--
+  Renders the real InsightsView and Dashboard components, out of the real
+  index.html, against a real sample classroom — and reports anything that
+  throws on the way.
+
+  verify_engine.py + verify.html check that the *analysis* is right.
+  This checks that the *screen* works: that the JSX compiles, that every branch
+  of the view survives real data, and that no component throws.
+
+  It has to be served over HTTP rather than opened from disk, because it reads
+  index.html with fetch() to pull the app's script out of it:
+
+      cd integrated_version
+      python -m http.server 8777
+      # then open http://localhost:8777/tools/smoke.html
+
+  Or run tools/smoke_test.py, which does both and prints the result.
+-->
+<style>
+body{margin:0;font:14px/1.6 "Nunito",system-ui,sans-serif;background:#F0F9F4;color:#1A3A2A}
+#report{padding:20px;max-width:1000px;margin:0 auto}
+.banner{border-radius:16px;padding:16px 20px;font-weight:900;font-size:16px;margin-bottom:14px}
+.ok{background:#E8F8F0;color:#1A6B3C;border:2px solid #A8E6CF}
+.bad{background:#FDECEA;color:#B3261E;border:2px solid #f5c2bd}
+li{font-weight:700;font-size:13px;margin-bottom:3px}
+li.pass::before{content:"PASS  ";color:#1A6B3C;font-weight:900}
+li.fail::before{content:"FAIL  ";color:#B3261E;font-weight:900}
+pre{background:#fff;border-radius:12px;padding:12px;overflow:auto;font-size:11.5px;max-height:240px}
+#stage{border-top:3px dashed #cdeadb;margin-top:20px}
+</style>
+</head>
+<body>
+<div id="report">Running…</div>
+<div id="stage"></div>
+
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
+<script src="../fb-insights.js"></script>
+<script src="../demo-data.js"></script>
+<script>
+const CHECKS = [];
+const ERRORS = [];
+function check(name, fn) {
+  try { const detail = fn(); CHECKS.push([true, name, detail || ""]); }
+  catch (e) { CHECKS.push([false, name, (e && e.message) || String(e)]); }
+}
+
+// Anything the app throws during render has to reach the report, not the
+// console where a headless run would never see it.
+window.addEventListener("error", e => ERRORS.push("window.onerror: " + e.message));
+window.addEventListener("unhandledrejection", e => ERRORS.push("unhandled rejection: " + e.reason));
+const realError = console.error;
+console.error = function () {
+  ERRORS.push("console.error: " + Array.prototype.join.call(arguments, " "));
+  realError.apply(console, arguments);
+};
+
+(async function () {
+  const report = document.getElementById("report");
+  let app;
+  try {
+    // The app is one inline <script type="text/babel"> inside index.html. It is
+    // pulled out and compiled here rather than copied, so this test can never
+    // drift from what actually ships.
+    const html = await (await fetch("../index.html")).text();
+    const match = html.match(/<script type="text\/babel"[^>]*>([\s\S]*?)<\/script>/);
+    if (!match) throw new Error("could not find the text/babel block in index.html");
+    app = match[1];
+  } catch (e) {
+    report.innerHTML = '<div class="banner bad">Could not read index.html: ' + e.message +
+      '<br><span style="font-size:13px;font-weight:700">This page must be served over HTTP. ' +
+      'Run <code>python tools/smoke_test.py</code>, or ' +
+      '<code>python -m http.server 8777</code> from integrated_version/.</span></div>';
+    return;
+  }
+
+  // Compile it exactly as the browser does when index.html loads, but stop
+  // short of the app mounting itself: ReactDOM.createRoot(#root) at the bottom
+  // of the file would start the whole app and we only want its components.
+  let compiled;
+  check("index.html's JSX compiles", () => {
+    compiled = Babel.transform(app.replace(/ReactDOM\.createRoot[\s\S]*$/, ""),
+                               { presets: ["react"] }).code;
+    return (compiled.length / 1024).toFixed(0) + " KB of output";
+  });
+  if (!compiled) return render(report);
+
+  // Evaluated in a function scope, returning the handles this test needs. The
+  // app's own top-level `const`s are all in scope inside it.
+  let exports;
+  check("the app's script evaluates", () => {
+    exports = new Function(compiled + `
+      ;return {InsightsView, Dashboard, EM, DB, CSS,
+               NAV_PROBE: typeof InsightsView === "function"};`)();
+    return "";
+  });
+  if (!exports) return render(report);
+
+  check("the emotion picker carries the detector's full vocabulary", () => {
+    const labels = exports.EM.map(e => e.label.toLowerCase());
+    const missing = Object.keys(FBI.EMOTION_VALENCE)
+      .filter(word => labels.indexOf(word) === -1);
+    if (missing.length) throw new Error("app cannot emit: " + missing.join(", "));
+    return exports.EM.length + " emotions, all known to the engine";
+  });
+
+  check("the first eight emotions kept their positions", () => {
+    // Children who rely on button position have learned where their feeling
+    // lives on the grid. New words were appended; if one ever gets inserted
+    // instead, this fails.
+    const expected = ["Happy", "Sad", "Angry", "Scared", "Tired", "Okay", "Excited", "Confused"];
+    expected.forEach((label, i) => {
+      if (exports.EM[i].label !== label) {
+        throw new Error("position " + i + " is " + exports.EM[i].label + ", expected " + label);
+      }
+    });
+    return "unchanged";
+  });
+
+  check("DB.getAllNotes exists", () => {
+    if (typeof exports.DB.getAllNotes !== "function") throw new Error("missing");
+    return "";
+  });
+
+  // ---- render the view against a real sample room -------------------------
+  const room = FB_DEMO_ROOMS.rooms[0];
+  const stage = document.getElementById("stage");
+
+  // Notes live in the app's offline storage, which is where getAllNotes looks.
+  Object.keys(room.notes).forEach(id => {
+    try { localStorage.setItem("bs-notes-" + room.code + "-" + id,
+                               JSON.stringify(room.notes[id])); } catch (e) {}
+  });
+
+  let analysis;
+  check("the engine analyses the sample room", () => {
+    analysis = FBI.analyseClassroom({
+      classroom: { ...room.classroom, code: room.code },
+      roster: room.roster, students: room.students,
+      notes: room.notes, stories: room.stories
+    });
+    if (!analysis.room.order.length) throw new Error("nothing flagged — cannot exercise the view");
+    return analysis.room.counts.flagged + " flagged, " +
+           analysis.room.counts.alert + " alert / " +
+           analysis.room.counts.watch + " watch / " +
+           analysis.room.counts.positive + " positive";
+  });
+
+  await new Promise(resolve => {
+    check("InsightsView mounts", () => {
+      ReactDOM.createRoot(stage).render(
+        React.createElement(exports.InsightsView, {
+          code: room.code,
+          cls: room.classroom,
+          roster: room.roster,
+          students: room.students,
+          stories: room.stories,
+          onOpenStudent: () => {}
+        }));
+      return "";
+    });
+    // The view loads notes asynchronously before it can draw anything, so the
+    // assertions below have to wait for that round trip to settle.
+    setTimeout(resolve, 2500);
+  });
+
+  const text = stage.textContent || "";
+  const has = needle => text.indexOf(needle) !== -1;
+
+  check("it finished loading", () => {
+    if (has("Reading this class's check-ins")) throw new Error("still on the loading state");
+    if (has("Could not analyse")) throw new Error("the view reported an analysis error");
+    return "";
+  });
+  check("the KPI row rendered", () => {
+    ["Flagged", "High priority", "Alert channel", "Watch", "Going well", "No notes"]
+      .forEach(label => { if (!has(label)) throw new Error("missing tile: " + label); });
+    return "6 tiles";
+  });
+  check("both alert panels rendered", () => {
+    if (!has("Needs attention now")) throw new Error("missing: Needs attention now");
+    if (!has("Since your last check")) throw new Error("missing: Since your last check");
+    return "";
+  });
+  check("the channel sections rendered", () => {
+    const found = ["Alert queue", "Watch", "Going well"].filter(has);
+    if (!found.length) throw new Error("no channel section drawn");
+    return found.join(", ");
+  });
+  check("student cards rendered with their evidence", () => {
+    const cards = stage.querySelectorAll(".ins-card");
+    if (!cards.length) throw new Error("no student cards");
+    const withEvidence = Array.prototype.filter.call(cards,
+      c => c.querySelector("ul li"));
+    if (!withEvidence.length) throw new Error("cards drew no evidence lines");
+    return cards.length + " cards, " + withEvidence.length + " carrying evidence";
+  });
+  check("check-in strips rendered", () => {
+    const cells = stage.querySelectorAll(".ins-cell");
+    if (!cells.length) throw new Error("no strip cells");
+    if (!cells[0].getAttribute("data-tip")) throw new Error("cells have no hover detail");
+    return cells.length + " cells";
+  });
+  check("the view agrees with the engine on the headline count", () => {
+    const flagged = analysis.room.counts.flagged;
+    if (!has(flagged + " of " + analysis.meta.studentsScanned + " students")) {
+      throw new Error("header does not state " + flagged + " of " + analysis.meta.studentsScanned);
+    }
+    return "";
+  });
+  check("the room-level advice rendered", () => {
+    if (!analysis.room.recommendations.length) return "none for this room (nothing to draw)";
+    if (!has("Change once, not per student")) throw new Error("room advice section missing");
+    return analysis.room.recommendations.length + " room recommendations";
+  });
+  check("the stale-window notice is honest about the sample data", () => {
+    if (analysis.meta.staleDays > 2 && !has("most recent check-in in this class was")) {
+      throw new Error("data is " + analysis.meta.staleDays + " days old and the view does not say so");
+    }
+    return analysis.meta.staleDays + " days behind today, and stated";
+  });
+
+  // ---- and the dashboard that hosts it ------------------------------------
+  const shell = document.createElement("div");
+  document.body.appendChild(shell);
+  await new Promise(resolve => {
+    check("Dashboard mounts with the Insights tab in its nav", () => {
+      ReactDOM.createRoot(shell).render(
+        React.createElement(exports.Dashboard, {
+          code: room.code, cls: room.classroom, roster: room.roster,
+          students: room.students, loading: false, dbMode: "demo",
+          onRefresh: () => {}, onBack: () => {}
+        }));
+      return "";
+    });
+    setTimeout(resolve, 1200);
+  });
+  check("the Insights nav button is present", () => {
+    const labels = Array.prototype.map.call(shell.querySelectorAll("nav button"),
+                                            b => b.textContent);
+    if (labels.join("|").indexOf("Insights") === -1) {
+      throw new Error("nav shows: " + labels.join(", "));
+    }
+    return labels.join(" · ");
+  });
+  check("the roster carries a route into Insights", () => {
+    if ((shell.textContent || "").indexOf("Read the check-ins as patterns") === -1) {
+      throw new Error("no callout on the Students tab");
+    }
+    return "";
+  });
+  shell.remove();
+
+  check("nothing threw during any of that", () => {
+    // React's own dev warnings are not failures; anything else is.
+    const real = ERRORS.filter(e => e.indexOf("Warning:") === -1);
+    if (real.length) throw new Error(real.join(" ;; "));
+    return ERRORS.length ? ERRORS.length + " React warnings, no errors" : "clean";
+  });
+
+  render(report);
+})();
+
+function render(report) {
+  const failed = CHECKS.filter(c => !c[0]).length;
+  report.innerHTML =
+    '<div class="banner ' + (failed ? "bad" : "ok") + '" id="verdict">' +
+      (failed ? failed + " of " + CHECKS.length + " smoke checks FAILED"
+              : "All " + CHECKS.length + " smoke checks passed") + "</div>" +
+    "<ul>" + CHECKS.map(c =>
+      '<li class="' + (c[0] ? "pass" : "fail") + '">' + c[1] +
+      (c[2] ? ' <span style="color:#8a998f;font-weight:700">— ' + c[2] + "</span>" : "") +
+      "</li>").join("") + "</ul>" +
+    (ERRORS.length ? "<pre>" + ERRORS.join("\n") + "</pre>" : "");
+}
+</script>
+</body>
+</html>

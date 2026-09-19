@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Focus Bridge — Insights end-to-end</title>
+<!--
+  Walks the whole journey a teacher actually takes, by clicking the real app:
+
+      landing → Teachers → Load a sample classroom → pick a room
+              → teacher dashboard → Insights → filter → jump to a student
+
+  smoke.html renders the Insights component in isolation. This one never
+  touches a component directly: it finds buttons by the words on them and
+  dispatches real clicks, so it fails if the wiring between screens breaks even
+  when every individual piece still works.
+
+  Served over HTTP (it reads index.html with fetch):
+
+      python tools/smoke_test.py --page e2e
+
+  Runs against a scratch copy of localStorage, and clears the sample classroom
+  it installed on the way out.
+-->
+<style>
+body{margin:0;font:14px/1.6 "Nunito",system-ui,sans-serif;background:#F0F9F4;color:#1A3A2A}
+#report{padding:20px;max-width:1000px;margin:0 auto}
+.banner{border-radius:16px;padding:16px 20px;font-weight:900;font-size:16px;margin-bottom:14px}
+.ok{background:#E8F8F0;color:#1A6B3C;border:2px solid #A8E6CF}
+.bad{background:#FDECEA;color:#B3261E;border:2px solid #f5c2bd}
+li{font-weight:700;font-size:13px;margin-bottom:3px}
+li.pass::before{content:"PASS  ";color:#1A6B3C;font-weight:900}
+li.fail::before{content:"FAIL  ";color:#B3261E;font-weight:900}
+pre{background:#fff;border-radius:12px;padding:12px;overflow:auto;font-size:11.5px;max-height:260px}
+#stage{border-top:3px dashed #cdeadb;margin-top:20px}
+</style>
+</head>
+<body>
+<div id="report">Running…</div>
+<div id="stage"></div>
+
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
+<!-- Both of these are loaded by index.html's own <head>, which this page does
+     not execute — only its inline script. demo-data.js being present up front
+     also means the app's lazy <script> injection is skipped, which matters
+     because its "./demo-data.js" is relative to index.html, not to tools/. -->
+<script src="../fb-insights.js"></script>
+<script src="../demo-data.js"></script>
+<script>
+const CHECKS = [], ERRORS = [];
+function check(name, fn) {
+  try { const detail = fn(); CHECKS.push([true, name, detail || ""]); return true; }
+  catch (e) { CHECKS.push([false, name, (e && e.message) || String(e)]); return false; }
+}
+window.addEventListener("error", e => ERRORS.push("window.onerror: " + e.message));
+window.addEventListener("unhandledrejection", e => ERRORS.push("rejection: " + e.reason));
+const realError = console.error;
+console.error = function () {
+  ERRORS.push("console.error: " + Array.prototype.join.call(arguments, " "));
+  realError.apply(console, arguments);
+};
+
+const stage = document.getElementById("stage");
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const textOf = el => (el.textContent || "").replace(/\s+/g, " ").trim();
+
+/* Find a clickable by the words on it. Deliberately not by id or by DOM path:
+   a test that knows the shape of the markup passes when the markup is intact
+   and the journey is broken. */
+function findClickable(words, root) {
+  const scope = root || stage;
+  const all = scope.querySelectorAll("button, a, [role=button]");
+  for (const el of all) if (textOf(el).indexOf(words) !== -1) return el;
+  return null;
+}
+
+function click(el) {
+  el.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
+}
+
+/* Wait until the stage contains some text, or give up. Every step goes through
+   here rather than a fixed sleep, so a slow machine does not produce a red
+   run and a fast one does not hide a race. */
+async function waitFor(predicate, label, timeout) {
+  const deadline = Date.now() + (timeout || 8000);
+  while (Date.now() < deadline) {
+    if (predicate()) return true;
+    await sleep(120);
+  }
+  throw new Error("timed out waiting for " + label);
+}
+const waitForText = (needle, timeout) =>
+  waitFor(() => textOf(stage).indexOf(needle) !== -1, '"' + needle + '"', timeout);
+
+(async function () {
+  const report = document.getElementById("report");
+  let App;
+
+  // A clean slate: the app resumes a saved session on boot, and a leftover one
+  // would start this run halfway through the journey it is meant to walk.
+  try { localStorage.clear(); } catch (e) {}
+
+  try {
+    const html = await (await fetch("../index.html")).text();
+    const match = html.match(/<script type="text\/babel"[^>]*>([\s\S]*?)<\/script>/);
+    if (!match) throw new Error("no text/babel block in index.html");
+    const code = Babel.transform(match[1].replace(/ReactDOM\.createRoot[\s\S]*$/, ""),
+                                 { presets: ["react"] }).code;
+    App = new Function(code + ";return App;")();
+  } catch (e) {
+    report.innerHTML = '<div class="banner bad" id="verdict">Could not load the app: ' +
+      e.message + '<br><span style="font-size:13px">Serve over HTTP: ' +
+      '<code>python tools/smoke_test.py --page e2e</code></span></div>';
+    return;
+  }
+
+  ReactDOM.createRoot(stage).render(React.createElement(App));
+
+  const sample = FB_DEMO_ROOMS.rooms[0];
+  const code = sample.code;
+
+  // The app boots into a "loading" screen and only reaches the landing page
+  // after an async look at storage for a saved session, so every step below
+  // waits for the screen it expects rather than assuming React has caught up.
+  let step = true;
+  try {
+    await waitFor(() => !!findClickable("Teachers"), "the landing page", 15000);
+    check("the app boots to the landing page", () => "");
+  } catch (e) {
+    CHECKS.push([false, "the app boots to the landing page",
+                 e.message + " — stage showed: " + textOf(stage).slice(0, 200)]);
+    step = false;
+  }
+
+  if (step) {
+    click(findClickable("Teachers"));
+    step = await waitForText("Teacher Access", 6000).then(() => true).catch(e => {
+      CHECKS.push([false, "Teachers opens the teacher screen", e.message]); return false;
+    });
+    if (step) check("Teachers opens the teacher screen", () => "offline demo mode");
+  }
+
+  if (step) {
+    step = check("the sample-data offer is on the teacher screen", () => {
+      if (!findClickable("Load a sample classroom")) throw new Error("no offer");
+      return "";
+    });
+  }
+
+  if (step) {
+    click(findClickable("Load a sample classroom"));
+    step = await waitForText(sample.classroom.name, 8000).then(() => true).catch(e => {
+      CHECKS.push([false, "the sample rooms list", e.message]); return false;
+    });
+    if (step) check("the sample rooms list", () => FB_DEMO_ROOMS.rooms.length + " offered");
+  }
+
+  if (step) {
+    click(findClickable(sample.classroom.name));
+    // Installing ~20 students into storage and reading them back takes a beat.
+    step = await waitForText("students enrolled", 20000).then(() => true).catch(e => {
+      CHECKS.push([false, "picking a room opens the teacher dashboard", e.message]); return false;
+    });
+    if (step) check("picking a room opens the teacher dashboard", () => {
+      const roster = stage.querySelectorAll("tbody tr");
+      if (!roster.length) throw new Error("the roster table is empty");
+      return roster.length + " students on the roster";
+    });
+  }
+
+  if (step) {
+    check("the sample classroom really landed in storage", () => {
+      const raw = localStorage.getItem("bs-roster-" + code);
+      if (!raw) throw new Error("no roster written under bs-roster-" + code);
+      const notes = Object.keys(localStorage).filter(k => k.indexOf("bs-notes-" + code) === 0);
+      return JSON.parse(raw).length + " students, " + notes.length + " students with notes";
+    });
+    check("the roster offers a route into Insights", () => {
+      if (!findClickable("Open Insights")) throw new Error("no callout");
+      return "";
+    });
+  }
+
+  if (step) {
+    click(findClickable("Insights"));       // the sidebar nav entry
+    step = await waitForText("Needs attention now", 20000).then(() => true).catch(e => {
+      CHECKS.push([false, "the Insights tab opens and finishes analysing", e.message]); return false;
+    });
+    if (step) check("the Insights tab opens and finishes analysing", () => {
+      const cards = stage.querySelectorAll(".ins-card");
+      if (!cards.length) throw new Error("no student cards rendered");
+      return cards.length + " student cards";
+    });
+  }
+
+  if (step) {
+    check("it agrees with the engine run directly", () => {
+      const expected = FBI.analyseClassroom({
+        classroom: { ...sample.classroom, code: code },
+        roster: sample.roster, students: sample.students,
+        notes: sample.notes, stories: sample.stories
+      });
+      const shown = textOf(stage);
+      const line = expected.room.counts.flagged + " of " + expected.meta.studentsScanned + " students";
+      if (shown.indexOf(line) === -1) throw new Error('the header does not say "' + line + '"');
+      return line;
+    });
+
+    check("every card shows the evidence behind its advice", () => {
+      const cards = stage.querySelectorAll(".ins-card");
+      const bare = Array.prototype.filter.call(cards, card => {
+        const numbered = card.querySelectorAll("ul");
+        return numbered.length === 0;
+      });
+      if (bare.length) throw new Error(bare.length + " cards have advice with no evidence under it");
+      return cards.length + " cards, all cited";
+    });
+
+    const before = stage.querySelectorAll(".ins-card").length;
+    const trending = findClickable("Trending down");
+    check("the filter chips narrow the list", () => {
+      if (!trending) throw new Error("no Trending down chip");
+      click(trending);
+      return "";
+    });
+    await sleep(400);
+    check("Trending down shows fewer students than Everyone", () => {
+      const after = stage.querySelectorAll(".ins-card").length;
+      if (after >= before) throw new Error(after + " cards after filtering, " + before + " before");
+      return before + " → " + after;
+    });
+    click(findClickable("Everyone"));
+    await sleep(300);
+
+    check("table view switches without losing anyone", () => {
+      click(findClickable("Table view"));
+      return "";
+    });
+    await sleep(400);
+    check("the table lists the same students", () => {
+      const rows = stage.querySelectorAll("tbody tr").length;
+      if (rows < before) throw new Error("table has " + rows + " rows, cards had " + before);
+      return rows + " rows";
+    });
+    click(findClickable("Card view"));
+    await sleep(300);
+
+    check("Mark as read arms the change comparison", () => {
+      const button = findClickable("Mark as read");
+      if (!button) throw new Error("no Mark as read button");
+      click(button);
+      return "";
+    });
+    await sleep(700);
+    check("the snapshot was written", () => {
+      if (!localStorage.getItem("bs-insights-snap-" + code)) {
+        throw new Error("nothing stored under bs-insights-snap-" + code);
+      }
+      return "";
+    });
+
+    check("Open in Students reaches the roster", () => {
+      const button = findClickable("Open in Students");
+      if (!button) throw new Error("no Open in Students button on any card");
+      click(button);
+      return "";
+    });
+    await sleep(700);
+    check("...and selects that student", () => {
+      if (textOf(stage).indexOf("Teacher Notes") === -1) {
+        throw new Error("the student detail panel did not open");
+      }
+      return "";
+    });
+  }
+
+  check("nothing threw during the whole journey", () => {
+    const real = ERRORS.filter(e => e.indexOf("Warning:") === -1);
+    if (real.length) throw new Error(real.join(" ;; "));
+    return ERRORS.length ? ERRORS.length + " React warnings, no errors" : "clean";
+  });
+
+  // Leave the browser as it was found.
+  try {
+    Object.keys(localStorage).filter(k => k.indexOf(code) !== -1)
+      .forEach(k => localStorage.removeItem(k));
+  } catch (e) {}
+
+  const failed = CHECKS.filter(c => !c[0]).length;
+  report.innerHTML =
+    '<div class="banner ' + (failed ? "bad" : "ok") + '" id="verdict">' +
+      (failed ? failed + " of " + CHECKS.length + " end-to-end checks FAILED"
+              : "All " + CHECKS.length + " end-to-end checks passed") + "</div>" +
+    "<ul>" + CHECKS.map(c =>
+      '<li class="' + (c[0] ? "pass" : "fail") + '">' + c[1] +
+      (c[2] ? ' <span style="color:#8a998f">— ' + c[2] + "</span>" : "") + "</li>").join("") +
+    "</ul>" + (ERRORS.length ? "<pre>" + ERRORS.join("\n") + "</pre>" : "");
+})();
+</script>
+</body>
+</html>
