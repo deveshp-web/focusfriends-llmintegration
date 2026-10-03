@@ -1,10 +1,14 @@
 # Focus Bridge — synthetic data, emotion detection, and the teacher dashboard
 
-Three things live here:
+Five things live here:
 
     focusbridge_sourcecode/   the Focus Bridge app (single-file React/Babel build)
     synthetic_data/           a synthetic corpus and the pipeline that reads it
     integrated_version/       the app with the pipeline's insights built into it
+    supabase/                 the database both apps run against, and its security tests
+    deploy/                   the build that turns the app into the site Netlify serves
+
+To put it online, read [DEPLOY.md](DEPLOY.md).
 
 Focus Bridge is a classroom app for special-education students: they check in
 with how they feel, work through a picture schedule, use a calm corner and read
@@ -79,12 +83,14 @@ comparison is real data rather than a fixture:
 
     python detect_patterns.py --reference 2026-07-31T13:08:00 --suffix _prev
 
-> **Read the change counts with care.** On this synthetic corpus the diff can
-> only ever improve — sliding the 30-day window forward drops flagged students
-> and adds none (910 → 870 → 818 → 751 over four weekly reference dates, with
-> zero new at every step). The generator front-loads each student's episodes, so
-> "0 newly flagged" is an artefact of how the data was made, not good news about
-> a classroom. The dashboard says so in its own footer.
+> **A correction.** This section used to say the change feed could only ever
+> improve on this corpus — "0 newly flagged" at every step — and blamed how the
+> data was generated. That was a bug: the detector's window had no upper bound,
+> so the pinned "previous" run also read every check-in after its own date and
+> nothing could be new against it. With the window bounded at both ends, the
+> same comparison gives 163 escalated, 219 newly flagged, 158 eased and 235
+> resolved. The two windows still overlap, so a change is a reason to look, not
+> a verdict — the dashboard's footer says so.
 
 ### 4. `dashboard.py` — the teacher view
 
@@ -152,7 +158,7 @@ open next.
     cd synthetic_data
     python -m unittest discover -s tests -t .
 
-71 tests, standard library only, no fixtures on disk. They cover the pure
+97 tests, standard library only, no fixtures on disk. They cover the pure
 functions — the rules, the parsing, the statistics, the diff — because that is
 where the decisions live and they can be checked against a seven-entry list
 instead of a 153 MB file. The window index is additionally checked against a
@@ -217,9 +223,49 @@ reading order and every recommendation id. Two more pages check that the screen
 renders and that the journey through it works. All three run headless from that
 one command.
 
-See `integrated_version/README.md` for what changed in the app, and for one bug
-this integration turned up in `recommend/context.py` that only shows on live app
-data.
+See `integrated_version/README.md` for what changed in the app.
+
+## The database
+
+`supabase/focus-bridge-schema-secure.sql` is the schema both apps are written
+against: six tables behind row-level security, and the database functions
+students call without logging in. Run it in the Supabase SQL Editor, then run
+`supabase/security_tests.sql` the same way — it must finish without an error
+before any real student data goes in. `supabase/SECURITY_TESTS.md` explains
+what the tests prove and what to check by hand.
+
+The trust model, in one paragraph: anyone with the page and a class code can
+look up the classroom and join it as a **new** student, and nothing more. A
+returning child picks up their own record only on a device that proves it —
+the device they used before, or a classroom tablet the teacher has marked as
+trusted in Settings. Teachers reach only their own classrooms. Every secret is
+stored as a hash.
+
+A project that ran the earlier (v3) schema is upgraded in place by the same
+file, keeping every record. It signs every child out once, and the new page
+and the new database have to go live together. [DEPLOY.md](DEPLOY.md) has the
+order.
+
+To run the same tests on a local Postgres instead of a Supabase project:
+
+    python supabase/tests/run_local.py
+
+That runs them on a fresh install and on an upgraded copy of the v3 schema
+holding data, and checks the two end up identical. It needs PostgreSQL 15 or
+newer; the file's docstring shows how to get one without installing anything
+system-wide.
+
+## Publishing the app
+
+    python deploy/build_site.py --supabase-url https://YOUR-PROJECT.supabase.co --supabase-key sb_publishable_...
+    python deploy/check_site.py --site deploy/site
+
+The first command builds `deploy/site/`, the folder Netlify serves. It holds
+the app, your server's address and public key, a fresh service-worker cache
+name, and a `_headers` file with a Content-Security-Policy. The second loads
+that folder in Chrome under those headers, as a new visitor and as a returning
+one, and fails if anything is blocked. `netlify.toml` runs the same build when
+Netlify deploys from GitHub. [DEPLOY.md](DEPLOY.md) covers both routes.
 
 ## A caveat that applies to all of it
 

@@ -1,0 +1,16 @@
+# How Netlify builds this repository into the Focus Bridge site. See DEPLOY.md.
+#
+# The build copies integrated_version/ into deploy/site/, writes the classroom
+# server's address and public key into it, and adds security headers. Give it
+# those two values as environment variables (Site configuration -> Environment
+# variables): FB_SUPABASE_URL and FB_SUPABASE_KEY. Do NOT mark the key as a
+# secret - it is the public key, it has to appear in the page, and Netlify fails
+# any build whose output contains a value marked secret. Without the two
+# variables the build publishes a demo-only site.
+#
+# The build needs nothing but Python's standard library, which Netlify's build
+# image already has, and none of the Git LFS files.
+
+[build]
+  command = "python3 deploy/build_site.py"
+  publish = "deploy/site"

@@ -1,0 +1,32 @@
+# Response headers for the published site, in Netlify's _headers format.
+# deploy/build_site.py fills in the {PLACEHOLDERS} from the build's settings and
+# writes the result to deploy/site/_headers. Lines starting with # stay here.
+#
+# Content-Security-Policy, directive by directive:
+#   script-src   'unsafe-eval' because the app compiles its own JSX in the
+#                browser (Babel standalone), and 'unsafe-inline' because that
+#                JSX and the config block are inline. Both go away only with a
+#                build step. What this policy still does is fix WHERE code may
+#                come from: this site and the CDN, nothing else.
+#   connect-src  this site, the classroom server, and the CDN and font hosts -
+#                the last two because the service worker fetches them, and a
+#                worker's fetches obey connect-src. Leave them out and every
+#                returning visitor gets a blank page.
+#   frame-ancestors 'none'  nobody may put the app inside their own page.
+#
+# Permissions-Policy turns off devices the app never uses. It does not need
+# the microphone: read-aloud is speech synthesis, which needs no permission.
+#
+# The service worker gets no-cache so a new deploy reaches devices promptly.
+
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'{SCRIPT_SRC}; style-src 'self' 'unsafe-inline'{STYLE_SRC}; font-src 'self'{FONT_SRC}; img-src 'self' data: blob:{IMG_SRC}; media-src 'self' data: blob:; connect-src 'self'{CONNECT_SRC}; worker-src 'self'; manifest-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: no-referrer
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  Cross-Origin-Opener-Policy: same-origin
+  Strict-Transport-Security: max-age=31536000
+
+/sw.js
+  Cache-Control: no-cache
