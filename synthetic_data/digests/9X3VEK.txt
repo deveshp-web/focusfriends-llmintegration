@@ -2,8 +2,16 @@ Focus Bridge - Room 21 Explorers
 Maria Torres - Willow Creek Academy
 Changes between 2026-07-31 and 2026-08-07
 
-2 eased.
-8 students unchanged.
+2 new, 2 eased.
+6 students unchanged.
+
+NEW (2)
+  Hana: not flagged -> info
+      5 "excited" check-ins in a row
+      Suggested: Say this one out loud
+  Milo: not flagged -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🖐️ Milo has not opened 5-4-3-2-1 yet
 
 EASED (2)
   Ezra: high -> medium

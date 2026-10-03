@@ -2,11 +2,16 @@ Focus Bridge - Room 28 Stars
 Ashley Cohen - Maple Ridge Elementary
 Changes between 2026-07-31 and 2026-08-07
 
-1 eased.
-10 students unchanged.
+1 new, 1 eased.
+9 students unchanged.
+
+NEW (1)
+  Student 4F67: not flagged -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🖐️ Student 4F67 has not opened 5-4-3-2-1 yet
 
 EASED (1)
-  Wren: medium -> info
+  Student 7079: medium -> info
       4 "happy" check-ins in a row
       Suggested: Say this one out loud
 

@@ -2,8 +2,24 @@ Focus Bridge - Room 7 Explorers
 David Ahmed - Sunrise Learning Center
 Changes between 2026-07-31 and 2026-08-07
 
-1 eased, 2 resolved.
-13 students unchanged.
+2 escalated, 2 new, 1 eased, 2 resolved.
+9 students unchanged.
+
+ESCALATED (2)
+  Ibrahim: medium -> high
+      4 negative check-ins in a row over 2 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+  Sana: medium -> high
+      7 negative check-ins in a row over 3 days
+      Suggested: Sustained run - worth a second pair of eyes
+
+NEW (2)
+  Ben: not flagged -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🫧 Ben has not opened Pop Bubbles yet
+  Nadia: not flagged -> watch
+      20% of recent check-ins negative, never four in a row
+      Suggested: 🫧 Nadia has not opened Pop Bubbles yet
 
 EASED (1)
   Oliver: medium -> watch

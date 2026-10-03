@@ -2,8 +2,30 @@ Focus Bridge - Room 13 Learners
 Lisa Ahmed - Maple Ridge Elementary
 Changes between 2026-07-31 and 2026-08-07
 
-2 eased.
-17 students unchanged.
+1 escalated, 5 new, 2 eased.
+11 students unchanged.
+
+ESCALATED (1)
+  Dario: info -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🌀 Go back to Fidget Spinner
+
+NEW (5)
+  Layla: not flagged -> info
+      5 "happy" check-ins in a row
+      Suggested: Say this one out loud
+  Maya: not flagged -> medium
+      7 negative check-ins in a row over 2 days
+      Suggested: 🌀 Maya has not opened Fidget Spinner yet
+  Omar: not flagged -> info
+      7 "happy" check-ins in a row
+      Suggested: Say this one out loud
+  Quinn: not flagged -> watch
+      29% of recent check-ins negative, never four in a row
+      Suggested: 🌬️ Quinn has not opened Deep Breathing yet
+  Yusuf: not flagged -> medium
+      5 negative check-ins in a row over 2 days
+      Suggested: 🫧 Yusuf has not opened Pop Bubbles yet
 
 EASED (2)
   Ben: high -> medium

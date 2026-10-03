@@ -2,8 +2,27 @@ Focus Bridge - Room 22 Stars
 Emily Ahmed - Riverside SPED Cooperative
 Changes between 2026-07-31 and 2026-08-07
 
-2 eased, 1 resolved.
-19 students unchanged.
+2 escalated, 3 new, 2 eased, 1 resolved.
+14 students unchanged.
+
+ESCALATED (2)
+  Ibrahim: medium -> high
+      4 negative check-ins in a row over 2 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+  Luca: medium -> high
+      5 negative check-ins in a row over 2 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+
+NEW (3)
+  Kayla: not flagged -> medium
+      5 negative check-ins in a row over 3 days
+      Suggested: 🌀 Go back to Fidget Spinner
+  Layla: not flagged -> watch
+      51% of recent check-ins negative, never four in a row
+      Suggested: 🌌 Layla has not opened Starry Night yet
+  Luca: not flagged -> high
+      8 negative check-ins in a row over 5 days
+      Suggested: Sustained run - worth a second pair of eyes
 
 EASED (2)
   Emmy: high -> watch

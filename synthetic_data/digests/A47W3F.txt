@@ -2,8 +2,21 @@ Focus Bridge - Room 27 Friends
 Jennifer Chen - Harmony Special Education Center
 Changes between 2026-07-31 and 2026-08-07
 
-2 eased, 2 resolved.
-16 students unchanged.
+1 escalated, 2 new, 2 eased, 2 resolved.
+13 students unchanged.
+
+ESCALATED (1)
+  Ava: medium -> high
+      4 negative check-ins in a row over 2 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+
+NEW (2)
+  Kayla: not flagged -> info
+      5 "happy" check-ins in a row
+      Suggested: Say this one out loud
+  Yusuf: not flagged -> watch
+      27% of recent check-ins negative, never four in a row
+      Suggested: 🌬️ Yusuf has not opened Deep Breathing yet
 
 EASED (2)
   Diego: medium -> watch

@@ -2,8 +2,16 @@ Focus Bridge - Room 26 Explorers
 Rachel Garcia - Northgate Elementary
 Changes between 2026-07-31 and 2026-08-07
 
-1 resolved.
-15 students unchanged.
+2 new, 1 resolved.
+13 students unchanged.
+
+NEW (2)
+  Grace: not flagged -> watch
+      26% of recent check-ins negative, never four in a row
+      Suggested: 🖐️ Grace has not opened 5-4-3-2-1 yet
+  Ines: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
 
 RESOLVED (1)
   Noor: info -> not flagged

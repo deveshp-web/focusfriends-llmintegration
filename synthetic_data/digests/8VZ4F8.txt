@@ -2,8 +2,13 @@ Focus Bridge - Room 24 Friends
 Andrew Kim - Willow Creek Academy
 Changes between 2026-07-31 and 2026-08-07
 
-2 resolved.
-8 students unchanged.
+1 new, 2 resolved.
+7 students unchanged.
+
+NEW (1)
+  Sadie: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
 
 RESOLVED (2)
   Beckett: medium -> not flagged

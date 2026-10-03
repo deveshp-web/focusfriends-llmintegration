@@ -1,0 +1,21 @@
+Focus Bridge - Room 22 Explorers
+Michael Patel - Willow Creek Academy
+Changes between 2026-07-31 and 2026-08-07
+
+1 escalated, 2 new.
+5 students unchanged.
+
+ESCALATED (1)
+  Milo: medium -> high
+      7 negative check-ins in a row over 2 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+
+NEW (2)
+  Hana: not flagged -> info
+      4 "calm" check-ins in a row
+      Suggested: Say this one out loud
+  Sadie: not flagged -> watch
+      22% of recent check-ins negative, never four in a row
+      Suggested: 🌧️ Sadie has not opened Watch Rain yet
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

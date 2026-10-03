@@ -2,8 +2,24 @@ Focus Bridge - Room 22 Champions
 Sarah Johnson - Cedar Park Elementary
 Changes between 2026-07-31 and 2026-08-07
 
-5 resolved.
-14 students unchanged.
+3 escalated, 1 new, 5 resolved.
+10 students unchanged.
+
+ESCALATED (3)
+  Ezra: medium -> high
+      6 negative check-ins in a row over 2 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+  Omar: info -> watch
+      24% of recent check-ins negative, never four in a row
+      Suggested: 🫧 Omar has not opened Pop Bubbles yet
+  Quinn: watch -> medium
+      4 negative check-ins in a row over 3 days
+      Suggested: 🌬️ Quinn has not opened Deep Breathing yet
+
+NEW (1)
+  Noor: not flagged -> info
+      5 "happy" check-ins in a row
+      Suggested: Say this one out loud
 
 RESOLVED (5)
   Ines: info -> not flagged

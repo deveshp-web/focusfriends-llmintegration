@@ -2,8 +2,13 @@ Focus Bridge - Room 17 Friends
 James Patel - Cedar Park Elementary
 Changes between 2026-07-31 and 2026-08-07
 
-1 eased.
-15 students unchanged.
+1 escalated, 1 eased.
+14 students unchanged.
+
+ESCALATED (1)
+  Beckett: medium -> high
+      7 negative check-ins in a row over 2 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
 
 EASED (1)
   Jasper: medium -> watch

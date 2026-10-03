@@ -2,8 +2,13 @@ Focus Bridge - Room 22 Stars
 Maria Brown - Riverside SPED Cooperative
 Changes between 2026-07-31 and 2026-08-07
 
-1 resolved.
-14 students unchanged.
+1 new, 1 resolved.
+13 students unchanged.
+
+NEW (1)
+  Beckett: not flagged -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🖐️ Beckett has not opened 5-4-3-2-1 yet
 
 RESOLVED (1)
   Chloe: info -> not flagged

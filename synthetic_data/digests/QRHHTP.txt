@@ -2,8 +2,13 @@ Focus Bridge - Room 13 Learners
 Michael Lopez - Lincoln Elementary
 Changes between 2026-07-31 and 2026-08-07
 
-2 eased.
-17 students unchanged.
+1 new, 2 eased.
+16 students unchanged.
+
+NEW (1)
+  Ibrahim: not flagged -> watch
+      27% of recent check-ins negative, never four in a row
+      Suggested: 🌌 Ibrahim has not opened Starry Night yet
 
 EASED (2)
   Ben: high -> watch

@@ -1,0 +1,16 @@
+Focus Bridge - Room 15 Champions
+Sarah Walsh - Lincoln Elementary
+Changes between 2026-07-31 and 2026-08-07
+
+2 new.
+13 students unchanged.
+
+NEW (2)
+  Dario: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
+  Milo: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

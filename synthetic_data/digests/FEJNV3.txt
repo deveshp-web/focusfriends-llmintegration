@@ -1,0 +1,13 @@
+Focus Bridge - Room 13 Friends
+Sarah Johnson - Bright Horizons School
+Changes between 2026-07-31 and 2026-08-07
+
+1 escalated.
+9 students unchanged.
+
+ESCALATED (1)
+  Student AF83: info -> watch
+      43% of recent check-ins negative, never four in a row
+      Suggested: 🌬️ Go back to Deep Breathing
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

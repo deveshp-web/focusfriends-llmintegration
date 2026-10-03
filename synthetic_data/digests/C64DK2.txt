@@ -2,8 +2,16 @@ Focus Bridge - Room 26 Champions
 Jennifer Cohen - Bright Horizons School
 Changes between 2026-07-31 and 2026-08-07
 
-3 resolved.
-16 students unchanged.
+2 new, 3 resolved.
+14 students unchanged.
+
+NEW (2)
+  Felix: not flagged -> medium
+      5 negative check-ins in a row over 2 days
+      Suggested: 🫧 Felix has not opened Pop Bubbles yet
+  Quinn: not flagged -> watch
+      39% of recent check-ins negative, never four in a row
+      Suggested: 🖐️ Quinn has not opened 5-4-3-2-1 yet
 
 RESOLVED (3)
   Emmy: watch -> not flagged

@@ -2,8 +2,13 @@ Focus Bridge - Room 2 Learners
 Ashley Garcia - Willow Creek Academy
 Changes between 2026-07-31 and 2026-08-07
 
-1 resolved.
-20 students unchanged.
+1 new, 1 resolved.
+19 students unchanged.
+
+NEW (1)
+  Hugo: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
 
 RESOLVED (1)
   Maya: info -> not flagged

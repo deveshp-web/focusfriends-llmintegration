@@ -2,15 +2,20 @@ Focus Bridge - Room 10 Friends
 Emily Rossi - Northgate Elementary
 Changes between 2026-07-31 and 2026-08-07
 
-2 eased.
-14 students unchanged.
+2 escalated, 1 eased.
+13 students unchanged.
 
-EASED (2)
+ESCALATED (2)
+  Fatima: info -> watch
+      33% of recent check-ins negative, never four in a row
+      Suggested: 🌀 Go back to Fidget Spinner
+  Rosa: info -> watch
+      28% of recent check-ins negative, never four in a row
+      Suggested: 🫧 Rosa has not opened Pop Bubbles yet
+
+EASED (1)
   Noor: high -> medium
       4 negative check-ins in a row over 2 days
-      Suggested: 🌧️ Go back to Watch Rain
-  Omar: high -> medium
-      7 negative check-ins in a row over 2 days
       Suggested: 🌧️ Go back to Watch Rain
 
 Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

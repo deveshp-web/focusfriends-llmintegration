@@ -2,8 +2,16 @@ Focus Bridge - Room 5 Friends
 Lisa Walsh - Willow Creek Academy
 Changes between 2026-07-31 and 2026-08-07
 
-2 eased, 2 resolved.
-14 students unchanged.
+2 escalated, 2 eased, 2 resolved.
+12 students unchanged.
+
+ESCALATED (2)
+  Ava: medium -> high
+      7 negative check-ins in a row over 2 days, across 2 separate episodes - clustered around Music Class
+      Suggested: Bring this one to your support team
+  Leo: medium -> high
+      11 negative check-ins in a row over 3 days, across 3 separate episodes
+      Suggested: Bring this one to your support team
 
 EASED (2)
   Leo: high -> medium

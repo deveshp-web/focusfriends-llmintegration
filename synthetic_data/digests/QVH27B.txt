@@ -2,8 +2,30 @@ Focus Bridge - Room 3 Explorers
 Carlos Chen - Bright Horizons School
 Changes between 2026-07-31 and 2026-08-07
 
-1 eased.
-15 students unchanged.
+1 escalated, 5 new, 1 eased.
+9 students unchanged.
+
+ESCALATED (1)
+  Ines: medium -> high
+      6 negative check-ins in a row over 2 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+
+NEW (5)
+  Dario: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
+  Elowen: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
+  Ines: not flagged -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🌀 Go back to Fidget Spinner
+  Jayden: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
+  Nadia: not flagged -> info
+      4 "calm" check-ins in a row
+      Suggested: Say this one out loud
 
 EASED (1)
   Hana: high -> medium

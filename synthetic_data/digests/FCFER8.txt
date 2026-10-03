@@ -2,8 +2,16 @@ Focus Bridge - Room 1 Champions
 Sarah Fischer - Harmony Special Education Center
 Changes between 2026-07-31 and 2026-08-07
 
-3 resolved.
-5 students unchanged.
+2 new, 3 resolved.
+3 students unchanged.
+
+NEW (2)
+  Ben: not flagged -> medium
+      6 negative check-ins in a row over 2 days
+      Suggested: 🌀 Ben has not opened Fidget Spinner yet
+  Zion: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
 
 RESOLVED (3)
   Amara: medium -> not flagged

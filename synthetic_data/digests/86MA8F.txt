@@ -2,8 +2,24 @@ Focus Bridge - Room 15 Stars
 Rachel Patel - Sunrise Learning Center
 Changes between 2026-07-31 and 2026-08-07
 
-3 eased.
-19 students unchanged.
+1 escalated, 3 new, 3 eased, 1 resolved.
+15 students unchanged.
+
+ESCALATED (1)
+  Isla: medium -> high
+      4 negative check-ins in a row over 2 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+
+NEW (3)
+  Finn: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
+  Malik: not flagged -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🌀 Malik has not opened Fidget Spinner yet
+  Quinn: not flagged -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🌌 Quinn has not opened Starry Night yet
 
 EASED (3)
   Jasper: medium -> watch
@@ -15,5 +31,8 @@ EASED (3)
   Zion: high -> medium
       5 negative check-ins in a row over 2 days
       Suggested: 🌀 Go back to Fidget Spinner
+
+RESOLVED (1)
+  Amara: watch -> not flagged
 
 Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

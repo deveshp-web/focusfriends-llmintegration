@@ -2,8 +2,16 @@ Focus Bridge - Room 14 Learners
 Kevin Brown - Riverside SPED Cooperative
 Changes between 2026-07-31 and 2026-08-07
 
-1 eased, 1 resolved.
-9 students unchanged.
+2 new, 1 eased, 1 resolved.
+7 students unchanged.
+
+NEW (2)
+  Finn: not flagged -> watch
+      35% of recent check-ins negative, never four in a row
+      Suggested: 🖐️ Finn has not opened 5-4-3-2-1 yet
+  Malik: not flagged -> medium
+      4 negative check-ins in a row over 3 days
+      Suggested: 🌌 Malik has not opened Starry Night yet
 
 EASED (1)
   Priya: medium -> watch

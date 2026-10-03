@@ -30,7 +30,7 @@ from datetime import datetime
 from ..core import cli
 from ..core.jsonio import (dumps_line, group_by, index_by, open_jsonl_writer,
                            read_json, read_jsonl, write_json, write_jsonl)
-from ..core.timeline import Timeline, read_check_ins
+from ..core.timeline import Timeline, read_check_ins, within_window
 from ..core.triage import classroom_sort_key, student_sort_key
 from .context import StoryIndex, build_context, read_notes
 from .room_rules import build_room_recommendations
@@ -122,7 +122,7 @@ class RunTotals:
             self.with_task_cluster += 1
 
 
-def build_contexts(paths, insights, cutoff, settings, report):
+def build_contexts(paths, insights, cutoff, reference, settings, report):
     """Stream the corpus and build a context for every flagged student.
 
     The joins against notes, stories and classrooms are all done through
@@ -151,7 +151,9 @@ def build_contexts(paths, insights, cutoff, settings, report):
 
         code = insight.get("classroom_code")
         check_ins = read_check_ins(student, problems)
-        timeline = Timeline([c for c in check_ins if c.at >= cutoff])
+        # The same window the detector used - both ends - so the evidence
+        # behind a recommendation is exactly the evidence behind the flag.
+        timeline = Timeline(within_window(check_ins, cutoff, reference))
 
         contexts[student["id"]] = build_context(
             student=student,
@@ -182,7 +184,7 @@ def run(paths, settings=DEFAULT_SETTINGS, report=print):
     report(f"{len(insights)} flagged students to advise")
 
     contexts, rooms, problems, _ = build_contexts(
-        paths, insights, cutoff, settings, report)
+        paths, insights, cutoff, reference, settings, report)
 
     totals = RunTotals()
     totals.problems = problems

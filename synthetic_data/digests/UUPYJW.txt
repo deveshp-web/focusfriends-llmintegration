@@ -2,8 +2,18 @@ Focus Bridge - Room 7 Learners
 Lisa Brown - Harmony Special Education Center
 Changes between 2026-07-31 and 2026-08-07
 
-1 resolved.
-8 students unchanged.
+1 escalated, 1 new, 1 resolved.
+6 students unchanged.
+
+ESCALATED (1)
+  Theo: medium -> high
+      8 negative check-ins in a row over 3 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+
+NEW (1)
+  Zion: not flagged -> watch
+      23% of recent check-ins negative, never four in a row
+      Suggested: 🌬️ Zion has not opened Deep Breathing yet
 
 RESOLVED (1)
   Fatima: info -> not flagged

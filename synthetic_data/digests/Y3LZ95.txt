@@ -2,13 +2,27 @@ Focus Bridge - Room 27 Explorers
 Kevin Chen - Oakdale Elementary
 Changes between 2026-07-31 and 2026-08-07
 
-1 eased, 3 resolved.
-16 students unchanged.
+2 escalated, 3 new, 3 resolved.
+12 students unchanged.
 
-EASED (1)
-  Jun: high -> medium
-      4 negative check-ins in a row over 3 days
-      Suggested: 🌀 Go back to Fidget Spinner
+ESCALATED (2)
+  Luca: watch -> medium
+      5 negative check-ins in a row over 4 days
+      Suggested: 🌬️ Go back to Deep Breathing
+  Oliver: medium -> high
+      6 negative check-ins in a row over 4 days
+      Suggested: Sustained run - worth a second pair of eyes
+
+NEW (3)
+  Camila: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
+  Jayden: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
+  Sadie: not flagged -> info
+      5 "excited" check-ins in a row
+      Suggested: Say this one out loud
 
 RESOLVED (3)
   Isla: info -> not flagged

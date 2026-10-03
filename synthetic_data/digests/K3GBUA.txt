@@ -2,8 +2,16 @@ Focus Bridge - Room 24 Stars
 Emily Smith - Bright Horizons School
 Changes between 2026-07-31 and 2026-08-07
 
-2 eased, 3 resolved.
-19 students unchanged.
+2 new, 2 eased, 3 resolved.
+17 students unchanged.
+
+NEW (2)
+  Jayden: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
+  Nadia: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
 
 EASED (2)
   Layla: high -> medium

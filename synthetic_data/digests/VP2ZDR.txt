@@ -2,11 +2,19 @@ Focus Bridge - Room 23 Stars
 James Brown - Maple Ridge Elementary
 Changes between 2026-07-31 and 2026-08-07
 
-1 eased.
-19 students unchanged.
+2 new, 1 eased.
+17 students unchanged.
+
+NEW (2)
+  Student B64D: not flagged -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🌧️ Go back to Watch Rain
+  Student C99D: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
 
 EASED (1)
-  Rosa: high -> medium
+  Student BC19: high -> medium
       4 negative check-ins in a row over 3 days
       Suggested: 🌧️ Go back to Watch Rain
 

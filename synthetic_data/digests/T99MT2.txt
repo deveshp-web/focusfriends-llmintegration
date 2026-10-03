@@ -2,13 +2,32 @@ Focus Bridge - Room 15 Explorers
 Lisa Johnson - Riverside SPED Cooperative
 Changes between 2026-07-31 and 2026-08-07
 
-2 eased.
-20 students unchanged.
+2 escalated, 4 new, 1 eased.
+15 students unchanged.
 
-EASED (2)
-  Isla: high -> medium
+ESCALATED (2)
+  Amara: medium -> high
+      6 negative check-ins in a row over 3 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+  Chloe: info -> medium
       5 negative check-ins in a row over 3 days
-      Suggested: 🫧 Isla has not opened Pop Bubbles yet
+      Suggested: 🌌 Go back to Starry Night
+
+NEW (4)
+  Ben: not flagged -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🖐️ Ben has not opened 5-4-3-2-1 yet
+  Emmy: not flagged -> watch
+      28% of recent check-ins negative, never four in a row
+      Suggested: 🖐️ Emmy has not opened 5-4-3-2-1 yet
+  Ibrahim: not flagged -> watch
+      35% of recent check-ins negative, never four in a row
+      Suggested: 🫧 Ibrahim has not opened Pop Bubbles yet
+  Omar: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
+
+EASED (1)
   Mabel: high -> medium
       4 negative check-ins in a row over 2 days
       Suggested: 🌬️ Mabel has not opened Deep Breathing yet

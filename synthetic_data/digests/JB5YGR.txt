@@ -2,8 +2,21 @@ Focus Bridge - Room 9 Champions
 James Garcia - Northgate Elementary
 Changes between 2026-07-31 and 2026-08-07
 
-1 eased.
-8 students unchanged.
+1 escalated, 2 new, 1 eased.
+5 students unchanged.
+
+ESCALATED (1)
+  Isla: watch -> medium
+      8 negative check-ins in a row over 2 days
+      Suggested: 🌬️ Isla has not opened Deep Breathing yet
+
+NEW (2)
+  Amara: not flagged -> info
+      5 "happy" check-ins in a row
+      Suggested: Say this one out loud
+  Kayla: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
 
 EASED (1)
   Omar: watch -> info

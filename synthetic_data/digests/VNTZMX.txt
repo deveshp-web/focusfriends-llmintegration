@@ -2,8 +2,19 @@ Focus Bridge - Room 14 Stars
 Jennifer Rossi - Bright Horizons School
 Changes between 2026-07-31 and 2026-08-07
 
-1 resolved.
-13 students unchanged.
+3 escalated, 1 resolved.
+10 students unchanged.
+
+ESCALATED (3)
+  Fatima: medium -> high
+      4 negative check-ins in a row over 2 days, across 2 separate episodes - clustered around Transition to Gym
+      Suggested: Bring this one to your support team
+  Noor: info -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🫧 Noor has not opened Pop Bubbles yet
+  Omar: info -> medium
+      5 negative check-ins in a row over 3 days
+      Suggested: 🖐️ Omar has not opened 5-4-3-2-1 yet
 
 RESOLVED (1)
   Isla: info -> not flagged

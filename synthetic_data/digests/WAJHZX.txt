@@ -1,0 +1,16 @@
+Focus Bridge - Room 20 Explorers
+Jennifer Ahmed - Riverside SPED Cooperative
+Changes between 2026-07-31 and 2026-08-07
+
+2 new.
+13 students unchanged.
+
+NEW (2)
+  Hugo: not flagged -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🌬️ Hugo has not opened Deep Breathing yet
+  Isla: not flagged -> high
+      6 negative check-ins in a row over 3 days
+      Suggested: Sustained run - worth a second pair of eyes
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

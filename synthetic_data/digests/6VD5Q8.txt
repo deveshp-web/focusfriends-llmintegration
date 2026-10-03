@@ -1,0 +1,19 @@
+Focus Bridge - Room 23 Learners
+Sarah Okafor - Riverside SPED Cooperative
+Changes between 2026-07-31 and 2026-08-07
+
+3 new.
+5 students unchanged.
+
+NEW (3)
+  Ben: not flagged -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🌧️ Ben has not opened Watch Rain yet
+  Finn: not flagged -> info
+      4 "calm" check-ins in a row
+      Suggested: Say this one out loud
+  Hugo: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

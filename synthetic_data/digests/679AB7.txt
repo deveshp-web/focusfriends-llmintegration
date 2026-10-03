@@ -2,8 +2,16 @@ Focus Bridge - Room 30 Explorers
 David Nguyen - Maple Ridge Elementary
 Changes between 2026-07-31 and 2026-08-07
 
-3 resolved.
-5 students unchanged.
+2 new, 3 resolved.
+3 students unchanged.
+
+NEW (2)
+  Ezra: not flagged -> info
+      4 "excited" check-ins in a row
+      Suggested: Say this one out loud
+  Noor: not flagged -> info
+      4 "calm" check-ins in a row
+      Suggested: Say this one out loud
 
 RESOLVED (3)
   Elowen: info -> not flagged

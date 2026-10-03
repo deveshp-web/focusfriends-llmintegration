@@ -36,7 +36,8 @@ from datetime import datetime, timedelta
 from ..core import cli
 from ..core.jsonio import (dumps_line, open_jsonl_writer, read_jsonl, write_json,
                            write_jsonl)
-from ..core.timeline import Timeline, parse_timestamp, read_check_ins
+from ..core.timeline import (Timeline, is_future_dated, parse_timestamp,
+                             read_check_ins, within_window)
 from ..core.triage import classroom_sort_key, student_sort_key
 from .judge import collect_judge_cases, new_case_collection, write_judge_cases
 from .rules import (find_density_streaks, find_negative_streaks,
@@ -50,8 +51,8 @@ from .summarize import compute_flag_id, summarize
 # working out the window
 # ---------------------------------------------------------------------------
 
-def latest_check_in_time(students_path):
-    """The most recent check-in anywhere in the corpus.
+def latest_check_in_time(students_path, now=None):
+    """The most recent *believable* check-in anywhere in the corpus.
 
     Used as the default end of the recency window. Anchoring to the *data*
     rather than to ``datetime.now()`` is what makes a run reproducible: this
@@ -62,21 +63,30 @@ def latest_check_in_time(students_path):
     A live deployment reading real check-ins would pass ``datetime.now()``
     instead, which is exactly what ``--reference`` is for.
 
+    "Believable" is the important word. A check-in dated further ahead of
+    ``now`` than :data:`~focusbridge.core.timeline.FUTURE_TOLERANCE` allows is
+    skipped here, because the latest check-in anywhere sets the window for
+    *every* classroom: before this guard, one tablet with its clock set a year
+    ahead moved the window past all real data and the detector flagged nobody.
+
     Complexity: O(total check-ins), and it is a whole extra pass over the
     corpus - see the module docstring.
     """
+    now = now or datetime.now()
     latest = None
     for student in read_jsonl(students_path):
         for row in student.get("emotion_log") or []:
             if not isinstance(row, dict):
                 continue
             at = parse_timestamp(row)
-            if at is not None and (latest is None or at > latest):
+            if at is None or is_future_dated(at, now):
+                continue
+            if latest is None or at > latest:
                 latest = at
     return latest
 
 
-def resolve_reference(students_path, reference_text=None):
+def resolve_reference(students_path, reference_text=None, now=None):
     """Decide where the recency window ends, from the CLI argument or the data."""
     if reference_text:
         try:
@@ -84,7 +94,7 @@ def resolve_reference(students_path, reference_text=None):
         except ValueError:
             raise cli.fail(f"--reference is not an ISO datetime: {reference_text!r}")
 
-    reference = latest_check_in_time(students_path)
+    reference = latest_check_in_time(students_path, now)
     if reference is None:
         raise cli.fail("no readable timestamps in students.jsonl")
     return reference
@@ -114,11 +124,17 @@ def load_classrooms(classrooms_path):
 # the per-student work
 # ---------------------------------------------------------------------------
 
-def analyse_student(student, cutoff, problems, settings=DEFAULT_SETTINGS):
+def analyse_student(student, cutoff, reference, problems,
+                    settings=DEFAULT_SETTINGS, now=None):
     """Everything the detector has to say about one student.
 
     Returns ``(timeline, streaks, runs)``, where ``timeline`` holds only the
-    check-ins inside the recency window.
+    check-ins inside the window ``cutoff..reference``.
+
+    ``reference`` is required, not defaulted, on purpose: the bug it fixes was
+    a window with no end, and an optional end is how that bug comes back.
+    ``now``, when given, is used only to *count* check-ins dated implausibly far
+    in the future, so a run reports them instead of silently ignoring them.
 
     **Rule order is load-bearing here**, which is why it is spelled out in this
     one place rather than hidden behind a single ``find_all_streaks`` call: the
@@ -127,10 +143,12 @@ def analyse_student(student, cutoff, problems, settings=DEFAULT_SETTINGS):
     """
     check_ins = read_check_ins(student, problems)
 
-    # `read_check_ins` sorts, so the recent slice is a suffix of the list. Kept
-    # as a list comprehension rather than a bisect for clarity - the cost is
-    # linear either way once the entries have been parsed.
-    recent = Timeline([check_in for check_in in check_ins if check_in.at >= cutoff])
+    if now is not None:
+        future = sum(1 for check_in in check_ins if is_future_dated(check_in.at, now))
+        if future:
+            problems["future_dated"] += future
+
+    recent = Timeline(within_window(check_ins, cutoff, reference))
 
     runs = scan_negative_runs(recent, settings)
     negative = find_negative_streaks(recent, runs, settings)
@@ -258,7 +276,7 @@ class RunTotals:
         }
 
 
-def run(paths, reference, settings=DEFAULT_SETTINGS, report=print):
+def run(paths, reference, settings=DEFAULT_SETTINGS, report=print, now=None):
     """Detect patterns across the whole corpus and write every output file.
 
     Args:
@@ -268,10 +286,13 @@ def run(paths, reference, settings=DEFAULT_SETTINGS, report=print):
         report:    where progress lines go. Injected so tests can silence it, and
                    so a future web front end could collect the lines instead of
                    printing them.
+        now:       the wall-clock time, injectable for tests. Used only to
+                   recognise check-ins dated implausibly far in the future.
 
     Returns:
         The metadata dictionary that was written to ``insights_meta.json``.
     """
+    now = now or datetime.now()
     cutoff = reference - timedelta(days=settings.recency_days)
     report(f"reference {reference.isoformat()}  cutoff {cutoff.isoformat()}")
 
@@ -287,7 +308,7 @@ def run(paths, reference, settings=DEFAULT_SETTINGS, report=print):
             totals.scanned += 1
 
             recent, streaks, runs = analyse_student(
-                student, cutoff, totals.problems, settings)
+                student, cutoff, reference, totals.problems, settings, now=now)
 
             totals.emotion_counts.update(
                 check_in.emotion for check_in in recent.check_ins
@@ -360,6 +381,12 @@ def _report_run(report, paths, totals, classroom_records, case_populations, unma
     report(f"run metadata -> {paths.insights_meta}")
     if totals.problems:
         report(f"  dropped entries: {dict(totals.problems)}")
+    if totals.problems.get("future_dated"):
+        # Said on its own line because it is the one dropped-entry reason that
+        # points at something a person has to go and fix: a device clock.
+        report(f"  WARNING {totals.problems['future_dated']} check-ins are dated more "
+               f"than a day in the future and were left out - check the clock "
+               f"on the devices students use")
     if unmatched:
         report(f"  WARNING {len(unmatched)} classroom codes not in "
                f"classrooms.jsonl: {unmatched[:5]}")
@@ -387,8 +414,11 @@ def main(argv=None):
     paths = cli.paths_from_args(args)
     cli.require(paths.students, "the corpus is missing from this data directory")
 
-    reference = resolve_reference(paths.students, args.reference)
-    run(paths, reference, DEFAULT_SETTINGS)
+    # One clock reading for the whole run, so the reference and the
+    # future-dated count are judged against the same instant.
+    now = datetime.now()
+    reference = resolve_reference(paths.students, args.reference, now)
+    run(paths, reference, DEFAULT_SETTINGS, now=now)
 
 
 if __name__ == "__main__":

@@ -2,8 +2,13 @@ Focus Bridge - Room 24 Learners
 Sarah Torres - Bright Horizons School
 Changes between 2026-07-31 and 2026-08-07
 
-3 resolved.
-14 students unchanged.
+1 new, 3 resolved.
+13 students unchanged.
+
+NEW (1)
+  Felix: not flagged -> watch
+      34% of recent check-ins negative, never four in a row
+      Suggested: 🌀 Felix has not opened Fidget Spinner yet
 
 RESOLVED (3)
   Dario: high -> not flagged

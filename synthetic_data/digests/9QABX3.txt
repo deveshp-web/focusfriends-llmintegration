@@ -2,8 +2,13 @@ Focus Bridge - Room 22 Learners
 David Fischer - Sunrise Learning Center
 Changes between 2026-07-31 and 2026-08-07
 
-2 resolved.
-21 students unchanged.
+1 escalated, 2 resolved.
+20 students unchanged.
+
+ESCALATED (1)
+  Zara: medium -> high
+      5 negative check-ins in a row over 2 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
 
 RESOLVED (2)
   Rosa: medium -> not flagged

@@ -1,0 +1,18 @@
+Focus Bridge - Room 20 Friends
+Sarah Nguyen - Sunrise Learning Center
+Changes between 2026-07-31 and 2026-08-07
+
+1 escalated, 1 new.
+7 students unchanged.
+
+ESCALATED (1)
+  Student BC5D: medium -> high
+      5 negative check-ins in a row over 2 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+
+NEW (1)
+  Student 437C: not flagged -> info
+      5 "happy" check-ins in a row
+      Suggested: Say this one out loud
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

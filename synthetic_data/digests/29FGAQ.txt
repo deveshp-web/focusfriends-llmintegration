@@ -6,15 +6,15 @@ Changes between 2026-07-31 and 2026-08-07
 11 students unchanged.
 
 EASED (2)
-  Ben: high -> medium
-      5 negative check-ins in a row over 2 days
-      Suggested: 🫧 Ben has not opened Pop Bubbles yet
-  Elowen: high -> medium
+  Student 4F86: high -> medium
       4 negative check-ins in a row over 2 days
-      Suggested: 🖐️ Elowen has not opened 5-4-3-2-1 yet
+      Suggested: 🖐️ Student 4F86 has not opened 5-4-3-2-1 yet
+  Student B788: high -> medium
+      5 negative check-ins in a row over 2 days
+      Suggested: 🫧 Student B788 has not opened Pop Bubbles yet
 
 RESOLVED (2)
-  Ines: info -> not flagged
-  Jasper: info -> not flagged
+  Student C158: info -> not flagged
+  Student C820: info -> not flagged
 
 Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

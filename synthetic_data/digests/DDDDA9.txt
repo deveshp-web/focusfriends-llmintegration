@@ -2,8 +2,21 @@ Focus Bridge - Room 30 Champions
 Priya Patel - Oakdale Elementary
 Changes between 2026-07-31 and 2026-08-07
 
-1 eased, 2 resolved.
-13 students unchanged.
+2 escalated, 1 new, 1 eased, 2 resolved.
+10 students unchanged.
+
+ESCALATED (2)
+  Diego: medium -> high
+      4 negative check-ins in a row over 2 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+  Ibrahim: watch -> medium
+      4 negative check-ins in a row over 3 days
+      Suggested: 🫧 Ibrahim has not opened Pop Bubbles yet
+
+NEW (1)
+  Luca: not flagged -> medium
+      5 negative check-ins in a row over 2 days
+      Suggested: 🖐️ Luca has not opened 5-4-3-2-1 yet
 
 EASED (1)
   Nadia: high -> medium

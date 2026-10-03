@@ -2,8 +2,16 @@ Focus Bridge - Room 28 Learners
 Carlos Johnson - Lincoln Elementary
 Changes between 2026-07-31 and 2026-08-07
 
-1 eased, 1 resolved.
-13 students unchanged.
+2 new, 1 eased, 1 resolved.
+11 students unchanged.
+
+NEW (2)
+  Dario: not flagged -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🖐️ Dario has not opened 5-4-3-2-1 yet
+  Milo: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
 
 EASED (1)
   Kayla: high -> medium

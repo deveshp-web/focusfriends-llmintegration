@@ -2,8 +2,13 @@ Focus Bridge - Room 19 Learners
 Carlos Fischer - Riverside SPED Cooperative
 Changes between 2026-07-31 and 2026-08-07
 
-2 eased, 1 resolved.
-13 students unchanged.
+1 new, 2 eased, 1 resolved.
+12 students unchanged.
+
+NEW (1)
+  Camila: not flagged -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🫧 Camila has not opened Pop Bubbles yet
 
 EASED (2)
   Ben: high -> medium

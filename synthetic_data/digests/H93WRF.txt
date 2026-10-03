@@ -2,8 +2,18 @@ Focus Bridge - Room 28 Stars
 Daniel Okafor - Northgate Elementary
 Changes between 2026-07-31 and 2026-08-07
 
-2 eased, 1 resolved.
-9 students unchanged.
+1 escalated, 1 new, 2 eased, 1 resolved.
+7 students unchanged.
+
+ESCALATED (1)
+  Sana: medium -> high
+      5 negative check-ins in a row over 2 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+
+NEW (1)
+  Theo: not flagged -> info
+      4 "excited" check-ins in a row
+      Suggested: Say this one out loud
 
 EASED (2)
   Aiden: high -> medium

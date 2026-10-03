@@ -6,7 +6,7 @@ Changes between 2026-07-31 and 2026-08-07
 13 students unchanged.
 
 RESOLVED (2)
-  Hana: medium -> not flagged
-  Hugo: medium -> not flagged
+  Student C16B: medium -> not flagged
+  Student E9A6: medium -> not flagged
 
 Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

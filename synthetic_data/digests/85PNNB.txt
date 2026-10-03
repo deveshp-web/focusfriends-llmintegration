@@ -2,15 +2,28 @@ Focus Bridge - Room 25 Champions
 Sarah Garcia - Bright Horizons School
 Changes between 2026-07-31 and 2026-08-07
 
-1 eased, 1 resolved.
-19 students unchanged.
+1 escalated, 2 new, 1 eased, 1 resolved.
+16 students unchanged.
+
+ESCALATED (1)
+  Student 12F2: medium -> high
+      7 negative check-ins in a row over 2 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+
+NEW (2)
+  Student BD34: not flagged -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🖐️ Student BD34 has not opened 5-4-3-2-1 yet
+  Student F4C2: not flagged -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🫧 Student F4C2 has not opened Pop Bubbles yet
 
 EASED (1)
-  Kai: high -> medium
+  Student B4BB: high -> medium
       4 negative check-ins in a row over 3 days
       Suggested: 🌌 Go back to Starry Night
 
 RESOLVED (1)
-  Priya: info -> not flagged
+  Student 9F22: info -> not flagged
 
 Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

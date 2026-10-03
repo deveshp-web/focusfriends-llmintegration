@@ -2,8 +2,27 @@ Focus Bridge - Room 14 Champions
 Maria Torres - Cedar Park Elementary
 Changes between 2026-07-31 and 2026-08-07
 
-4 resolved.
-16 students unchanged.
+3 escalated, 2 new, 4 resolved.
+11 students unchanged.
+
+ESCALATED (3)
+  Emmy: medium -> high
+      7 negative check-ins in a row over 2 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+  Mabel: medium -> high
+      5 negative check-ins in a row over 2 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+  Rosa: watch -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🫧 Rosa has not opened Pop Bubbles yet
+
+NEW (2)
+  Ben: not flagged -> watch
+      23% of recent check-ins negative, never four in a row
+      Suggested: 🌧️ Ben has not opened Watch Rain yet
+  Hana: not flagged -> medium
+      5 negative check-ins in a row over 3 days - clustered around Math Centers
+      Suggested: Math Centers is where this shows up
 
 RESOLVED (4)
   Amara: high -> not flagged

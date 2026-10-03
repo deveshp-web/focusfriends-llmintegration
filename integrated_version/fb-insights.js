@@ -291,6 +291,15 @@ function dayKey(date) {
 
 var DAY_MS = 86400000;
 
+/* How far past "now" a check-in may be dated before it is treated as a clock
+   error rather than as data. The window ends at the room's latest check-in, so
+   without this one tablet with its clock set ahead moved the window past every
+   child's real check-ins: on a sample room, one "Happy" dated next week took
+   the alert queue from 12 children to none, and hid the stale-data notice too.
+   The Python pipeline uses the same tolerance (FUTURE_TOLERANCE in
+   focusbridge/core/timeline.py) - change both, or the engines disagree. */
+var FUTURE_TOLERANCE_MS = DAY_MS;
+
 /* Whole days between two dates, counted date-to-date rather than by duration:
    08:00 Monday to 16:00 Tuesday spans "1 day", not "1.3 days", because that is
    how a teacher counts. */
@@ -1954,20 +1963,25 @@ function analyseClassroom(options) {
   var nameMode = classroom.nameMode || "full";
   var stories = new StoryIndex(options.stories || []);
 
-  // Pass 1: read every student's check-ins, and find the room's latest.
-  var read = [], latest = null;
+  // Pass 1: read every student's check-ins, and find the room's latest
+  // BELIEVABLE one. A check-in dated beyond now + FUTURE_TOLERANCE_MS is a clock
+  // error, not something a child did; it is counted, reported on screen, and
+  // kept out of the anchor - otherwise it would decide the window for everyone.
+  var now = options.now || new Date();
+  var horizon = now.getTime() + FUTURE_TOLERANCE_MS;
+  var read = [], latest = null, futureCheckIns = 0;
   roster.forEach(function (entry) {
     var record = records[entry.id];
     if (!record) return;
     var checkIns = readCheckIns(record.emotionLog || record.emotion_log);
-    if (checkIns.length) {
-      var last = checkIns[checkIns.length - 1].at;
-      if (!latest || last > latest) latest = last;
+    for (var i = checkIns.length - 1; i >= 0; i--) {
+      if (checkIns[i].at.getTime() > horizon) { futureCheckIns++; continue; }
+      if (!latest || checkIns[i].at > latest) latest = checkIns[i].at;
+      break;    // sorted ascending: the first believable one from the end is the latest
     }
     read.push({ entry: entry, record: record, checkIns: checkIns });
   });
 
-  var now = new Date();
   var reference = options.reference || latest || now;
   var cutoff = new Date(reference.getTime() - DETECT.recencyDays * DAY_MS);
 
@@ -1976,7 +1990,12 @@ function analyseClassroom(options) {
   var counts = { flagged: 0, alert: 0, watch: 0, positive: 0, high: 0, undoc: 0 };
 
   read.forEach(function (item) {
-    var recent = item.checkIns.filter(function (c) { return c.at >= cutoff; });
+    // Both ends of the window. Without the upper bound, a future-dated row
+    // would still sit in its student's timeline, and a run pinned to an
+    // earlier `reference` would see check-ins from after it.
+    var recent = item.checkIns.filter(function (c) {
+      return c.at >= cutoff && c.at <= reference;
+    });
     if (!recent.length) return;
 
     var timeline = new Timeline(recent);
@@ -2072,7 +2091,10 @@ function analyseClassroom(options) {
       // How far behind today the data is. The view says so rather than quietly
       // presenting a month-old window as current.
       staleDays: latest ? Math.max(0, daysBetween(latest, now)) : null,
-      anchoredToData: !options.reference && !!latest
+      anchoredToData: !options.reference && !!latest,
+      // Check-ins dated implausibly far ahead, left out of the analysis. The
+      // view says so: a silent drop would hide a device whose clock is wrong.
+      futureCheckIns: futureCheckIns
     },
     room: {
       code: classroom.code || options.code || "",

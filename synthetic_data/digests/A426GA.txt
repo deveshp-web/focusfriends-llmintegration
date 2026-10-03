@@ -2,8 +2,19 @@ Focus Bridge - Room 1 Learners
 Kevin Okafor - Lincoln Elementary
 Changes between 2026-07-31 and 2026-08-07
 
-1 resolved.
-16 students unchanged.
+3 new, 1 resolved.
+13 students unchanged.
+
+NEW (3)
+  Camila: not flagged -> high
+      6 negative check-ins in a row over 4 days
+      Suggested: Sustained run - worth a second pair of eyes
+  Leo: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
+  Omar: not flagged -> medium
+      5 negative check-ins in a row over 2 days
+      Suggested: 🌀 Go back to Fidget Spinner
 
 RESOLVED (1)
   Elowen: medium -> not flagged

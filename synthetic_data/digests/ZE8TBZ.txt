@@ -1,0 +1,13 @@
+Focus Bridge - Room 16 Learners
+Carlos Cohen - Harmony Special Education Center
+Changes between 2026-07-31 and 2026-08-07
+
+1 escalated.
+9 students unchanged.
+
+ESCALATED (1)
+  Ava: info -> medium
+      6 negative check-ins in a row over 2 days
+      Suggested: 🌀 Ava has not opened Fidget Spinner yet
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

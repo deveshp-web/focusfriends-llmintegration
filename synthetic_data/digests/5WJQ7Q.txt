@@ -2,8 +2,13 @@ Focus Bridge - Room 23 Stars
 David Nguyen - Willow Creek Academy
 Changes between 2026-07-31 and 2026-08-07
 
-2 eased, 1 resolved.
-8 students unchanged.
+1 escalated, 2 eased, 1 resolved.
+7 students unchanged.
+
+ESCALATED (1)
+  Zion: medium -> high
+      9 negative check-ins in a row over 2 days, across 2 separate episodes - clustered around Transition to Gym
+      Suggested: Bring this one to your support team
 
 EASED (2)
   Hana: watch -> info

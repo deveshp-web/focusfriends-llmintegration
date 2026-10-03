@@ -649,12 +649,11 @@ function render() {
     + `overall — a rate against their own rate, so a busy activity is not mistaken for a hard one. `
     + `Detector run ${esc(m.detector_run)}; recommendations ${esc(m.advice_run)}. `
     + `Every recommendation is a rule with a stated trigger — disagree with it where your own read differs.`
-    + (m.changes ? `<br><br><b>On the “since your last check” comparison:</b> in this `
-      + `synthetic dataset, sliding the 30-day window forward only ever removes flagged students `
-      + `— across four weekly reference dates no student was newly flagged at any step. That is an `
-      + `artefact of how the data was generated (each student's episodes are front-loaded), not `
-      + `evidence that classrooms are improving. Read the escalation counts as “nothing to report `
-      + `from this corpus”, not as good news.` : "");
+    + (m.changes ? `<br><br><b>On the “since your last check” comparison:</b> it compares this `
+      + `window with the same ${m.recency_days}-day window as it stood on ${esc(m.changes.prev)}. `
+      + `The two overlap, so a student can move because older check-ins have aged out of the `
+      + `window rather than because of anything that happened this week — read a change as a `
+      + `reason to look, not as a verdict.` : "");
 }
 
 /* -------------------------------------------------------------- interaction */

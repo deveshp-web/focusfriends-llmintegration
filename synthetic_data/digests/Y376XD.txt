@@ -2,13 +2,20 @@ Focus Bridge - Room 2 Stars
 Jennifer Lopez - Sunrise Learning Center
 Changes between 2026-07-31 and 2026-08-07
 
-3 eased.
-15 students unchanged.
+1 escalated, 1 new, 2 eased.
+14 students unchanged.
 
-EASED (3)
-  Finn: high -> medium
-      4 negative check-ins in a row over 2 days
-      Suggested: 🖐️ Finn has not opened 5-4-3-2-1 yet
+ESCALATED (1)
+  Jun: medium -> high
+      5 negative check-ins in a row over 3 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+
+NEW (1)
+  Beckett: not flagged -> medium
+      5 negative check-ins in a row over 3 days
+      Suggested: 🌧️ Go back to Watch Rain
+
+EASED (2)
   Layla: high -> medium
       5 negative check-ins in a row over 2 days
       Suggested: 🌀 Go back to Fidget Spinner

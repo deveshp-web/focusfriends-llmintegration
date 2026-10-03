@@ -2,11 +2,16 @@ Focus Bridge - Room 26 Friends
 Maria Cohen - Sunrise Learning Center
 Changes between 2026-07-31 and 2026-08-07
 
-2 resolved.
-11 students unchanged.
+1 escalated, 2 resolved.
+10 students unchanged.
+
+ESCALATED (1)
+  Student 9FDE: watch -> high
+      8 negative check-ins in a row over 3 days
+      Suggested: Sustained run - worth a second pair of eyes
 
 RESOLVED (2)
-  Hugo: medium -> not flagged
-  Theo: medium -> not flagged
+  Student 6FAB: medium -> not flagged
+  Student 8B30: medium -> not flagged
 
 Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

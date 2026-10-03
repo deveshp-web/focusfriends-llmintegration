@@ -10,7 +10,13 @@
 // and then went offline would find that one tab broken. demo-data.js is
 // deliberately NOT in CORE: it is 1.4 MB, most installs never load it, and the
 // fetch handler below caches it on first use anyway.
-const CACHE = 'focus-bridge-v31';
+// v32 — fb-insights.js changed (the analysis window now ends at the reference
+// time). Scripts are served cache-first, so without a new cache name every
+// device that ever opened the app would keep running the old engine.
+// deploy/build_site.py also stamps this name with a hash of the files it
+// publishes, so a Netlify build can never repeat this mistake; bump it by hand
+// only when shipping this folder some other way.
+const CACHE = 'focus-bridge-v32';
 const CORE = ['./', './index.html', './fb-insights.js', './privacy.html', './delete-account.html', './manifest.webmanifest', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', e => {

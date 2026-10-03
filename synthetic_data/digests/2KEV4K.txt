@@ -2,22 +2,29 @@ Focus Bridge - Room 10 Champions
 Rachel Ahmed - Willow Creek Academy
 Changes between 2026-07-31 and 2026-08-07
 
-3 eased, 2 resolved.
-17 students unchanged.
+2 escalated, 1 new, 1 eased, 2 resolved.
+16 students unchanged.
 
-EASED (3)
-  Noor: high -> medium
+ESCALATED (2)
+  Hana: medium -> high
+      5 negative check-ins in a row over 2 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+  Kai: info -> medium
       4 negative check-ins in a row over 2 days
-      Suggested: 🌀 Noor has not opened Fidget Spinner yet
-  Sana: high -> medium
+      Suggested: 🌬️ Kai has not opened Deep Breathing yet
+
+NEW (1)
+  Jayden: not flagged -> medium
       4 negative check-ins in a row over 2 days
-      Suggested: 🖐️ Sana has not opened 5-4-3-2-1 yet
+      Suggested: 🌀 Jayden has not opened Fidget Spinner yet
+
+EASED (1)
   Sana: high -> medium
       4 negative check-ins in a row over 2 days
       Suggested: 🌀 Go back to Fidget Spinner
 
 RESOLVED (2)
   Hana: medium -> not flagged
-  Zara: info -> not flagged
+  Zara: watch -> not flagged
 
 Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

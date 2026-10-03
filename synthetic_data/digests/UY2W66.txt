@@ -2,8 +2,18 @@ Focus Bridge - Room 14 Learners
 Emily Nguyen - Bright Horizons School
 Changes between 2026-07-31 and 2026-08-07
 
-1 resolved.
-14 students unchanged.
+1 escalated, 1 new, 1 resolved.
+12 students unchanged.
+
+ESCALATED (1)
+  Camila: medium -> high
+      7 negative check-ins in a row over 2 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+
+NEW (1)
+  Ezra: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
 
 RESOLVED (1)
   Leo: medium -> not flagged

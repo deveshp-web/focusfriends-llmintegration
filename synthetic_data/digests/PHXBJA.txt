@@ -1,0 +1,24 @@
+Focus Bridge - Room 25 Learners
+Rachel Okafor - Riverside SPED Cooperative
+Changes between 2026-07-31 and 2026-08-07
+
+3 escalated, 1 new.
+12 students unchanged.
+
+ESCALATED (3)
+  Fatima: info -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🫧 Fatima has not opened Pop Bubbles yet
+  Omar: medium -> high
+      4 negative check-ins in a row over 2 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+  Rosa: medium -> high
+      6 negative check-ins in a row over 2 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+
+NEW (1)
+  Diego: not flagged -> info
+      5 "happy" check-ins in a row
+      Suggested: Say this one out loud
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

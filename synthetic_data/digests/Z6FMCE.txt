@@ -2,15 +2,28 @@ Focus Bridge - Room 23 Stars
 Maria Kim - Harmony Special Education Center
 Changes between 2026-07-31 and 2026-08-07
 
-2 eased.
-12 students unchanged.
+1 escalated, 2 new, 2 eased.
+9 students unchanged.
 
-EASED (2)
-  Jasper: watch -> info
+ESCALATED (1)
+  Student E684: watch -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🌬️ Student E684 has not opened Deep Breathing yet
+
+NEW (2)
+  Student 0E9B: not flagged -> info
       5 "happy" check-ins in a row
       Suggested: Say this one out loud
-  Kai: high -> medium
+  Student 8823: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
+
+EASED (2)
+  Student 6077: watch -> info
+      5 "happy" check-ins in a row
+      Suggested: Say this one out loud
+  Student E3A5: high -> medium
       4 negative check-ins in a row over 2 days
-      Suggested: 🫧 Kai has not opened Pop Bubbles yet
+      Suggested: 🫧 Student E3A5 has not opened Pop Bubbles yet
 
 Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

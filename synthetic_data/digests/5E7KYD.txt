@@ -2,8 +2,13 @@ Focus Bridge - Room 29 Learners
 David Brown - Northgate Elementary
 Changes between 2026-07-31 and 2026-08-07
 
-1 resolved.
-11 students unchanged.
+1 escalated, 1 resolved.
+10 students unchanged.
+
+ESCALATED (1)
+  Amara: watch -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🖐️ Amara has not opened 5-4-3-2-1 yet
 
 RESOLVED (1)
   Rosa: medium -> not flagged

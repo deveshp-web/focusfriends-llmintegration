@@ -2,8 +2,21 @@ Focus Bridge - Room 24 Champions
 Robert Brown - Riverside SPED Cooperative
 Changes between 2026-07-31 and 2026-08-07
 
-2 resolved.
-10 students unchanged.
+1 escalated, 2 new, 2 resolved.
+7 students unchanged.
+
+ESCALATED (1)
+  Kayla: info -> medium
+      5 negative check-ins in a row over 2 days
+      Suggested: 🫧 Kayla has not opened Pop Bubbles yet
+
+NEW (2)
+  Ben: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
+  Fatima: not flagged -> info
+      6 "happy" check-ins in a row
+      Suggested: Say this one out loud
 
 RESOLVED (2)
   Isla: info -> not flagged

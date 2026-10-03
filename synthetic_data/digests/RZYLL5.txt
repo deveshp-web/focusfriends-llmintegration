@@ -2,8 +2,16 @@ Focus Bridge - Room 26 Explorers
 David Kim - Lincoln Elementary
 Changes between 2026-07-31 and 2026-08-07
 
-1 eased, 1 resolved.
-14 students unchanged.
+2 new, 1 eased, 1 resolved.
+12 students unchanged.
+
+NEW (2)
+  Beckett: not flagged -> watch
+      42% of recent check-ins negative, never four in a row
+      Suggested: 🖐️ Beckett has not opened 5-4-3-2-1 yet
+  Dario: not flagged -> medium
+      5 negative check-ins in a row over 2 days
+      Suggested: 🌧️ Dario has not opened Watch Rain yet
 
 EASED (1)
   Emmy: high -> medium

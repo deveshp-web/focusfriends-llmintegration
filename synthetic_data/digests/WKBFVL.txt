@@ -2,8 +2,21 @@ Focus Bridge - Room 25 Champions
 Lisa Okafor - Harmony Special Education Center
 Changes between 2026-07-31 and 2026-08-07
 
-1 resolved.
-21 students unchanged.
+1 escalated, 2 new, 1 resolved.
+18 students unchanged.
+
+ESCALATED (1)
+  Dario: medium -> high
+      5 negative check-ins in a row over 2 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+
+NEW (2)
+  Elowen: not flagged -> medium
+      5 negative check-ins in a row over 3 days
+      Suggested: 🌌 Elowen has not opened Starry Night yet
+  Kayla: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
 
 RESOLVED (1)
   Ava: medium -> not flagged

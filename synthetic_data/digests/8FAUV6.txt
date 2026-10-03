@@ -2,8 +2,24 @@ Focus Bridge - Room 29 Explorers
 Maria Patel - Harmony Special Education Center
 Changes between 2026-07-31 and 2026-08-07
 
-1 eased, 2 resolved.
-17 students unchanged.
+2 escalated, 2 new, 1 eased, 2 resolved.
+13 students unchanged.
+
+ESCALATED (2)
+  Ibrahim: info -> watch
+      30% of recent check-ins negative, never four in a row
+      Suggested: 🫧 Ibrahim has not opened Pop Bubbles yet
+  Yusuf: medium -> high
+      4 negative check-ins in a row over 2 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+
+NEW (2)
+  Malik: not flagged -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🌌 Malik has not opened Starry Night yet
+  Oliver: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
 
 EASED (1)
   Diego: medium -> watch

@@ -8,7 +8,9 @@ that is labelled "eased" when a student actually got worse.
 from __future__ import annotations
 
 import math
+import re
 import unittest
+from pathlib import Path
 
 from focusbridge.core.triage import (PRIORITY_RANK, UNFLAGGED_RANK, display_name,
                                      priority_rank, student_sort_key)
@@ -147,10 +149,62 @@ class TriageTests(unittest.TestCase):
         self.assertEqual([s[0] for s in ordered], ["high", "medium", "watch"])
 
     def test_name_modes_are_honoured(self):
-        self.assertEqual(display_name("Sana Malik", "full", "stu_x"), "Sana Malik")
-        self.assertEqual(display_name("Sana Malik", "initials", "stu_x"), "SM")
+        """The app's two modes, plus the two the browser engine also accepts."""
+        self.assertEqual(display_name("Sana Malik", "full", "stu_x"), "Sana")
+        self.assertEqual(display_name("Sana Malik", "id", "stu_e0c27497"),
+                         "Student 7497")
         self.assertEqual(display_name("Sana Malik", "anon", "stu_e0c27497"),
                          "Student 7497")
+        self.assertEqual(display_name("Sana Malik", "initials", "stu_x"), "SM")
+
+    def test_id_only_never_shows_the_stored_name(self):
+        """Regression: "ID only" rooms used to be printed by name.
+
+        The app's "ID only - no name shown" setting writes ``name_mode="id"``,
+        which this function did not recognise, so every flagged child in such a
+        room was named in recommendations, the dashboard and the email digests.
+        Uppercased, because that is what the app shows.
+        """
+        label = display_name("Yusuf", "id", "stu_9f2ab64d")
+        self.assertEqual(label, "Student B64D")
+        self.assertNotIn("Yusuf", label)
+
+    def test_full_mode_shows_a_first_name_only(self):
+        """The app collects "first name only"; a longer entry is cut back to it."""
+        self.assertEqual(display_name("  Sana   Malik ", "full", "stu_x"), "Sana")
+        self.assertEqual(display_name("A" * 30, "full", "stu_x"), "A" * 20)
+
+    def test_every_mode_the_app_can_write_is_handled_as_the_app_handles_it(self):
+        """A contract test against the app itself, not against a copy of it.
+
+        The leak above happened because the app and this function used
+        different words for the same setting, and nothing compared them. This
+        reads the privacy picker's option values straight out of each app's
+        index.html, so if the app ever adds a mode, this fails until the
+        pipeline knows what to do with it.
+        """
+        repo = Path(__file__).resolve().parents[2]
+        apps = [repo / "integrated_version" / "index.html",
+                repo / "focusbridge_sourcecode" / "index.html"]
+        found = [app for app in apps if app.exists()]
+        if not found:
+            self.skipTest("no app index.html next to this checkout")
+
+        expected = {"full": "Sana", "id": "Student 7497"}
+        for app in found:
+            source = app.read_text(encoding="utf-8")
+            picker = re.search(r"function NameModePicker.*?const opts=\[(.*?)\];",
+                               source, re.S)
+            self.assertIsNotNone(picker, f"no NameModePicker in {app}")
+            modes = re.findall(r'\["([a-z]+)",', picker.group(1))
+            self.assertTrue(modes, f"no modes parsed from {app}")
+            for mode in modes:
+                with self.subTest(app=app.parent.name, mode=mode):
+                    self.assertIn(mode, expected,
+                                  f"the app offers name mode {mode!r}, which the "
+                                  f"pipeline does not know how to honour")
+                    self.assertEqual(display_name("Sana Malik", mode, "stu_e0c27497"),
+                                     expected[mode])
 
     def test_an_unknown_name_mode_does_not_leak_more_than_full(self):
         """An unrecognised mode falls back to the app's own default, not a crash."""

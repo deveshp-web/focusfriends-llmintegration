@@ -2,12 +2,17 @@ Focus Bridge - Room 29 Stars
 Sarah Patel - Harmony Special Education Center
 Changes between 2026-07-31 and 2026-08-07
 
-1 eased.
-15 students unchanged.
+1 new, 1 eased.
+14 students unchanged.
+
+NEW (1)
+  Student E039: not flagged -> watch
+      36% of recent check-ins negative, never four in a row
+      Suggested: 🖐️ Student E039 has not opened 5-4-3-2-1 yet
 
 EASED (1)
-  Milo: high -> medium
+  Student C036: high -> medium
       5 negative check-ins in a row over 2 days
-      Suggested: 🌧️ Milo has not opened Watch Rain yet
+      Suggested: 🌧️ Student C036 has not opened Watch Rain yet
 
 Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

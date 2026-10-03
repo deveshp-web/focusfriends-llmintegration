@@ -14,18 +14,22 @@
      CLASSROOM SERVER (Supabase)  —  fill these in once
      ───────────────────────────────────────────────────────────────────────
      1. Create a free project at supabase.com
-     2. SQL Editor -> paste and run focus-bridge-schema-secure.sql
+     2. SQL Editor -> paste and run supabase/focus-bridge-schema-secure.sql
+        (in this repository)
      3. Authentication -> Providers -> Email: ENABLE it, and turn OFF
         "Confirm email"  (REQUIRED: teachers sign up with a username, so
         there is no real inbox to receive a confirmation link)
      4. Project Settings -> API -> copy Project URL and the "anon public" key
-     5. Paste them below and redeploy.
+     5. Paste them below and redeploy - or leave them blank here and give
+        them to deploy/build_site.py, which writes them into the copy it
+        publishes (see DEPLOY.md). That keeps them out of the repository.
 
      Leave BOTH blank to ship a home-mode-only build (no classroom features).
 
      NOTE: the anon key is MEANT to be public — it is safe in page source.
      What protects the data is the row-level security in the SQL schema.
-     Run SECURITY_TESTS.md before any real student data is entered.
+     Run supabase/security_tests.sql (see supabase/SECURITY_TESTS.md) before any
+     real student data is entered.
      ═══════════════════════════════════════════════════════════════════════ -->
 <script>
 window.FB_SUPABASE_URL = "";   // e.g. "https://abcdefgh.supabase.co"
@@ -158,10 +162,18 @@ const sbFetch=async(path,method="GET",body=null,extra={},_retry=false)=>{
     LAST_ERR="";
     const t=await r.text();return t?JSON.parse(t):true;}catch(e){LAST_ERR="Could not reach the database ("+(e&&e.message?e.message:"network error")+"). Check the Supabase URL/key in index.html and your connection.";return null;}
 };
-// RPC (used by anonymous students; functions enforce their own scoping)
-const sbRpc=async(fn,args)=>{
-  try{const r=await fetch(SB_URL+"/rest/v1/rpc/"+fn,{method:"POST",headers:{"apikey":SB_KEY,"Authorization":"Bearer "+SB_KEY,"Content-Type":"application/json"},body:JSON.stringify(args||{})});
-    if(!r.ok){const t=await r.text();LAST_ERR=fn+": "+r.status+" "+t.slice(0,200);
+// RPC. Students call these anonymously; each function checks its own proof (a
+// session token, or the secret of a device the teacher trusted). The three
+// teacher functions pass asTeacher=true so the teacher's login travels with the
+// call - "Delete my account" used to send only the public key, so the server had
+// no way to know whose account it was being asked to delete.
+const sbRpc=async(fn,args,asTeacher=false)=>{
+  try{const r=await fetch(SB_URL+"/rest/v1/rpc/"+fn,{method:"POST",headers:{"apikey":SB_KEY,"Authorization":asTeacher?authHdr():"Bearer "+SB_KEY,"Content-Type":"application/json"},body:JSON.stringify(args||{})});
+    if(!r.ok){const t=await r.text();
+      // The database writes its refusals for people ("ask your teacher to set up
+      // this device"), so show that message rather than the raw response.
+      let said="";try{said=JSON.parse(t).message||"";}catch{}
+      LAST_ERR=said||(fn+": "+r.status+" "+t.slice(0,200));
       if(r.status===404)LAST_ERR="Database function \""+fn+"\" not found. Re-run focus-bridge-schema-secure.sql in the Supabase SQL Editor (it is safe to run again).";
       return null;}
     LAST_ERR="";const t=await r.text();return t?JSON.parse(t):true;}catch(e){LAST_ERR="Network error reaching the database.";return null;}
@@ -216,8 +228,11 @@ const DB={
   async getSchedule(code){const C=code.toUpperCase();
     if(SB_ON){const c=await this.getClassroom(C);return(c&&c.schedule&&c.schedule.length)?c.schedule:null;}
     return sGet("bs-sched-"+C,true);},
-  async joinStudent(code,id,name,avatar,schedule){const C=code.toUpperCase();
-    if(SB_ON){const d=await sbRpc("bs_join_student",{p_code:C,p_id:id,p_name:name,p_avatar:avatar,p_schedule:schedule});
+  // `token`: this child's session from an earlier sign-in on this device, if any.
+  // Coming back to an existing record needs that, or a device the teacher has
+  // trusted - a class code alone used to be enough to become any child.
+  async joinStudent(code,id,name,avatar,schedule,token){const C=code.toUpperCase();
+    if(SB_ON){const d=await sbRpc("bs_join_student",{p_code:C,p_id:id,p_name:name,p_avatar:avatar,p_schedule:schedule,p_token:token||null,p_device:await DB.deviceSecret(C)});
       if(!d||d.error)return null;return{id:d.id,token:d.token,data:d.data};}
     // demo
     const roster=await sGet("bs-roster-"+C,true)||[];const ex=roster.find(s=>s.name.toLowerCase()===name.toLowerCase());
@@ -234,7 +249,7 @@ const DB={
     return (await sGet("bs-stories-"+C,true))||[];},
   // Sign-in list for a class (teacher opt-in). Never includes tokens.
   async listStudents(code){const C=code.toUpperCase();
-    if(SB_ON)return asArr(await sbRpc("bs_list_students",{p_code:C}));
+    if(SB_ON)return asArr(await sbRpc("bs_list_students",{p_code:C,p_device:await DB.deviceSecret(C)}));
     const r=await sGet("bs-roster-"+C,true)||[];return r.map(x=>({id:x.id,name:x.name,avatar:x.avatar}));},
   // Class codes this device has used before (device-local), so a child never
   // has to retype the code on a returning visit.
@@ -246,15 +261,26 @@ const DB={
   // Profiles that have signed in on THIS device (device-local; no server involved)
   async knownHere(code){return (await sGet("bs-known-"+code.toUpperCase()))||[];},
   async rememberHere(code,p){const C=code.toUpperCase();const cur=(await sGet("bs-known-"+C))||[];
-    const next=[{id:p.id,name:p.name,avatar:p.avatar},...cur.filter(x=>x.id!==p.id)].slice(0,12);
+    const next=[{id:p.id,name:p.name,avatar:p.avatar,...(p.token?{token:p.token}:{})},...cur.filter(x=>x.id!==p.id)].slice(0,12);
     return sSet("bs-known-"+C,next);},
   async forgetHere(code,id){const C=code.toUpperCase();const cur=(await sGet("bs-known-"+C))||[];
     return sSet("bs-known-"+C,cur.filter(x=>x.id!==id));},
+  // Tap-your-name sign-in works only on a device the teacher has trusted. Its
+  // secret is kept in this device's own storage; the server stores a hash.
+  async deviceSecret(code){return (await sGet("bs-device-"+String(code||"").toUpperCase()))||null;},
+  async trustThisDevice(code,label){const C=code.toUpperCase();if(!SB_ON)return false;
+    const d=await sbRpc("bs_enroll_device",{p_code:C,p_label:label||null},true);
+    if(!d||!d.device_secret)return false;return sSet("bs-device-"+C,d.device_secret);},
+  async revokeDevices(code){const C=code.toUpperCase();if(!SB_ON)return null;
+    const n=await sbRpc("bs_revoke_devices",{p_code:C},true);
+    if(n===null)return null;await sDel("bs-device-"+C);return typeof n==="number"?n:0;},
   async getStudent(code,id,token){const C=code.toUpperCase();
     if(SB_ON){const d=await sbRpc("bs_get_student",{p_id:id,p_token:token});return d||null;}
     return sGet("bs-student-"+C+"-"+id,true);},
-  async recordConsent(code,id,name,method,detail){const C=code.toUpperCase();
-    if(SB_ON){return await sbRpc("bs_record_consent",{p_code:C,p_student_id:id,p_name:name,p_method:method,p_detail:detail});}
+  // `token`: the session the child was just given. Consent is bound to it, so
+  // nobody holding only a class code can write a consent record for a child.
+  async recordConsent(code,id,name,method,detail,token){const C=code.toUpperCase();
+    if(SB_ON){return await sbRpc("bs_record_consent",{p_code:C,p_student_id:id,p_name:name,p_method:method,p_detail:detail,p_token:token||null});}
     const ex=await sGet("bs-consent-"+C,true)||[];return sSet("bs-consent-"+C,[...ex,{student_id:id,name,method,detail,at:new Date().toISOString()}],true);},
   async selfDelete(id,token){if(SB_ON)return await sbRpc("bs_self_delete",{p_id:id,p_token:token});return true;},
 
@@ -271,7 +297,7 @@ const DB={
   async updateClassroom(code,fields){const C=code.toUpperCase();
     if(SB_ON){const b={};if(fields.name!==undefined)b.name=fields.name;if(fields.tokenReward!==undefined)b.token_reward=fields.tokenReward;if(fields.tokenGoal!==undefined)b.token_goal=fields.tokenGoal;if(fields.nameMode!==undefined)b.name_mode=fields.nameMode;if(fields.rosterPick!==undefined)b.roster_pick=fields.rosterPick;return(await sbFetch("classrooms?code=eq."+C,"PATCH",b))!==null;}
     const c=await sGet("bs-class-"+C,true);if(!c)return false;return sSet("bs-class-"+C,{...c,...fields},true);},
-  async deleteMyAccount(){if(!SB_ON)return false;const r=await sbRpc("bs_delete_my_account",{});return r===true;},
+  async deleteMyAccount(){if(!SB_ON)return false;const r=await sbRpc("bs_delete_my_account",{},true);return r===true;},
   async saveSchedule(code,tasks){const C=code.toUpperCase();
     if(SB_ON)return(await sbFetch("classrooms?code=eq."+C,"PATCH",{schedule_json:tasks}))!==null;
     return sSet("bs-sched-"+C,tasks,true);},
@@ -297,7 +323,17 @@ const DB={
   // request per child. `ids` is only used by the offline path, which has to
   // know which keys to look under.
   async getAllNotes(code,ids){const C=code.toUpperCase();const out={};
-    if(SB_ON){const d=asArr(await sbFetch("notes?classroom_code=eq."+C+"&order=created_at.asc"));
+    if(SB_ON){
+      // Paged. Supabase returns at most 1,000 rows per request by default, and
+      // asked for in one go, oldest first, a room past that silently lost its
+      // NEWEST notes - the only ones the analysis window looks at - so every
+      // flagged child read as having nothing on file. Pages are fetched until
+      // one comes back empty, which holds whatever the project's limit is set to.
+      const d=[];const PAGE=500;
+      for(let from=0;from<100000;){
+        const page=asArr(await sbFetch("notes?classroom_code=eq."+C+"&order=created_at.asc,id.asc&limit="+PAGE+"&offset="+from));
+        if(!page.length)break;d.push(...page);from+=page.length;
+      }
       d.forEach(n=>{(out[n.student_id]=out[n.student_id]||[]).push({text:n.text,created_at:n.created_at,
         time:new Date(n.created_at).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"}),
         date:new Date(n.created_at).toLocaleDateString()});});
@@ -560,9 +596,9 @@ function Join({dbMode,onBack,onJoined}){
   const resume=async(p)=>{
     const C=code.trim().toUpperCase();setLoading(true);setErr("");
     const csched=await DB.getSchedule(C);const base=(csched&&csched.length)?csched:SD;
-    const res=await DB.joinStudent(C,p.id,p.name,p.avatar,base.map(t=>({id:t.id,done:false})));
+    const res=await DB.joinStudent(C,p.id,p.name,p.avatar,base.map(t=>({id:t.id,done:false})),p.token);
     if(!res){setErr(LAST_ERR||"Could not sign in. Please try again.");setLoading(false);return;}
-    await DB.rememberHere(C,{id:res.id,name:p.name,avatar:p.avatar});
+    await DB.rememberHere(C,{id:res.id,name:p.name,avatar:p.avatar,token:res.token});
     await DB.rememberClass(C,cls?.name);
     setLoading(false);onJoined(C,res.id,res.token,p.name,p.avatar,cls);
   };
@@ -573,9 +609,9 @@ function Join({dbMode,onBack,onJoined}){
     const csched=await DB.getSchedule(C);const base=(csched&&csched.length)?csched:SD;
     const res=await DB.joinStudent(C,genId(),fn,avatar,base.map(t=>({id:t.id,done:false})));
     if(!res){setErr(LAST_ERR||"Could not join. Please try again.");setLoading(false);return;}
-    await DB.recordConsent(C,res.id,fn,"school_authorized","Confirmed by supervising adult at join");
+    await DB.recordConsent(C,res.id,fn,"school_authorized","Confirmed by supervising adult at join",res.token);
     ping("class-join");
-    await DB.rememberHere(C,{id:res.id,name:fn,avatar});
+    await DB.rememberHere(C,{id:res.id,name:fn,avatar,token:res.token});
     await DB.rememberClass(C,cls?.name);
     setLoading(false);onJoined(C,res.id,res.token,fn,avatar,cls);
   };
@@ -836,6 +872,28 @@ function TeacherAuth({dbMode,onBack,onAccess}){
     </div></div>);
 }
 
+// Trusting a device is what lets returning students tap their name on it. The
+// device keeps its secret in its own storage and the server keeps only a hash;
+// "Stop trusting all devices" also signs out anyone those devices signed in.
+function DeviceTrust({code}){
+  const [trusted,setTrusted]=useState(false);const [busy,setBusy]=useState(false);const [msg,setMsg]=useState("");
+  useEffect(()=>{(async()=>{setTrusted(!!(await DB.deviceSecret(code)));})();},[code]);
+  if(!SB_ON)return <div style={{fontSize:11,color:"#7a8fa6",fontWeight:700,marginTop:8}}>Device trust applies once the classroom server is connected.</div>;
+  const trust=async()=>{setBusy(true);setMsg("");const ok=await DB.trustThisDevice(code,"Trusted "+new Date().toLocaleDateString());setBusy(false);
+    if(ok){setTrusted(true);setMsg("This device is now trusted. Sign out, and students can tap their name here.");}else setMsg(LAST_ERR||"Could not trust this device.");};
+  const revoke=async()=>{setBusy(true);setMsg("");const n=await DB.revokeDevices(code);setBusy(false);
+    if(n===null){setMsg(LAST_ERR||"Could not stop trusting devices.");return;}
+    setTrusted(false);setMsg("Stopped trusting "+n+" device"+(n===1?"":"s")+". Students signed in on them will need to sign in again.");};
+  return(<div style={{marginTop:12,paddingTop:12,borderTop:"1px dashed #Bde0FF"}}>
+    <div role="status" style={{fontSize:12,fontWeight:800,color:"#1A3A2A",marginBottom:8}}>{trusted?"\u2705 This device is trusted for student sign-in":"This device is not trusted for student sign-in"}</div>
+    <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
+      {!trusted&&<Btn onClick={trust} disabled={busy} col="#2E86DE" small>Trust this device</Btn>}
+      <button onClick={revoke} disabled={busy} style={{background:"#FFF5F5",border:"2px solid #FFC0C0",borderRadius:10,padding:"8px 14px",cursor:busy?"wait":"pointer",fontWeight:800,fontSize:12,color:"#CC3333",fontFamily:"inherit"}}>Stop trusting all devices</button>
+    </div>
+    {msg&&<div style={{fontSize:11.5,color:"#555",fontWeight:700,marginTop:8,lineHeight:1.6}}>{msg}</div>}
+  </div>);
+}
+
 function NameModePicker({value,set}){
   const opts=[["full","First name","Shows the child's first name"],["id","ID only","No name shown — most private"]];
   return(<div style={{marginBottom:16}}><label style={{fontWeight:800,fontSize:13,color:"#333",display:"block",marginBottom:7}}>How should students be shown? (privacy)</label>
@@ -860,6 +918,8 @@ function StudentApp({sess,cls,a11y,updateA11y,onSignOut,onParent,db=DB}){
   const [srN,setSrN]=useState(0);const [calmDone,setCalmDone]=useState([]);
   const [emoLog,setEmoLog]=useState([]);const [taskLog,setTaskLog]=useState([]);
   const [sync,setSync]=useState("ok");const [ready,setReady]=useState(false);
+  // Set when this device cannot load the child's record from the server; holds the reason.
+  const [lost,setLost]=useState("");const [attempt,setAttempt]=useState(0);
   const [stories,setStories]=useState([]);const [openStory,setOpenStory]=useState(null);
   const [showSettings,setShowSettings]=useState(false);const [exitArm,setExitArm]=useState(false);
   const [bPhase,setBPhase]=useState("idle");const [bRound,setBRound]=useState(0);
@@ -878,10 +938,14 @@ function StudentApp({sess,cls,a11y,updateA11y,onSignOut,onParent,db=DB}){
       let d=null;
       if(sess.token&&sess.token!=="demo"){d=await db.getStudent(sess.code,sess.studentId,sess.token);}
       if(!d){
-        const res=await db.joinStudent(sess.code,sess.studentId,sess.name,sess.avatar,base.map(t=>({id:t.id,done:false})));
+        const res=await db.joinStudent(sess.code,sess.studentId,sess.name,sess.avatar,base.map(t=>({id:t.id,done:false})),sess.token);
         d=res?.data;
         if(res?.token)setToken(res.token);
       }
+      // Neither worked: the sign-in expired, the tablet stopped being trusted,
+      // or the database was upgraded. Say so. Opening an empty profile instead
+      // would let a child keep checking in while every save failed unseen.
+      if(!d&&SB_ON&&!sess.home){setLost(LAST_ERR||"This device could not load your things.");return;}
       let merged=base.map(t=>({...t,uid:mkUid(),done:false}));
       if(d){
         setStars(d.stars||0);setCoins(d.coins||0);setTokens(d.tokens||0);
@@ -899,14 +963,14 @@ function StudentApp({sess,cls,a11y,updateA11y,onSignOut,onParent,db=DB}){
       setReady(true);
     })();
     return()=>{if(breathRef.current)clearTimeout(breathRef.current);};
-  },[]);
+  },[attempt]);
 
   const sk=schedule.map(t=>t.done?"1":"0").join(""),bk=[...unlocked].sort().join(",");
   useEffect(()=>{
     if(!ready||deletedRef.current)return;setSync("saving");
     if(saveRef.current)clearTimeout(saveRef.current);
     const snap={name:sess.name,avatar:sess.avatar,stars,coins,tokens,streak,lastActive,badges:[...unlocked],emotionLog:emoLog,taskLog,aacCount:aacN,emoCount:emoN,sentenceCount:senN,storiesRead:srN,calmDone,schedule:schedule.map(t=>({id:t.id,uid:t.uid,done:t.done})),lastSeen:new Date().toISOString()};
-    saveRef.current=setTimeout(async()=>{if(deletedRef.current)return;const ok=await db.saveStudent(sess.code,sess.studentId,token,snap);if(!deletedRef.current)setSync(ok?"ok":"err");},2500);
+    saveRef.current=setTimeout(async()=>{if(deletedRef.current)return;const ok=await db.saveStudent(sess.code,sess.studentId,token,snap);if(!deletedRef.current){setSync(ok?"ok":"err");if(!ok&&SB_ON&&!sess.home&&/sign-in has expired/i.test(LAST_ERR))setLost(LAST_ERR);}},2500);
   },[stars,coins,tokens,streak,bk,emoLog.length,taskLog.length,sk,aacN,emoN,senN,srN,calmDone.length,ready]);
 
   useEffect(()=>{if(!tId||tSecs<=0)return;const t=setTimeout(()=>setTSecs(v=>{if(v<=1){setTId(null);return 0;}return v-1;}),1000);return()=>clearTimeout(t);},[tId,tSecs]);
@@ -976,9 +1040,10 @@ function StudentApp({sess,cls,a11y,updateA11y,onSignOut,onParent,db=DB}){
         <button onClick={handleExit} title="Signs out. Your stars are saved — tap your name to come back." style={{background:exitArm?"#FF7675":"rgba(255,255,255,.18)",border:"none",borderRadius:9,padding:"4px 10px",cursor:"pointer",color:"white",fontSize:11,fontWeight:800,fontFamily:"inherit",flexShrink:0}}>{exitArm?"Sure?":"Exit"}</button>
       </div>
 
-      {!ready&&<div style={{textAlign:"center",padding:60}}><div style={{fontSize:48,animation:"spin 2s linear infinite"}}>✨</div><div style={{marginTop:12,fontWeight:800,color:"#bbb"}}>Loading your stuff...</div></div>}
+      {lost&&<div role="alert" style={{maxWidth:460,margin:"40px auto",background:"white",borderRadius:22,padding:"26px 22px",textAlign:"center",boxShadow:"0 8px 30px rgba(0,0,0,.08)"}}><div style={{fontSize:46}}>🔑</div><div style={{fontSize:19,fontWeight:900,marginTop:8,color:"#2c3e50"}}>Let's sign you in again</div><div style={{fontSize:14,fontWeight:700,color:"#666",marginTop:8,lineHeight:1.5}}>{lost}</div><div style={{display:"flex",gap:10,justifyContent:"center",marginTop:18,flexWrap:"wrap"}}><button onClick={()=>{setLost("");setReady(false);setAttempt(a=>a+1);}} style={{background:"#27AE60",color:"white",border:"none",borderRadius:14,padding:"10px 18px",fontWeight:900,fontSize:14,cursor:"pointer",fontFamily:"inherit"}}>Try again</button><button onClick={onSignOut} style={{background:"#F0F0F0",color:"#2c3e50",border:"none",borderRadius:14,padding:"10px 18px",fontWeight:900,fontSize:14,cursor:"pointer",fontFamily:"inherit"}}>Back to sign in</button></div></div>}
+      {!ready&&!lost&&<div style={{textAlign:"center",padding:60}}><div style={{fontSize:48,animation:"spin 2s linear infinite"}}>✨</div><div style={{marginTop:12,fontWeight:800,color:"#bbb"}}>Loading your stuff...</div></div>}
 
-      {ready&&<div style={{maxWidth:720,margin:"0 auto",padding:"18px 16px 80px"}}>
+      {ready&&!lost&&<div style={{maxWidth:720,margin:"0 auto",padding:"18px 16px 80px"}}>
         {tab==="home"&&<StudentDash sess={sess} setTab={setTab} done={done} total={schedule.length} pct={pct} stars={stars} coins={coins} streak={streak} tokens={tokens} TG={TG} badges={unlocked.size} totalBadges={BD.length} stories={(stories||[]).length} lastEmotion={emoLog.length?emoLog[emoLog.length-1]:null} calmDone={calmDone.length}/>}
         {tab==="schedule"&&<SchedView schedule={schedule} pool={pool} toggleTask={toggleTask} pct={pct} done={done} tId={tId} tSecs={tSecs} tMax={tMax} startT={startT} first={first} then={then} addToDay={addToDay} removeFromDay={removeFromDay} moveInDay={moveInDay} reorderDay={reorderDay}/>}
         {tab==="talk"&&<TalkView cat={cat} setCat={setCat} sentence={sentence} addWord={addWord} delWord={()=>setSentence(p=>p.slice(0,-1))} clearSen={()=>setSentence([])} lastSaid={lastSaid} speak={speak}/>}
@@ -1670,6 +1735,16 @@ function InsightsView({code,cls,roster,students,stories,onOpenStudent,db=DB}){
       Everything below is the {meta.recencyDays} days ending then, not the {meta.recencyDays} days ending today.
     </div>}
 
+    {/* A check-in dated in the future is a device clock problem, not data - and
+        left in, one of them would decide the window for the whole room. The
+        engine leaves them out; this says so, because a teacher cannot fix a
+        tablet's clock they do not know is wrong. */}
+    {meta.futureCheckIns>0&&<div role="status" style={{background:"#FFF3E0",border:"2px solid #FFD700",borderRadius:14,
+      padding:"11px 15px",marginBottom:14,fontSize:12.5,fontWeight:700,color:"#8a6d00",lineHeight:1.6}}>
+      🕒 <b>{meta.futureCheckIns} check-in{meta.futureCheckIns===1?" is":"s are"} dated in the future</b> and
+      {meta.futureCheckIns===1?" was":" were"} left out. A tablet's clock is probably set wrong — check the date and time on the devices students use.
+    </div>}
+
     {method&&<div style={{background:"white",borderRadius:18,padding:"16px 20px",marginBottom:14,
       boxShadow:"0 2px 12px rgba(0,0,0,.06)",fontSize:12.5,fontWeight:700,color:"#5d6f64",lineHeight:1.75}}>
       <div style={{fontWeight:900,fontSize:13.5,color:INS.ink,marginBottom:7}}>How this works</div>
@@ -2044,8 +2119,9 @@ function Dashboard({code,cls,roster=[],students={},loading,dbMode,onRefresh,onBa
             <div style={{marginBottom:14}}><label style={{fontWeight:800,fontSize:13,color:"#333",display:"block",marginBottom:7}}>Token Goal (1-10)</label><input value={sGoal} onChange={e=>setSGoal(e.target.value.replace(/\D/g,"").slice(0,2))} inputMode="numeric" style={{width:90,padding:"10px",border:"2px solid #e8e8e8",borderRadius:11,fontFamily:"inherit",fontWeight:900,fontSize:18,textAlign:"center"}} onFocus={e=>e.target.style.borderColor="#27AE60"} onBlur={e=>e.target.style.borderColor="#e8e8e8"}/></div>
             <NameModePicker value={sNameMode} set={setSNameMode}/>
             <div style={{background:"#F8FBFF",border:"2px solid #Bde0FF",borderRadius:12,padding:"12px 14px",marginBottom:14}}>
-              <Toggle label="Let students tap their name to sign in" desc="Shows a list of first names + avatars after the class code" on={sRoster} set={setSRoster}/>
-              <div style={{fontSize:11,color:"#7a8fa6",fontWeight:700,lineHeight:1.6,marginTop:8}}>Easiest for young students — no typing. Note the trade-off: anyone who has the class code can then pick any name on the list, so use it for supervised classroom devices. Leave it off and students sign in with their name + avatar instead.</div>
+              <Toggle label="Let students tap their name to sign in" desc="Shows a list of first names + avatars after the class code, on devices you trust below" on={sRoster} set={setSRoster}/>
+              <div style={{fontSize:11,color:"#7a8fa6",fontWeight:700,lineHeight:1.6,marginTop:8}}>Easiest for young students — no typing. A returning student can pick up their own record only on a classroom device you trust here, or on the device they used before. Anyone else with the class code can only join as a new student. Trust the classroom tablets, not personal phones.</div>
+              <DeviceTrust code={code}/>
             </div>
             <Ok msg={setMsg==="ok"?"Saved! Name display and settings updated.":""}/><Err msg={setMsg==="err"?"Could not save. Check your connection.":""}/>
             <Btn onClick={saveSettings} col="#27AE60" small>Save Settings</Btn>

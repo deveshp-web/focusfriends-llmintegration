@@ -2,8 +2,16 @@ Focus Bridge - Room 15 Explorers
 James Patel - Cedar Park Elementary
 Changes between 2026-07-31 and 2026-08-07
 
-5 eased, 2 resolved.
-16 students unchanged.
+2 escalated, 5 eased, 2 resolved.
+14 students unchanged.
+
+ESCALATED (2)
+  Priya: watch -> high
+      4 negative check-ins in a row over 2 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+  Quinn: watch -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🫧 Quinn has not opened Pop Bubbles yet
 
 EASED (5)
   Beckett: watch -> info

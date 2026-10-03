@@ -2,13 +2,26 @@ Focus Bridge - Room 19 Champions
 Robert Johnson - Harmony Special Education Center
 Changes between 2026-07-31 and 2026-08-07
 
-2 eased.
-16 students unchanged.
+3 escalated, 1 new, 1 eased.
+13 students unchanged.
 
-EASED (2)
-  Ava: high -> medium
+ESCALATED (3)
+  Emmy: medium -> high
+      4 negative check-ins in a row over 2 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+  Layla: watch -> high
+      7 negative check-ins in a row over 4 days
+      Suggested: Sustained run - worth a second pair of eyes
+  Yusuf: watch -> medium
+      5 negative check-ins in a row over 3 days
+      Suggested: 🌬️ Yusuf has not opened Deep Breathing yet
+
+NEW (1)
+  Amara: not flagged -> medium
       4 negative check-ins in a row over 2 days
-      Suggested: 🌀 Go back to Fidget Spinner
+      Suggested: 🫧 Amara has not opened Pop Bubbles yet
+
+EASED (1)
   Leo: medium -> watch
       30% of recent check-ins negative, never four in a row
       Suggested: 🫧 Leo has not opened Pop Bubbles yet

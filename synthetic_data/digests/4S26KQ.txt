@@ -2,8 +2,13 @@ Focus Bridge - Room 19 Friends
 Maria Lopez - Oakdale Elementary
 Changes between 2026-07-31 and 2026-08-07
 
-4 resolved.
-13 students unchanged.
+1 escalated, 4 resolved.
+12 students unchanged.
+
+ESCALATED (1)
+  Elowen: watch -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🌬️ Go back to Deep Breathing
 
 RESOLVED (4)
   Dario: medium -> not flagged

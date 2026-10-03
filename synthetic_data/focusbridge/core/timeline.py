@@ -213,6 +213,48 @@ def read_check_ins(student, problems):
 
 
 # ---------------------------------------------------------------------------
+# the analysis window
+# ---------------------------------------------------------------------------
+# Every stage asks the same question - "which check-ins are inside the window
+# we are describing?" - so the answer lives here, once. Both stages used to
+# write their own filter, and both made the same mistake: a lower bound and no
+# upper bound. That had two consequences, each worse than it looks:
+#
+#   * A run pinned to an earlier date ("as of 31 July") still read every
+#     check-in AFTER that date, so the previous-state snapshot the change feed
+#     compares against was really "31 July plus everything since". On this
+#     corpus, 1,698 students' "as of 31 July" findings used August check-ins.
+#   * The window is anchored to the latest check-in, and nothing stopped that
+#     check-in being dated in the future. One tablet with a wrong clock moved
+#     the window past everyone's real data and silenced every alert.
+
+#: How far past "now" a check-in may be dated before it is treated as a clock
+#: error rather than as data. A day covers a device whose timezone runs ahead
+#: of the machine doing the analysis; a check-in dated further ahead than that
+#: is not something a child did, and it must not be allowed to move the window.
+#:
+#: The same tolerance lives in ``integrated_version/fb-insights.js``
+#: (``FUTURE_TOLERANCE_MS``) - change both or the two engines disagree.
+FUTURE_TOLERANCE = timedelta(days=1)
+
+
+def is_future_dated(at, now):
+    """True if a check-in is dated further ahead of ``now`` than an honest clock would."""
+    return at > now + FUTURE_TOLERANCE
+
+
+def within_window(check_ins, start, end):
+    """The check-ins dated inside ``start..end``, both ends inclusive.
+
+    Both bounds are load-bearing - see the comment above this function for the
+    two bugs a missing upper bound caused. ``end`` is the window's reference
+    time, which for a normal run is the latest *believable* check-in, so the
+    upper bound is also what keeps a future-dated row out of the analysis.
+    """
+    return [check_in for check_in in check_ins if start <= check_in.at <= end]
+
+
+# ---------------------------------------------------------------------------
 # the fast window index
 # ---------------------------------------------------------------------------
 

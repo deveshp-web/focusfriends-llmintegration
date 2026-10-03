@@ -2,8 +2,16 @@ Focus Bridge - Room 27 Learners
 Daniel Kim - Bright Horizons School
 Changes between 2026-07-31 and 2026-08-07
 
-4 resolved.
-8 students unchanged.
+2 new, 4 resolved.
+6 students unchanged.
+
+NEW (2)
+  Noor: not flagged -> info
+      4 "calm" check-ins in a row
+      Suggested: Say this one out loud
+  Zara: not flagged -> info
+      5 "happy" check-ins in a row
+      Suggested: Say this one out loud
 
 RESOLVED (4)
   Elowen: watch -> not flagged

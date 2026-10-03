@@ -2,16 +2,29 @@ Focus Bridge - Room 4 Stars
 Robert Rossi - Lincoln Elementary
 Changes between 2026-07-31 and 2026-08-07
 
-2 eased, 1 resolved.
-21 students unchanged.
+1 escalated, 2 new, 2 eased, 1 resolved.
+18 students unchanged.
+
+ESCALATED (1)
+  Zion: medium -> high
+      4 negative check-ins in a row over 2 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+
+NEW (2)
+  Ben: not flagged -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🖐️ Ben has not opened 5-4-3-2-1 yet
+  Hugo: not flagged -> watch
+      32% of recent check-ins negative, never four in a row
+      Suggested: 🌀 Go back to Fidget Spinner
 
 EASED (2)
-  Chloe: high -> medium
-      5 negative check-ins in a row over 2 days
-      Suggested: 🖐️ Chloe has not opened 5-4-3-2-1 yet
   Nadia: high -> medium
       4 negative check-ins in a row over 2 days
       Suggested: 🌬️ Go back to Deep Breathing
+  Zara: watch -> info
+      5 "happy" check-ins in a row
+      Suggested: Say this one out loud
 
 RESOLVED (1)
   Beckett: high -> not flagged

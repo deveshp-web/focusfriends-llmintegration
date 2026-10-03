@@ -2,13 +2,29 @@ Focus Bridge - Room 19 Champions
 Maria Nguyen - Sunrise Learning Center
 Changes between 2026-07-31 and 2026-08-07
 
-2 eased.
-16 students unchanged.
+4 escalated, 1 new, 1 eased.
+12 students unchanged.
 
-EASED (2)
-  Emmy: high -> medium
-      7 negative check-ins in a row over 2 days - clustered around Lunch
-      Suggested: Lunch is where this shows up
+ESCALATED (4)
+  Gabriel: info -> medium
+      5 negative check-ins in a row over 2 days
+      Suggested: 🖐️ Gabriel has not opened 5-4-3-2-1 yet
+  Ibrahim: info -> high
+      7 negative check-ins in a row over 3 days
+      Suggested: Sustained run - worth a second pair of eyes
+  Jun: medium -> high
+      5 negative check-ins in a row over 2 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+  Zara: info -> watch
+      28% of recent check-ins negative, never four in a row
+      Suggested: 🌌 Zara has not opened Starry Night yet
+
+NEW (1)
+  Elowen: not flagged -> info
+      5 "happy" check-ins in a row
+      Suggested: Say this one out loud
+
+EASED (1)
   Ezra: medium -> watch
       31% of recent check-ins negative, never four in a row
       Suggested: 🌀 Ezra has not opened Fidget Spinner yet

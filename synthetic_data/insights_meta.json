@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-06T18:21:27",
+  "generated_at": "2026-10-02T17:58:16",
   "reference_time": "2026-08-07T13:08:00",
   "cutoff": "2026-07-08T13:08:00",
   "config": {
@@ -47,8 +47,8 @@
       "watch": 222
     },
     "students_by_trigger": {
-      "density": 1459,
       "negative": 2047,
+      "density": 1459,
       "repeated": 758,
       "same_day_cluster": 682
     },

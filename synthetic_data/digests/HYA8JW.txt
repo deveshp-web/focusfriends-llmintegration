@@ -2,8 +2,13 @@ Focus Bridge - Room 14 Learners
 Jennifer Smith - Lincoln Elementary
 Changes between 2026-07-31 and 2026-08-07
 
-1 resolved.
-23 students unchanged.
+1 escalated, 1 resolved.
+22 students unchanged.
+
+ESCALATED (1)
+  Noor: medium -> high
+      6 negative check-ins in one day (2026-08-03), across 2 separate episodes
+      Suggested: Bring this one to your support team
 
 RESOLVED (1)
   Aiden: medium -> not flagged

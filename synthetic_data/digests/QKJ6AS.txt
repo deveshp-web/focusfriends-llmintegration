@@ -2,8 +2,13 @@ Focus Bridge - Room 20 Champions
 Michael Lopez - Harmony Special Education Center
 Changes between 2026-07-31 and 2026-08-07
 
-2 eased, 1 resolved.
-6 students unchanged.
+1 escalated, 2 eased, 1 resolved.
+5 students unchanged.
+
+ESCALATED (1)
+  Rosa: watch -> high
+      12 negative check-ins in a row over 6 days
+      Suggested: Sustained run - worth a second pair of eyes
 
 EASED (2)
   Ines: high -> medium

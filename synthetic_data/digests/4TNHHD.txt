@@ -1,0 +1,13 @@
+Focus Bridge - Room 8 Explorers
+Michael Lopez - Oakdale Elementary
+Changes between 2026-07-31 and 2026-08-07
+
+1 new.
+5 students unchanged.
+
+NEW (1)
+  Student 6E14: not flagged -> medium
+      5 negative check-ins in a row over 3 days
+      Suggested: 🖐️ Student 6E14 has not opened 5-4-3-2-1 yet
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

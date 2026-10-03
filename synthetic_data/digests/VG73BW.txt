@@ -2,8 +2,21 @@ Focus Bridge - Room 16 Friends
 Jennifer Chen - Cedar Park Elementary
 Changes between 2026-07-31 and 2026-08-07
 
-2 eased.
-21 students unchanged.
+1 escalated, 2 new, 2 eased.
+18 students unchanged.
+
+ESCALATED (1)
+  Emmy: medium -> high
+      6 negative check-ins in a row over 2 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+
+NEW (2)
+  Maya: not flagged -> medium
+      6 negative check-ins in a row over 2 days
+      Suggested: 🖐️ Maya has not opened 5-4-3-2-1 yet
+  Omar: not flagged -> info
+      6 "happy" check-ins in a row
+      Suggested: Say this one out loud
 
 EASED (2)
   Theo: high -> medium

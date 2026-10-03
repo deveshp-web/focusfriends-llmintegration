@@ -2,10 +2,25 @@ Focus Bridge - Room 1 Champions
 Lisa Lopez - Riverside SPED Cooperative
 Changes between 2026-07-31 and 2026-08-07
 
-1 resolved.
-16 students unchanged.
+4 new, 2 resolved.
+12 students unchanged.
 
-RESOLVED (1)
+NEW (4)
+  Emmy: not flagged -> watch
+      30% of recent check-ins negative, never four in a row
+      Suggested: 🫧 Emmy has not opened Pop Bubbles yet
+  Leo: not flagged -> info
+      5 "happy" check-ins in a row
+      Suggested: Say this one out loud
+  Yusuf: not flagged -> info
+      5 "happy" check-ins in a row
+      Suggested: Say this one out loud
+  Zara: not flagged -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🌌 Zara has not opened Starry Night yet
+
+RESOLVED (2)
   Ibrahim: info -> not flagged
+  Luca: watch -> not flagged
 
 Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

@@ -2,8 +2,13 @@ Focus Bridge - Room 10 Friends
 Robert Fischer - Riverside SPED Cooperative
 Changes between 2026-07-31 and 2026-08-07
 
-1 eased, 4 resolved.
-19 students unchanged.
+1 new, 1 eased, 4 resolved.
+18 students unchanged.
+
+NEW (1)
+  Ben: not flagged -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🫧 Ben has not opened Pop Bubbles yet
 
 EASED (1)
   Sana: medium -> info

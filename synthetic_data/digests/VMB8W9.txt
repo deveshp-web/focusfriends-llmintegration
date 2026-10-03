@@ -2,11 +2,21 @@ Focus Bridge - Room 9 Explorers
 David Fischer - Cedar Park Elementary
 Changes between 2026-07-31 and 2026-08-07
 
-1 eased.
-7 students unchanged.
+1 escalated, 1 new, 1 eased.
+5 students unchanged.
+
+ESCALATED (1)
+  Student 4AA9: medium -> high
+      5 negative check-ins in a row over 3 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+
+NEW (1)
+  Student 7D08: not flagged -> info
+      4 "excited" check-ins in a row
+      Suggested: Say this one out loud
 
 EASED (1)
-  Mabel: high -> medium
+  Student EFB2: high -> medium
       5 negative check-ins in a row over 2 days
       Suggested: 🌌 Go back to Starry Night
 

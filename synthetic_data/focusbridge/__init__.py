@@ -204,22 +204,25 @@ date, not from a fixture, so the comparison is real data::
     python notify.py
 
 .. warning::
-   **On this synthetic corpus the diff can only ever improve.** Sliding the
-   30-day window forward drops flagged students and adds none - measured over
-   four weekly reference dates on a 1,200-student sample: 910 -> 870 -> 818 ->
-   751, with ``new = 0`` at every step. The aggregate negative rate is flat
-   (~34%, with a deliberate ~56% Monday spike), so this is not the data thinning
-   out; the generator front-loads each student's episodes, so later windows
-   contain fewer *consecutive* runs.
+   **A correction, recorded so nobody re-derives the wrong explanation.**
+   This section used to say the diff "can only ever improve" on this corpus -
+   that no student was ever newly flagged at any of four weekly reference
+   dates - and blamed the data generator for front-loading episodes. The
+   dashboard footer told teachers the same thing.
 
-   "0 newly flagged" here is an artefact of how the data was made, not good news
-   about a classroom. The dashboard says so in its own footer rather than
-   letting a teacher read it as progress.
+   It was a bug, not a property of the data. The detector's window had a lower
+   bound and no upper bound, so a run pinned to 31 July still read every
+   check-in after 31 July: the "previous" snapshot was really "31 July plus
+   everything since", a superset of the current window, and nothing could ever
+   be new against it. 1,698 students' previous-run findings used August data.
 
-   Because of that, the dashboard leads with **within-window trajectory** - who
-   is worse in the second half of their own window than the first - which does
-   move in both directions on this corpus (216 worsening against 229 improving)
-   and needs only one run. Run-over-run change is shown beneath it.
+   With both ends bounded (``within_window`` in ``core/timeline.py``), the same
+   two runs give 163 escalated, 219 newly flagged, 158 eased and 235 resolved.
+
+   The dashboard still leads with **within-window trajectory** - who is worse in
+   the second half of their own window than the first - because it needs only
+   one run. Run-over-run change sits beneath it, with a footer noting that the
+   two windows overlap, so a change is a reason to look rather than a verdict.
 
 
 ================================================================================

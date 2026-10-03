@@ -2,8 +2,13 @@ Focus Bridge - Room 19 Stars
 Emily Smith - Sunrise Learning Center
 Changes between 2026-07-31 and 2026-08-07
 
-1 eased, 3 resolved.
-15 students unchanged.
+1 new, 1 eased, 3 resolved.
+14 students unchanged.
+
+NEW (1)
+  Theo: not flagged -> info
+      5 "happy" check-ins in a row
+      Suggested: Say this one out loud
 
 EASED (1)
   Priya: high -> medium

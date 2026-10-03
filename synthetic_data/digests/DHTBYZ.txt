@@ -2,8 +2,19 @@ Focus Bridge - Room 5 Stars
 Michael Torres - Lincoln Elementary
 Changes between 2026-07-31 and 2026-08-07
 
-2 resolved.
-17 students unchanged.
+3 new, 2 resolved.
+14 students unchanged.
+
+NEW (3)
+  Luca: not flagged -> high
+      6 negative check-ins in a row over 3 days
+      Suggested: Sustained run - worth a second pair of eyes
+  Omar: not flagged -> info
+      6 "happy" check-ins in a row
+      Suggested: Say this one out loud
+  Theo: not flagged -> high
+      5 negative check-ins in a row over 3 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
 
 RESOLVED (2)
   Jun: medium -> not flagged

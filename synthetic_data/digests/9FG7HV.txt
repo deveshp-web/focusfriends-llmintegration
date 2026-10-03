@@ -2,8 +2,18 @@ Focus Bridge - Room 4 Learners
 Lisa Torres - Willow Creek Academy
 Changes between 2026-07-31 and 2026-08-07
 
-2 eased, 1 resolved.
-18 students unchanged.
+1 escalated, 1 new, 2 eased, 1 resolved.
+16 students unchanged.
+
+ESCALATED (1)
+  Ines: medium -> high
+      4 negative check-ins in a row over 2 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+
+NEW (1)
+  Oliver: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
 
 EASED (2)
   Camila: high -> medium

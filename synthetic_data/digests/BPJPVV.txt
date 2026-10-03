@@ -2,8 +2,21 @@ Focus Bridge - Room 11 Learners
 Priya Kim - Harmony Special Education Center
 Changes between 2026-07-31 and 2026-08-07
 
-1 resolved.
-18 students unchanged.
+2 escalated, 1 new, 1 resolved.
+15 students unchanged.
+
+ESCALATED (2)
+  Beckett: medium -> high
+      7 negative check-ins in a row over 2 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+  Chloe: watch -> medium
+      4 negative check-ins in a row over 3 days
+      Suggested: 🌬️ Chloe has not opened Deep Breathing yet
+
+NEW (1)
+  Maya: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
 
 RESOLVED (1)
   Emmy: watch -> not flagged

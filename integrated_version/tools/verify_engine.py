@@ -43,7 +43,7 @@ PIPELINE = os.path.normpath(os.path.join(HERE, "..", "..", "synthetic_data"))
 sys.path.insert(0, PIPELINE)
 
 try:
-    from focusbridge.core.timeline import Timeline, read_check_ins
+    from focusbridge.core.timeline import is_future_dated, read_check_ins
     from focusbridge.detect.pipeline import analyse_student
     from focusbridge.detect.summarize import summarize
     from focusbridge.recommend.context import StoryIndex, build_context, read_notes
@@ -83,77 +83,6 @@ def load_demo_data(path):
 # translated here - the inverse of what the exporter did - so both sides are
 # genuinely analysing the same check-ins.
 
-def to_corpus_task_log(rows):
-    """App task rows -> the corpus's ``{ts, task, status}`` shape.
-
-    .. warning::
-       **This conversion is doing more than it looks like it is.**
-
-       ``emotion_log`` below is deliberately left in the app's ``{iso, time}``
-       schema, because the pipeline's ``parse_timestamp`` reads both schemas and
-       leaving it alone keeps that path under test. ``task_log`` cannot be left
-       alone, because ``focusbridge.recommend.context.index_tasks`` does **not**
-       go through ``parse_timestamp`` - it calls
-       ``datetime.fromisoformat(str(raw.get("ts")))`` directly. An app task row
-       has no ``ts``, so every one of them is dropped, and the activity
-       correlation - the rule the recommender itself calls "the strongest thing
-       a teacher can actually change" - silently finds nothing on live app data.
-
-       Verified against ``stu_3432bd2e6cf4``: identical timeline, identical
-       streaks, identical flagged positions, and the cluster (Transition to Gym,
-       8 of 12 flagged against a 36% baseline, p=0.029) appears from the corpus
-       rows and vanishes from the app rows.
-
-       ``fb-insights.js`` does not share the bug - its ``indexTasks`` uses the
-       same tolerant parser as its check-in reader. Converting here is therefore
-       not papering over a difference between the two engines; it is removing a
-       Python-side defect from the comparison so that everything else in it
-       still means something. The one-line upstream fix is to replace that
-       ``fromisoformat`` call with ``parse_timestamp(raw)``.
-    """
-    out = []
-    for row in rows or []:
-        if not isinstance(row, dict):
-            continue
-        stamp = row.get("ts")
-        if not stamp:
-            day, clock = row.get("iso"), parse_clock_text(row.get("time"))
-            if not day or clock is None:
-                continue
-            stamp = f"{day}T{clock[0]:02d}:{clock[1]:02d}:00"
-        out.append({"ts": stamp, "task": row.get("task"), "status": row.get("status")})
-    return out
-
-
-def parse_clock_text(raw):
-    """``"09:12 AM"`` -> ``(9, 12)``; ``None`` if unreadable.
-
-    The pipeline's own ``parse_clock`` would do, but importing a private helper
-    of the thing under test into the harness that tests it is how a harness ends
-    up agreeing with a bug. Twelve lines, written independently.
-    """
-    if not isinstance(raw, str) or not raw.strip():
-        return None
-    text = raw.strip().upper().replace(" ", " ")
-    meridiem = None
-    for marker in ("AM", "PM"):
-        if text.endswith(marker):
-            meridiem, text = marker, text[:-2].strip()
-            break
-    parts = text.split(":")
-    if len(parts) < 2:
-        return None
-    try:
-        hour, minute = int(parts[0]), int(parts[1])
-    except ValueError:
-        return None
-    if meridiem == "PM" and hour != 12:
-        hour += 12
-    elif meridiem == "AM" and hour == 12:
-        hour = 0
-    return (hour, minute) if 0 <= hour < 24 and 0 <= minute < 60 else None
-
-
 def to_corpus_student(student_id, record, code):
     """One app student record -> the row ``students.jsonl`` would have held."""
     return {
@@ -166,7 +95,12 @@ def to_corpus_student(student_id, record, code):
         "tokens": record.get("tokens", 0),
         "badges": record.get("badges") or [],
         "emotion_log": record.get("emotionLog") or [],
-        "task_log": to_corpus_task_log(record.get("taskLog")),
+        # Left in the app's own {iso, time} shape, exactly as emotion_log is.
+        # This used to be translated to {ts} to step around a pipeline bug
+        # (index_tasks dropped every app task row); with that fixed, passing
+        # the rows through unchanged is what proves the fix - the activity
+        # correlation checks below now run on the rows the app really writes.
+        "task_log": record.get("taskLog") or [],
         "schedule_state": record.get("schedule") or [],
         "aac_count": record.get("aacCount", 0),
         "emo_count": record.get("emoCount", 0),
@@ -194,12 +128,20 @@ def to_corpus_stories(stories):
 # running the real stages over one room
 # --------------------------------------------------------------------------
 
-def latest_check_in(students):
-    """The room's most recent check-in - what the engine anchors its window to."""
+def latest_check_in(students, now=None):
+    """The room's most recent believable check-in - the engine's window anchor.
+
+    Skips check-ins dated more than a day ahead of ``now``, mirroring both
+    engines: before they did, one future-dated row moved every window past
+    the real data and silenced the room.
+    """
+    now = now or datetime.now()
     latest = None
     problems = Counter()
     for student in students:
         for check_in in read_check_ins(student, problems):
+            if is_future_dated(check_in.at, now):
+                continue
             if latest is None or check_in.at > latest:
                 latest = check_in.at
     return latest
@@ -224,7 +166,7 @@ def analyse_room(room):
     contexts, problems = [], Counter()
     for student in students:
         # Stage 1, the real function, not a re-implementation of it.
-        timeline, streaks, _runs = analyse_student(student, cutoff, problems)
+        timeline, streaks, _runs = analyse_student(student, cutoff, reference, problems)
         if not streaks:
             continue
         summary = summarize(streaks, timeline.check_ins)

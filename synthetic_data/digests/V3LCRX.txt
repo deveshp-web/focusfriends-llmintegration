@@ -2,8 +2,13 @@ Focus Bridge - Room 17 Stars
 Daniel Cohen - Oakdale Elementary
 Changes between 2026-07-31 and 2026-08-07
 
-1 eased, 1 resolved.
-18 students unchanged.
+1 new, 1 eased, 1 resolved.
+17 students unchanged.
+
+NEW (1)
+  Dario: not flagged -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🌬️ Dario has not opened Deep Breathing yet
 
 EASED (1)
   Quinn: high -> medium

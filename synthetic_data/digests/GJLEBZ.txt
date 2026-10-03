@@ -2,8 +2,16 @@ Focus Bridge - Room 27 Learners
 Daniel Rossi - Sunrise Learning Center
 Changes between 2026-07-31 and 2026-08-07
 
-1 eased, 2 resolved.
-11 students unchanged.
+2 new, 1 eased, 2 resolved.
+9 students unchanged.
+
+NEW (2)
+  Ava: not flagged -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🖐️ Ava has not opened 5-4-3-2-1 yet
+  Jun: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
 
 EASED (1)
   Camila: high -> medium

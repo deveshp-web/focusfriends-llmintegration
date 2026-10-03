@@ -1,0 +1,19 @@
+Focus Bridge - Room 4 Champions
+Emily Lopez - Lincoln Elementary
+Changes between 2026-07-31 and 2026-08-07
+
+2 new, 1 resolved.
+7 students unchanged.
+
+NEW (2)
+  Student 47FF: not flagged -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🫧 Student 47FF has not opened Pop Bubbles yet
+  Student F205: not flagged -> watch
+      36% of recent check-ins negative, never four in a row
+      Suggested: 🖐️ Student F205 has not opened 5-4-3-2-1 yet
+
+RESOLVED (1)
+  Student FF05: watch -> not flagged
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

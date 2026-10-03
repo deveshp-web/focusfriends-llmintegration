@@ -227,6 +227,45 @@ console.error = function () {
     return analysis.meta.staleDays + " days behind today, and stated";
   });
 
+  // ---- a device with its clock set wrong ----------------------------------
+  // Regression: the window ends at the room's latest check-in, so one row dated
+  // in the future used to move it past everyone's real data. On this room that
+  // took the alert queue to zero and hid the stale-data notice as well.
+  const tampered = JSON.parse(JSON.stringify(room));
+  const victim = tampered.students[tampered.roster[0].id];
+  victim.emotionLog.push({ emoji: "😊", label: "Happy", time: "09:00 AM",
+                           date: "08/07/2027", iso: "2027-08-07" });
+
+  check("a check-in dated next year does not empty the room", () => {
+    const hit = FBI.analyseClassroom({
+      classroom: { ...tampered.classroom, code: tampered.code },
+      roster: tampered.roster, students: tampered.students,
+      notes: tampered.notes, stories: tampered.stories
+    });
+    const before = JSON.stringify(analysis.room.counts), after = JSON.stringify(hit.room.counts);
+    if (before !== after) throw new Error("counts moved: " + before + " -> " + after);
+    if (hit.meta.futureCheckIns !== 1) throw new Error("futureCheckIns = " + hit.meta.futureCheckIns);
+    if (hit.meta.staleDays !== analysis.meta.staleDays) throw new Error("the stale notice was hidden");
+    return analysis.room.counts.alert + " alert before and after; 1 future check-in set aside";
+  });
+
+  const clockStage = document.createElement("div");
+  document.body.appendChild(clockStage);
+  await new Promise(resolve => {
+    ReactDOM.createRoot(clockStage).render(
+      React.createElement(exports.InsightsView, {
+        code: tampered.code, cls: tampered.classroom, roster: tampered.roster,
+        students: tampered.students, stories: tampered.stories, onOpenStudent: () => {}
+      }));
+    setTimeout(resolve, 2500);
+  });
+  check("the view tells the teacher a check-in was dated in the future", () => {
+    const seen = clockStage.textContent || "";
+    if (seen.indexOf("dated in the future") === -1) throw new Error("no notice on screen");
+    return "";
+  });
+  clockStage.remove();
+
   // ---- and the dashboard that hosts it ------------------------------------
   const shell = document.createElement("div");
   document.body.appendChild(shell);

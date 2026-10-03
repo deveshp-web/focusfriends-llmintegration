@@ -2,8 +2,13 @@ Focus Bridge - Room 14 Explorers
 Sarah Chen - Bright Horizons School
 Changes between 2026-07-31 and 2026-08-07
 
-2 eased.
-18 students unchanged.
+1 new, 2 eased.
+17 students unchanged.
+
+NEW (1)
+  Felix: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
 
 EASED (2)
   Ines: high -> medium

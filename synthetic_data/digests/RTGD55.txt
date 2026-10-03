@@ -2,8 +2,19 @@ Focus Bridge - Room 29 Stars
 James Rossi - Maple Ridge Elementary
 Changes between 2026-07-31 and 2026-08-07
 
-1 eased, 1 resolved.
-12 students unchanged.
+3 new, 1 eased, 1 resolved.
+9 students unchanged.
+
+NEW (3)
+  Isla: not flagged -> info
+      4 "calm" check-ins in a row
+      Suggested: Say this one out loud
+  Milo: not flagged -> info
+      9 "happy" check-ins in a row
+      Suggested: Say this one out loud
+  Rosa: not flagged -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🌬️ Rosa has not opened Deep Breathing yet
 
 EASED (1)
   Grace: high -> medium

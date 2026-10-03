@@ -2,11 +2,24 @@ Focus Bridge - Room 5 Champions
 Emily Fischer - Cedar Park Elementary
 Changes between 2026-07-31 and 2026-08-07
 
-1 eased.
-15 students unchanged.
+1 escalated, 2 new, 1 eased.
+12 students unchanged.
+
+ESCALATED (1)
+  Student 6C73: medium -> high
+      4 negative check-ins in a row over 2 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+
+NEW (2)
+  Student 79E6: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
+  Student BB36: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
 
 EASED (1)
-  Noor: high -> medium
+  Student 0DA8: high -> medium
       5 negative check-ins in a row over 2 days
       Suggested: 🌀 Go back to Fidget Spinner
 

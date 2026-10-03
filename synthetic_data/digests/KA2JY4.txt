@@ -1,0 +1,16 @@
+Focus Bridge - Room 30 Friends
+Michael Ahmed - Sunrise Learning Center
+Changes between 2026-07-31 and 2026-08-07
+
+2 new.
+6 students unchanged.
+
+NEW (2)
+  Amara: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
+  Jasper: not flagged -> watch
+      23% of recent check-ins negative, never four in a row
+      Suggested: 🌌 Jasper has not opened Starry Night yet
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

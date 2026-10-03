@@ -2,8 +2,18 @@ Focus Bridge - Room 24 Learners
 Rachel Ahmed - Willow Creek Academy
 Changes between 2026-07-31 and 2026-08-07
 
-3 resolved.
-11 students unchanged.
+1 escalated, 1 new, 3 resolved.
+9 students unchanged.
+
+ESCALATED (1)
+  Leo: medium -> high
+      5 negative check-ins in a row over 3 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+
+NEW (1)
+  Nadia: not flagged -> medium
+      5 negative check-ins in a row over 2 days
+      Suggested: 🌌 Nadia has not opened Starry Night yet
 
 RESOLVED (3)
   Hugo: info -> not flagged

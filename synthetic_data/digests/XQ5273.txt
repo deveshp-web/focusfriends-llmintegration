@@ -2,8 +2,25 @@ Focus Bridge - Room 1 Champions
 Rachel Rossi - Harmony Special Education Center
 Changes between 2026-07-31 and 2026-08-07
 
-1 eased.
-10 students unchanged.
+5 escalated, 1 eased.
+5 students unchanged.
+
+ESCALATED (5)
+  Chloe: watch -> high
+      9 negative check-ins in a row over 3 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+  Maya: info -> watch
+      24% of recent check-ins negative, never four in a row
+      Suggested: 🌧️ Maya has not opened Watch Rain yet
+  Nadia: medium -> high
+      6 negative check-ins in a row over 2 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+  Oliver: watch -> medium
+      7 negative check-ins in a row over 2 days
+      Suggested: 🫧 Oliver has not opened Pop Bubbles yet
+  Wren: watch -> medium
+      5 negative check-ins in a row over 2 days
+      Suggested: 🫧 Wren has not opened Pop Bubbles yet
 
 EASED (1)
   Grace: high -> medium

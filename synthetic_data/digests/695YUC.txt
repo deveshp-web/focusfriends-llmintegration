@@ -2,10 +2,32 @@ Focus Bridge - Room 7 Learners
 Maria Kim - Riverside SPED Cooperative
 Changes between 2026-07-31 and 2026-08-07
 
-1 resolved.
-14 students unchanged.
+2 escalated, 4 new, 1 resolved.
+8 students unchanged.
+
+ESCALATED (2)
+  Student 3607: medium -> high
+      6 negative check-ins in a row over 2 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+  Student C57F: watch -> medium
+      6 negative check-ins in a row over 2 days
+      Suggested: 🌌 Student C57F has not opened Starry Night yet
+
+NEW (4)
+  Student 0C79: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
+  Student 5C7B: not flagged -> info
+      6 "happy" check-ins in a row
+      Suggested: Say this one out loud
+  Student 7608: not flagged -> info
+      4 "calm" check-ins in a row
+      Suggested: Say this one out loud
+  Student E26A: not flagged -> medium
+      5 negative check-ins in a row over 2 days
+      Suggested: 🌬️ Student E26A has not opened Deep Breathing yet
 
 RESOLVED (1)
-  Gabriel: medium -> not flagged
+  Student 3E3E: medium -> not flagged
 
 Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

@@ -27,6 +27,7 @@ from functools import cached_property
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 
+from ..core.timeline import parse_timestamp
 from ..core.triage import display_name
 from ..core.vocabulary import NEGATIVE_EMOTIONS
 from .phrasing import (CALM_ALIASES, CALM_TOOLS, MAX_RECENT_NOTES, NOTE_FLAGS,
@@ -101,9 +102,14 @@ def index_tasks(student):
     for raw in student.get("task_log") or []:
         if not isinstance(raw, dict):
             continue
-        try:
-            at = datetime.fromisoformat(str(raw.get("ts")))
-        except (TypeError, ValueError):
+        # The same tolerant reader every other log path uses. This used to be
+        # `datetime.fromisoformat(raw["ts"])`, which understands the generated
+        # corpus's {ts} rows and nothing else - and the app writes task rows as
+        # {iso, time} with no `ts` at all. So every task row from real app data
+        # was silently dropped, and the activity correlation (the advice this
+        # module itself calls the most actionable) could never fire on it.
+        at = parse_timestamp(raw)
+        if at is None:
             continue  # an unreadable task row simply cannot be placed in time
         label = raw.get("task")
         if isinstance(label, str) and label:
@@ -319,9 +325,15 @@ def read_notes(notes, cutoff):
                "flags": set(), "recent": [], "count": 0}
 
     for note in notes:
-        try:
-            created = datetime.fromisoformat(str(note.get("created_at")))
-        except (TypeError, ValueError):
+        # Through `parse_timestamp`, not `datetime.fromisoformat` directly.
+        # Supabase returns `created_at` as a timezone-aware value
+        # ("...+00:00"), and comparing an aware datetime with the naive cutoff
+        # raised TypeError - stage 2 crashed on the first note from a real
+        # database. `parse_timestamp` drops the offset and keeps the wall-clock
+        # reading, which is also exactly what the browser engine does, so the
+        # two engines keep agreeing on which notes are in the window.
+        created = parse_timestamp({"ts": note.get("created_at")})
+        if created is None:
             continue
         if created < cutoff:
             continue  # older than the window these flags describe

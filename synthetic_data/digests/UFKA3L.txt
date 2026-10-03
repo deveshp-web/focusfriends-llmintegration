@@ -2,13 +2,15 @@ Focus Bridge - Room 4 Stars
 David Cohen - Sunrise Learning Center
 Changes between 2026-07-31 and 2026-08-07
 
-4 eased, 2 resolved.
+1 escalated, 3 eased, 2 resolved.
 15 students unchanged.
 
-EASED (4)
-  Ben: high -> medium
-      5 negative check-ins in a row over 2 days
-      Suggested: 🌧️ Ben has not opened Watch Rain yet
+ESCALATED (1)
+  Camila: info -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🖐️ Camila has not opened 5-4-3-2-1 yet
+
+EASED (3)
   Camila: medium -> info
       4 "happy" check-ins in a row
       Suggested: Say this one out loud

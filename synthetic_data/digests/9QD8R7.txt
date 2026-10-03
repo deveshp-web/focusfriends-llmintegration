@@ -2,8 +2,18 @@ Focus Bridge - Room 30 Champions
 James Fischer - Willow Creek Academy
 Changes between 2026-07-31 and 2026-08-07
 
-1 eased, 5 resolved.
-7 students unchanged.
+1 escalated, 1 new, 1 eased, 5 resolved.
+5 students unchanged.
+
+ESCALATED (1)
+  Mabel: info -> watch
+      36% of recent check-ins negative, never four in a row
+      Suggested: 🌌 Go back to Starry Night
+
+NEW (1)
+  Layla: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
 
 EASED (1)
   Milo: high -> medium

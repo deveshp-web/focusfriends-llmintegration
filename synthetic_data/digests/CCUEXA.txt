@@ -2,15 +2,20 @@ Focus Bridge - Room 11 Champions
 Sarah Cohen - Maple Ridge Elementary
 Changes between 2026-07-31 and 2026-08-07
 
-1 eased, 1 resolved.
-18 students unchanged.
+1 new, 1 eased, 1 resolved.
+17 students unchanged.
+
+NEW (1)
+  Student 1DB1: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
 
 EASED (1)
-  Sana: medium -> watch
+  Student 24FA: medium -> watch
       46% of recent check-ins negative, never four in a row
       Suggested: 🌬️ Go back to Deep Breathing
 
 RESOLVED (1)
-  Chloe: watch -> not flagged
+  Student 6BFD: watch -> not flagged
 
 Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

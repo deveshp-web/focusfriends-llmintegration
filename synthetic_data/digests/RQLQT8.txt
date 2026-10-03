@@ -2,8 +2,16 @@ Focus Bridge - Room 16 Explorers
 Michael Smith - Riverside SPED Cooperative
 Changes between 2026-07-31 and 2026-08-07
 
-2 eased.
-18 students unchanged.
+2 new, 2 eased.
+16 students unchanged.
+
+NEW (2)
+  Dario: not flagged -> watch
+      32% of recent check-ins negative, never four in a row
+      Suggested: 🌀 Dario has not opened Fidget Spinner yet
+  Kayla: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
 
 EASED (2)
   Rosa: medium -> watch

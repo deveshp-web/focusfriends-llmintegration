@@ -2,8 +2,21 @@ Focus Bridge - Room 24 Champions
 Robert Smith - Riverside SPED Cooperative
 Changes between 2026-07-31 and 2026-08-07
 
-1 eased, 1 resolved.
-18 students unchanged.
+1 escalated, 2 new, 1 eased, 1 resolved.
+15 students unchanged.
+
+ESCALATED (1)
+  Ava: medium -> high
+      9 negative check-ins in a row over 4 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+
+NEW (2)
+  Hana: not flagged -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🌀 Go back to Fidget Spinner
+  Zion: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
 
 EASED (1)
   Fatima: high -> medium

@@ -2,8 +2,13 @@ Focus Bridge - Room 18 Friends
 Jennifer Garcia - Bright Horizons School
 Changes between 2026-07-31 and 2026-08-07
 
-1 eased, 3 resolved.
-15 students unchanged.
+1 escalated, 1 eased, 3 resolved.
+14 students unchanged.
+
+ESCALATED (1)
+  Wren: watch -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🌀 Go back to Fidget Spinner
 
 EASED (1)
   Amara: high -> medium

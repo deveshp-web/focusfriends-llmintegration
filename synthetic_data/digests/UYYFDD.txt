@@ -2,8 +2,27 @@ Focus Bridge - Room 3 Friends
 Emily Torres - Willow Creek Academy
 Changes between 2026-07-31 and 2026-08-07
 
-3 resolved.
-13 students unchanged.
+2 escalated, 3 new, 3 resolved.
+8 students unchanged.
+
+ESCALATED (2)
+  Jun: medium -> high
+      6 negative check-ins in a row over 2 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+  Malik: medium -> high
+      5 negative check-ins in a row over 3 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+
+NEW (3)
+  Ines: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
+  Noor: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
+  Rosa: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
 
 RESOLVED (3)
   Emmy: medium -> not flagged

@@ -2,16 +2,35 @@ Focus Bridge - Room 14 Friends
 Andrew Walsh - Northgate Elementary
 Changes between 2026-07-31 and 2026-08-07
 
-1 eased, 2 resolved.
-14 students unchanged.
+2 escalated, 3 new, 1 eased, 2 resolved.
+9 students unchanged.
+
+ESCALATED (2)
+  Student 9D97: medium -> high
+      5 negative check-ins in a row over 2 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+  Student CE73: medium -> high
+      5 negative check-ins in a row over 2 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+
+NEW (3)
+  Student 1B1E: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
+  Student 800C: not flagged -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🌀 Student 800C has not opened Fidget Spinner yet
+  Student 8A45: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
 
 EASED (1)
-  Gabriel: medium -> info
+  Student 2DD9: medium -> info
       9 "happy" check-ins in a row
       Suggested: Say this one out loud
 
 RESOLVED (2)
-  Camila: high -> not flagged
-  Fatima: medium -> not flagged
+  Student 1AB8: high -> not flagged
+  Student A492: medium -> not flagged
 
 Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

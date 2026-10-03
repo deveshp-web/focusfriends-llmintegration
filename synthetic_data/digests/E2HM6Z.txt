@@ -2,8 +2,27 @@ Focus Bridge - Room 16 Stars
 Ashley Chen - Harmony Special Education Center
 Changes between 2026-07-31 and 2026-08-07
 
-1 eased, 1 resolved.
-17 students unchanged.
+1 escalated, 4 new, 1 eased, 1 resolved.
+12 students unchanged.
+
+ESCALATED (1)
+  Elowen: watch -> high
+      5 negative check-ins in a row over 2 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+
+NEW (4)
+  Ava: not flagged -> info
+      6 "excited" check-ins in a row
+      Suggested: Say this one out loud
+  Isla: not flagged -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🌌 Isla has not opened Starry Night yet
+  Kai: not flagged -> watch
+      24% of recent check-ins negative, never four in a row
+      Suggested: 🌀 Kai has not opened Fidget Spinner yet
+  Zara: not flagged -> medium
+      5 negative check-ins in a row over 2 days
+      Suggested: 🌬️ Zara has not opened Deep Breathing yet
 
 EASED (1)
   Layla: watch -> info

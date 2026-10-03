@@ -127,7 +127,7 @@ That starts a local server, drives headless Chrome (or Edge), and prints:
 
 ```
 [ok  ] tools/verify.html    All 411 checks agree with the Python pipeline.
-[ok  ] tools/smoke.html     All 20 smoke checks passed
+[ok  ] tools/smoke.html     All 22 smoke checks passed
 [ok  ] tools/e2e.html       All 19 end-to-end checks passed
 ```
 
@@ -163,7 +163,12 @@ down together" rule fires; `XDZYTL` is lighter.
 
 ## Two things to know about the numbers
 
-**The window is anchored to the room's own latest check-in, not to today.**
+**The window is anchored to the room's own latest believable check-in, not to
+today.** "Believable" because a check-in dated more than a day in the future is
+a tablet with the wrong clock, not data: it is left out and the tab says so in
+its own notice. Before that guard, one such check-in moved the window past
+everyone's real data — on a sample room it took the alert queue from 12
+children to none and hid the stale-data notice too.
 Anchoring to `now` would show an empty page for any class that has not checked
 in this month — including every sample room — and "no flags" and "no data" are
 very different answers. When the newest check-in is more than two days old the
@@ -178,33 +183,51 @@ and time rules never fire at all. The archetypes carry emotion *streaks*, not
 activities that trigger them. That rule exists for live app data, where a child
 who comes apart at every Gym transition is an ordinary case.
 
-## One bug found upstream, not fixed here
+## Running against a real database
 
-`focusbridge/recommend/context.py::index_tasks` reads task timestamps with
-`datetime.fromisoformat(str(raw.get("ts")))` instead of going through
-`parse_timestamp`, the tolerant reader every other log path in the project uses.
+Everything above runs offline, on sample data. With the Supabase URL and key
+filled in at the top of `index.html`, the same Insights tab analyses the class
+the teacher's dashboard loaded from the database. The schema it needs is
+`../supabase/focus-bridge-schema-secure.sql`, and its security tests sit beside
+it.
 
-App task rows are `{emoji, task, time, iso}` and carry no `ts`, so **every task
-row from an app export is silently dropped**, and the activity correlation — the
-rule the recommender itself calls "the strongest thing a teacher can actually
-change" — can never fire on live data. It only ever worked on the generated
-corpus.
+Four changes to this app came with that schema, and the original app in
+`../focusbridge_sourcecode/` has the same changes:
 
-Demonstrated on `stu_3432bd2e6cf4`: identical timeline, identical streaks,
-identical flagged positions, and the cluster (Transition to Gym, 8 of 12 flagged
-against a 36% baseline, p=0.029) present from corpus rows and absent from app
-rows.
+* **Coming back needs proof.** A returning child's device now sends the child's
+  session token, or the secret of a tablet the teacher trusted. A class code
+  alone used to be enough to become any child. *Settings* has *Trust this
+  device* and *Stop trusting all devices*.
+* **Consent is bound to the child's session**, so it cannot be recorded for
+  someone else.
+* **The teacher's identity goes with teacher-only calls.** Before, "Delete my
+  account" sent only the public key, so no server could tell whose account it
+  was.
+* **A device that cannot load the child's record says so.** It used to open an
+  empty profile instead: no stars, no check-ins, and every save refused, so a
+  child could keep checking in while nothing reached their teacher. Now it
+  shows *"Let's sign you in again"*, with the reason, *Try again* and *Back to
+  sign in*. Every device meets this once after the database upgrade.
 
-`fb-insights.js` does not share the bug — its `indexTasks` uses the same
-tolerant parser as its check-in reader. The upstream fix is one line:
+And two changes to this app only. The Insights tab **pages its notes
+request**: Supabase returns at most 1,000 rows per request by default, and a
+single request sorted oldest-first lost the *newest* notes, which are the only
+ones the analysis window reads. And **`sw.js` moved to cache v32**, because
+`fb-insights.js` changed and scripts are served cache-first. Without the bump,
+every device that had opened the app before would have kept the old engine.
+`../deploy/build_site.py` stamps the cache name on every build, so a Netlify
+deploy cannot repeat that mistake.
 
-```python
-# focusbridge/recommend/context.py, in index_tasks()
-at = parse_timestamp(raw)          # was: datetime.fromisoformat(str(raw.get("ts")))
-if at is None:
-    continue
-```
+## Bugs the port's tests turned up in the pipeline, now fixed
 
-Left unapplied because it is outside this folder; `tools/verify_engine.py`
-converts task rows to the corpus schema so the comparison is not distorted by
-it, and says so in a comment where it does.
+Both were invisible on the generated corpus and only appeared on data shaped
+like the app's:
+
+* `recommend/context.py::index_tasks` read task times with
+  `datetime.fromisoformat(raw["ts"])`. App task rows have no `ts`, so every one
+  was dropped, and the activity rule could never fire on real data. It now uses
+  `parse_timestamp`, like every other log reader. `tools/verify_engine.py`
+  used to translate task rows to step around this; it now passes the app's own
+  rows through unchanged, and all 411 checks still agree.
+* `read_notes` compared Supabase's timezone-aware `created_at` with a naive
+  cutoff, which crashed the recommendation stage on the first real note.

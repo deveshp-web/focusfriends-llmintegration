@@ -2,10 +2,15 @@ Focus Bridge - Room 17 Explorers
 Daniel Okafor - Harmony Special Education Center
 Changes between 2026-07-31 and 2026-08-07
 
-1 resolved.
-7 students unchanged.
+1 new, 1 resolved.
+6 students unchanged.
+
+NEW (1)
+  Student E67B: not flagged -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🌬️ Student E67B has not opened Deep Breathing yet
 
 RESOLVED (1)
-  Amara: medium -> not flagged
+  Student 5395: medium -> not flagged
 
 Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

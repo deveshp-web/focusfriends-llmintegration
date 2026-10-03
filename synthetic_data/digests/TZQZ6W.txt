@@ -2,8 +2,21 @@ Focus Bridge - Room 19 Friends
 Emily Rossi - Northgate Elementary
 Changes between 2026-07-31 and 2026-08-07
 
-1 resolved.
-10 students unchanged.
+1 escalated, 2 new, 1 resolved.
+7 students unchanged.
+
+ESCALATED (1)
+  Dario: watch -> high
+      8 negative check-ins in a row over 3 days
+      Suggested: Sustained run - worth a second pair of eyes
+
+NEW (2)
+  Diego: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
+  Ines: not flagged -> watch
+      36% of recent check-ins negative, never four in a row
+      Suggested: 🌀 Ines has not opened Fidget Spinner yet
 
 RESOLVED (1)
   Quinn: watch -> not flagged

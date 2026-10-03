@@ -125,6 +125,15 @@ def main(argv=None):
     parser.add_argument("--browser", default=None)
     args = parser.parse_args(argv)
 
+    # The pages report check names that contain emoji. A default Windows
+    # console encodes output as cp1252, which cannot represent them, so the
+    # print crashed with UnicodeEncodeError after the tests had passed - the
+    # one-command check failed on the platform this project is built on.
+    # `errors="replace"` keeps any console readable rather than crashing it.
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="replace")
+
     browser = args.browser or find_browser()
     if not browser:
         sys.exit("no Chrome or Edge found. Pass --browser, or open tools/verify.html "

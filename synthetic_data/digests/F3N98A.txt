@@ -1,0 +1,13 @@
+Focus Bridge - Room 4 Stars
+Kevin Patel - Bright Horizons School
+Changes between 2026-07-31 and 2026-08-07
+
+1 new.
+6 students unchanged.
+
+NEW (1)
+  Student 2335: not flagged -> watch
+      37% of recent check-ins negative, never four in a row
+      Suggested: 🌬️ Go back to Deep Breathing
+
+Every line above is a rule with a stated trigger. Open the dashboard for the evidence behind each one.

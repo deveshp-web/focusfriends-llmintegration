@@ -2,11 +2,27 @@ Focus Bridge - Room 28 Explorers
 Carlos Patel - Bright Horizons School
 Changes between 2026-07-31 and 2026-08-07
 
-1 eased.
-13 students unchanged.
+1 escalated, 3 new, 1 eased.
+9 students unchanged.
+
+ESCALATED (1)
+  Student A000: medium -> high
+      4 negative check-ins in a row over 3 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+
+NEW (3)
+  Student 3759: not flagged -> watch
+      33% of recent check-ins negative, never four in a row
+      Suggested: 🖐️ Student 3759 has not opened 5-4-3-2-1 yet
+  Student D583: not flagged -> info
+      5 "happy" check-ins in a row
+      Suggested: Say this one out loud
+  Student DE0A: not flagged -> medium
+      4 negative check-ins in a row over 2 days
+      Suggested: 🫧 Student DE0A has not opened Pop Bubbles yet
 
 EASED (1)
-  Noor: high -> medium
+  Student 99C9: high -> medium
       4 negative check-ins in a row over 2 days
       Suggested: 🌀 Go back to Fidget Spinner
 

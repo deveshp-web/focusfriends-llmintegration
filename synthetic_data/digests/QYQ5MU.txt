@@ -2,8 +2,16 @@ Focus Bridge - Room 22 Explorers
 Michael Brown - Northgate Elementary
 Changes between 2026-07-31 and 2026-08-07
 
-2 eased, 7 resolved.
-8 students unchanged.
+2 new, 2 eased, 7 resolved.
+6 students unchanged.
+
+NEW (2)
+  Maya: not flagged -> watch
+      27% of recent check-ins negative, never four in a row
+      Suggested: 🌬️ Maya has not opened Deep Breathing yet
+  Oliver: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
 
 EASED (2)
   Omar: high -> medium

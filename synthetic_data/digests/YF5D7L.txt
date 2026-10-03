@@ -2,13 +2,30 @@ Focus Bridge - Room 2 Stars
 James Kim - Harmony Special Education Center
 Changes between 2026-07-31 and 2026-08-07
 
-1 eased, 4 resolved.
-22 students unchanged.
+2 escalated, 4 new, 4 resolved.
+17 students unchanged.
 
-EASED (1)
-  Felix: high -> medium
-      4 negative check-ins in a row over 2 days
-      Suggested: 🌬️ Felix has not opened Deep Breathing yet
+ESCALATED (2)
+  Hugo: info -> watch
+      26% of recent check-ins negative, never four in a row
+      Suggested: 🌬️ Hugo has not opened Deep Breathing yet
+  Isla: medium -> high
+      5 negative check-ins in a row over 3 days, across 2 separate episodes
+      Suggested: Bring this one to your support team
+
+NEW (4)
+  Camila: not flagged -> info
+      5 "happy" check-ins in a row
+      Suggested: Say this one out loud
+  Felix: not flagged -> medium
+      5 negative check-ins in a row over 2 days
+      Suggested: 🌀 Go back to Fidget Spinner
+  Jayden: not flagged -> watch
+      25% of recent check-ins negative, never four in a row
+      Suggested: 🌀 Jayden has not opened Fidget Spinner yet
+  Sadie: not flagged -> info
+      4 "happy" check-ins in a row
+      Suggested: Say this one out loud
 
 RESOLVED (4)
   Dario: medium -> not flagged
