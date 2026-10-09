@@ -1,0 +1,16 @@
+# Build output and Gradle's working files
+build/
+.gradle/
+.idea/
+*.iml
+.kotlin/
+
+# Machine-specific: where this computer keeps the Android SDK
+local.properties
+
+# Signing keys and passwords never go in the repository. The release build
+# reads them from environment variables (see README.md).
+*.keystore
+*.jks
+keystore.properties
+signing-key-info.txt

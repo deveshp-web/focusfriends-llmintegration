@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Green status bar, white page underneath: the site's own colours.
+         (From Android 15 the bars are see-through and MainActivity paints
+         the green itself.) -->
+    <style name="Theme.FocusBridge" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:colorPrimary">#27AE60</item>
+        <item name="android:colorPrimaryDark">#27AE60</item>
+        <item name="android:colorAccent">#27AE60</item>
+        <item name="android:statusBarColor">#27AE60</item>
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
+</resources>

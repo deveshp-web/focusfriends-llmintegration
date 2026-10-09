@@ -1,0 +1,46 @@
+<!doctype html>
+<!-- Shown by MainActivity when the site cannot be reached and nothing is cached
+     yet - in practice, the very first time the app is opened without internet.
+     After one visit online, the site's service worker keeps a copy and this
+     page is not needed. Self-contained: no network, no scripts from anywhere. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Focus Bridge</title>
+<style>
+  html, body { margin: 0; height: 100%; }
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: #FFF8F0; color: #2c3e50;
+    display: flex; align-items: center; justify-content: center; padding: 24px;
+    box-sizing: border-box; text-align: center;
+  }
+  .card { max-width: 380px; }
+  .face { font-size: 64px; line-height: 1; }
+  h1 { font-size: 22px; margin: 16px 0 8px; }
+  p { font-size: 16px; line-height: 1.5; color: #556; margin: 0 0 24px; }
+  button {
+    font: inherit; font-weight: 800; font-size: 17px; color: white;
+    background: #27AE60; border: none; border-radius: 16px;
+    padding: 14px 32px; min-width: 200px; cursor: pointer;
+  }
+  button:active { transform: scale(0.97); }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="face" aria-hidden="true">🌤️</div>
+    <h1>No internet yet</h1>
+    <p>Focus Bridge needs the internet the first time it opens.
+       After that, it keeps working without it.</p>
+    <button id="retry" type="button">Try again</button>
+  </div>
+<script>
+  var retry = new URLSearchParams(location.search).get("retry") || "https://focusbridge.org/";
+  document.getElementById("retry").addEventListener("click", function () {
+    location.replace(retry);
+  });
+</script>
+</body>
+</html>

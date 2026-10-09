@@ -1,12 +1,13 @@
 # Focus Bridge — synthetic data, emotion detection, and the teacher dashboard
 
-Five things live here:
+Six things live here:
 
     focusbridge_sourcecode/   the Focus Bridge app (single-file React/Babel build)
     synthetic_data/           a synthetic corpus and the pipeline that reads it
     integrated_version/       the app with the pipeline's insights built into it
     supabase/                 the database both apps run against, and its security tests
     deploy/                   the build that turns the app into the site Netlify serves
+    android/                  the Play Store app: a WebView around that site
 
 To put it online, read [DEPLOY.md](DEPLOY.md).
 

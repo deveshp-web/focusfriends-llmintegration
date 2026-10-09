@@ -51,6 +51,22 @@ window.FB_HOME_ONLY = false;
      site code below (also do it in privacy.html), then redeploy. -->
 <script>window.FF_ANALYTICS="";</script>
 <script>if(window.FF_ANALYTICS){var gcs=document.createElement("script");gcs.async=true;gcs.src="https://gc.zgo.at/count.js";gcs.setAttribute("data-goatcounter","https://"+window.FF_ANALYTICS+".goatcounter.com/count");document.head.appendChild(gcs);}</script>
+<!-- INSIDE THE ANDROID APP. The Play Store app (android/ in this repository) shows
+     this page in a WebView, and a WebView lacks three things the page uses:
+     speech synthesis (read-aloud), downloads ("Download my data"), and a
+     dependable clipboard. The app hands the page a small native bridge,
+     window.FBNative, and these three go through it instead. In a browser
+     FBNative does not exist, so nothing here runs. -->
+<script>(function(){
+  var n=window.FBNative;if(!n)return;
+  if(!window.speechSynthesis){
+    window.SpeechSynthesisUtterance=function(text){this.text=String(text==null?"":text);this.rate=1;this.pitch=1;};
+    window.speechSynthesis={speaking:false,pending:false,getVoices:function(){return[];},
+      speak:function(u){n.speak(u.text,+u.rate||1,+u.pitch||1);},cancel:function(){n.stop();}};
+  }
+  var clipboard={writeText:function(t){try{n.copyText(String(t));return Promise.resolve();}catch(e){return Promise.reject(e);}}};
+  try{Object.defineProperty(navigator,"clipboard",{value:clipboard,configurable:true});}catch(e){}
+})();</script>
 <script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('./sw.js').catch(function(){});});}</script>
 <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -380,7 +396,8 @@ const ago=iso=>{if(!iso)return"never";const m=Math.floor((Date.now()-new Date(is
 const todayISO=()=>new Date().toISOString().slice(0,10);
 const yesterISO=()=>{const d=new Date();d.setDate(d.getDate()-1);return d.toISOString().slice(0,10);};
 const shuffle=a=>[...a].sort(()=>Math.random()-.5);
-const download=(filename,text)=>{try{const b=new Blob([text],{type:"application/json"});const u=URL.createObjectURL(b);const a=document.createElement("a");a.href=u;a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);}catch{}};
+// In the Android app a blob link downloads nothing, so the native bridge saves the file.
+const download=(filename,text)=>{if(window.FBNative){window.FBNative.saveFile(filename,"application/json",String(text));return;}try{const b=new Blob([text],{type:"application/json"});const u=URL.createObjectURL(b);const a=document.createElement("a");a.href=u;a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);}catch{}};
 // Anonymous usage ping — increments an aggregate event counter only. Sends NO
 // names, IDs, class codes, or per-child identifiers, and does nothing at all
 // unless the site owner has enabled the optional counter in index.html.

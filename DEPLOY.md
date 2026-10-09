@@ -95,6 +95,50 @@ Open the site. The landing page should say **🔒 Server connected**. On a
 trusted tablet, a child taps their name and sees their own stars and
 check-ins.
 
+## The Android app (Google Play)
+
+The Play Store app (`android/`, see its README) is a WebView showing
+focusbridge.org. So it is exactly as healthy as the site and the database,
+and the order above still comes first: **database, then site, then app**.
+The site has to be up before the app ships, because it carries the code that
+connects read-aloud, saving and copying to the app.
+
+1. Build `app-release.aab` (android/README.md) and upload it to your
+   **closed testing** track as a new release of the same app. Testers get it
+   as an update, and the 14-day clock keeps running.
+2. Fix the privacy policy before you apply for production. `privacy.html`
+   is still marked *"Draft — pending legal review"* and has blanks:
+   `[DATE]`, `[DESCRIBE YOUR VERIFICATION METHOD]`, `[REGION]`,
+   `[RETENTION PERIOD]`, `[TIMEFRAME]`, `[CONTACT]` and
+   `[NAME / ROLE] — [EMAIL] — [MAILING ADDRESS]`. Play requires a complete
+   policy for any app that reaches children, and the reviewer reads it.
+3. Update **App content → Data safety**. The app includes classroom mode, so
+   it does collect data, and the form must say so. A starting point (check
+   it against your own reading and your attorney's):
+
+   | Question | Answer |
+   |---|---|
+   | Collects or shares required data types? | **Yes** |
+   | Encrypted in transit? | **Yes**. The app loads only HTTPS, and Supabase is HTTPS. |
+   | Users can ask for deletion? | **Yes**. In the app (a child's own data, a teacher's whole account), and at `https://focusbridge.org/delete-account.html`, which is also the "delete account URL" Play asks for. |
+   | Shared with third parties? | **No**. Supabase stores the data on your behalf, which Play's definitions count as a service provider, not sharing. |
+   | **Personal info → Name** | Collected. A student's first name or nickname (or an ID, at the teacher's choice), and a teacher's display name. Purpose: app functionality. |
+   | **Personal info → User IDs** | Collected. A teacher's sign-in username, and student IDs. Purpose: app functionality, account management. |
+   | **Personal info → Other info** | Collected. A school's name and ZIP code, entered by the teacher. Purpose: analytics, for counts by region only. |
+   | **Health and fitness → Health info** | Collected. The emotion check-ins describe how a child feels, so declare them here. Over-declaring costs little, and under-declaring is a policy violation. Purpose: app functionality. |
+   | **App activity → App interactions** | Collected. Tasks done, stories read, stars and badges. |
+   | **App activity → Other user-generated content** | Collected. Teachers' notes and the social stories they write. |
+
+   Home mode keeps everything on the device, and data that never leaves the
+   device is not "collected" in Play's sense. If you ever switch on the
+   GoatCounter counts (`FB_ANALYTICS`), add them too.
+4. In the production-access questionnaire, be specific. Say who your testers
+   were, what they reported, and what you changed. Moving from a TWA to a
+   native app with read-aloud, saving and an offline screen is a real change
+   made in response to testing. Google requires at least 12 testers opted
+   in for the last 14 days, and it looks for people actually using the app,
+   each on their own phone.
+
 ## If something goes wrong
 
 - **"Database function … not found"** in the app: the database step did not
