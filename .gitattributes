@@ -1,0 +1,4 @@
+# Unix line endings everywhere, on every checkout: Xcode project files and
+# Swift sources are LF, and a Windows clone must not turn them into CRLF.
+* text=auto eol=lf
+*.png binary
