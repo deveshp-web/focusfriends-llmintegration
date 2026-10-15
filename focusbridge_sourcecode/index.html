@@ -160,17 +160,22 @@ const asArr=v=>Array.isArray(v)?v:[];
 // Last server error, surfaced to the user instead of a generic failure message.
 // Declared before its first use (let is not hoisted).
 let LAST_ERR="";
+// What people see when something fails that they can't fix themselves. The
+// technical detail goes to the browser console, for whoever is debugging;
+// instructions about databases and config files are not for teachers or children.
+const SORRY="Something went wrong on our side. Please try again in a minute.";
+const OFFLINE="Couldn't connect. Check your internet connection and try again.";
+const FEEDBACK_EMAIL="deveshpunetha14@gmail.com";
+const techErr=detail=>{try{console.warn("[Focus Bridge]",detail);}catch{}};
 // authenticated table access (used by logged-in teachers; RLS enforces ownership)
 // retries once after refreshing if the access token has expired (401)
 const sbFetch=async(path,method="GET",body=null,extra={},_retry=false)=>{
   try{const opts={method,headers:{...sbH(),...extra}};if(body!==null)opts.body=JSON.stringify(body);
     const r=await fetch(SB_URL+"/rest/v1/"+path,opts);
     if(r.status===401&&!_retry&&SB_REFRESH){const ok=await refreshSession();if(ok)return sbFetch(path,method,body,extra,true);}
-    if(!r.ok){const t=await r.text();LAST_ERR=path.split("?")[0]+": "+r.status+" "+t.slice(0,200);
-      if(/column .* does not exist|schema cache/i.test(t))LAST_ERR="Your database is missing a column the app expects. Re-run focus-bridge-schema-secure.sql in the Supabase SQL Editor (safe to run again).";
-      return null;}
+    if(!r.ok){const t=await r.text();techErr(path.split("?")[0]+": "+r.status+" "+t.slice(0,300));LAST_ERR=SORRY;return null;}
     LAST_ERR="";
-    const t=await r.text();return t?JSON.parse(t):true;}catch(e){LAST_ERR="Could not reach the database ("+(e&&e.message?e.message:"network error")+"). Check the Supabase URL/key in index.html and your connection.";return null;}
+    const t=await r.text();return t?JSON.parse(t):true;}catch(e){techErr("database: "+(e&&e.message?e.message:"network error"));LAST_ERR=OFFLINE;return null;}
 };
 // RPC. Students call these anonymously; each function checks its own proof (a
 // session token, or the secret of a device the teacher trusted). The three
@@ -181,12 +186,13 @@ const sbRpc=async(fn,args,asTeacher=false)=>{
   try{const r=await fetch(SB_URL+"/rest/v1/rpc/"+fn,{method:"POST",headers:{"apikey":SB_KEY,"Authorization":asTeacher?authHdr():"Bearer "+SB_KEY,"Content-Type":"application/json"},body:JSON.stringify(args||{})});
     if(!r.ok){const t=await r.text();
       // The database writes its refusals for people ("ask your teacher to set up
-      // this device"), so show that message rather than the raw response.
-      let said="";try{said=JSON.parse(t).message||"";}catch{}
-      LAST_ERR=said||(fn+": "+r.status+" "+t.slice(0,200));
-      if(r.status===404)LAST_ERR="Database function \""+fn+"\" not found. Re-run focus-bridge-schema-secure.sql in the Supabase SQL Editor (it is safe to run again).";
+      // this device") with code P0001, and those are shown as they are. Anything
+      // else is a fault, not a message: say sorry, and log the detail.
+      let body={};try{body=JSON.parse(t)||{};}catch{}
+      techErr(fn+": "+r.status+" "+t.slice(0,300));
+      LAST_ERR=(body.code==="P0001"&&body.message)?body.message:SORRY;
       return null;}
-    LAST_ERR="";const t=await r.text();return t?JSON.parse(t):true;}catch(e){LAST_ERR="Network error reaching the database.";return null;}
+    LAST_ERR="";const t=await r.text();return t?JSON.parse(t):true;}catch(e){techErr(fn+": "+(e&&e.message?e.message:"network error"));LAST_ERR=OFFLINE;return null;}
 };
 // Supabase Auth (GoTrue) REST
 // Teachers sign in with a USERNAME. Supabase Auth needs an address-shaped
@@ -507,7 +513,7 @@ function Landing({onPlay,onStudent,onTeacher,onHome}){
       <div style={{display:"flex",gap:12,marginBottom:14}}>{["🦊","🐱","🐸","🐼","🦄"].map((e,i)=><div key={i} style={{fontSize:"clamp(38px,6vw,54px)",animation:"bounce 2.2s ease-in-out "+(i*0.18)+"s infinite"}}>{e}</div>)}</div>
       <h1 style={{fontSize:"clamp(40px,7vw,72px)",fontWeight:900,color:"white",lineHeight:1.05,marginBottom:10,animation:"fadeUp .7s ease-out"}}>Focus Bridge</h1>
       <p style={{fontSize:"clamp(15px,2.2vw,20px)",color:"rgba(255,255,255,.92)",fontWeight:800,margin:"0 auto 30px"}}>Play, talk, and feel calm — with a buddy!</p>
-      <button onClick={onPlay} style={{background:"white",border:"none",borderRadius:44,padding:"22px 52px",fontFamily:"inherit",fontWeight:900,fontSize:"clamp(22px,3.5vw,30px)",color:"#FF6B4A",cursor:"pointer",boxShadow:"0 12px 44px rgba(0,0,0,.22)",animation:"pulse 2.4s ease-in-out infinite"}}>▶ Start Playing!</button>
+      <button onClick={onPlay} style={{background:"white",border:"none",borderRadius:44,padding:"22px 52px",fontFamily:"inherit",fontWeight:900,fontSize:"clamp(22px,3.5vw,30px)",color:"#FF6B4A",cursor:"pointer",boxShadow:"0 12px 44px rgba(0,0,0,.22)",animation:"pulse 2.4s ease-in-out infinite"}}>▶ Start Here!</button>
       <div style={{marginTop:14,fontSize:13,fontWeight:800,color:"rgba(255,255,255,.85)"}}>Just tap — no sign-up needed</div>
       <div style={{marginTop:40,display:"flex",gap:12,justifyContent:"center",flexWrap:"wrap",width:"100%",maxWidth:740}}>
         {!HOME_ONLY&&<button onClick={onStudent} className="lift" style={{flex:"1 1 190px",maxWidth:232,background:"rgba(255,255,255,.96)",border:"none",borderRadius:20,padding:"16px 14px",fontFamily:"inherit",cursor:"pointer",textAlign:"center",boxShadow:"0 6px 22px rgba(0,0,0,.15)"}}>
@@ -687,8 +693,8 @@ function TeacherAuth({dbMode,onBack,onAccess}){
     if(!/^\d{5}$/.test(zip.trim())){setErr("Please enter a 5-digit ZIP code.");return;}
     setLoading(true);setErr("");setInfo("");
     const a=await authSignup(mail.trim()||uidToAddr(user),pw);
-    if(a.error){setErr((/invalid/i.test(a.error)&&!mail.trim())?("Sign-up rejected by the server: "+a.error+" Try a simpler username (letters and numbers only), or set window.FB_AUTH_DOMAIN in index.html to a domain you own."):a.error);setLoading(false);return;}
-    if(!a.token){setInfo(mail.trim()?"Account created. Check your email to confirm, then log in.":"Account created, but it needs confirmation. Since you signed up without an email, turn OFF Authentication > Providers > Email > Confirm email in Supabase, then sign up again.");setMode("login");setLoading(false);return;}
+    if(a.error){techErr("sign-up: "+a.error);setErr(/network/i.test(a.error)?OFFLINE:/already|exists|registered/i.test(a.error)?"That username is already taken. Try another, or log in.":/password/i.test(a.error)?a.error:/invalid/i.test(a.error)?"That username can't be used. Try one with only letters and numbers.":SORRY);setLoading(false);return;}
+    if(!a.token){if(!mail.trim())techErr("sign-up needs email confirmation, but this account has no inbox: turn OFF Authentication > Providers > Email > Confirm email in Supabase");setInfo(mail.trim()?"Account created. Check your email to confirm, then log in.":"Your account was created, but it can't be used yet. Please email us at "+FEEDBACK_EMAIL+" and we'll sort it out.");setMode("login");setLoading(false);return;}
     SB_JWT=a.token;SB_REFRESH=a.refresh||"";SB_USER_ID=a.user?.id||"";
     const code=genCode();
     const ok=await DB.createClassroom(code,{name:cn.trim(),teacherName:tn.trim(),tokenReward:tr.trim()||"Special Reward!",tokenGoal:5,nameMode,schoolName:sch.trim(),zip:zip.trim()},SB_USER_ID);
@@ -1366,7 +1372,7 @@ function Dashboard({code,cls,roster=[],students={},loading,dbMode,onRefresh,onBa
       <div style={{width:250,background:"linear-gradient(180deg,#1A6B3C,#27AE60)",display:"flex",flexDirection:"column",position:"fixed",top:0,bottom:0,left:0,zIndex:100,boxShadow:"4px 0 20px rgba(0,0,0,.12)",transform:side?"translateX(0)":"translateX(-260px)",transition:"transform .25s ease"}}>
         <div style={{padding:"18px 18px 14px 66px",borderBottom:"1px solid rgba(255,255,255,.12)"}}><div style={{fontSize:17,fontWeight:900,color:"white"}}>Focus Bridge</div><div style={{fontSize:11,color:"rgba(255,255,255,.6)",fontWeight:700,marginTop:2}}>Teacher Dashboard</div></div>
         <div style={{padding:"14px 18px",borderBottom:"1px solid rgba(255,255,255,.12)"}}><div style={{fontSize:10,color:"rgba(255,255,255,.6)",fontWeight:700,letterSpacing:"1.5px",marginBottom:5}}>CLASS CODE</div><div style={{fontSize:26,fontWeight:900,color:"white",letterSpacing:"5px",marginBottom:7}}>{code}</div><button onClick={copy} style={{background:"rgba(255,255,255,.2)",border:"none",borderRadius:9,padding:"5px 12px",color:"white",fontWeight:800,fontSize:12,cursor:"pointer",fontFamily:"inherit",width:"100%"}}>{copied?"Copied!":"Copy Code"}</button></div>
-        <div style={{padding:"8px 18px",borderBottom:"1px solid rgba(255,255,255,.12)"}}><div style={{fontSize:10,color:"rgba(255,255,255,.55)",fontWeight:700}}>STORAGE: {dbMode==="supabase"?"SECURE (Supabase)":"DEMO MODE"}</div></div>
+        <div style={{padding:"8px 18px",borderBottom:"1px solid rgba(255,255,255,.12)"}}><div style={{fontSize:10,color:"rgba(255,255,255,.55)",fontWeight:700}}>STORAGE: {dbMode==="supabase"?"SECURE SERVER":"DEMO MODE"}</div></div>
         <nav style={{flex:1,padding:"10px"}}>{NAVS.map(n=><button key={n.id} onClick={()=>{setNav(n.id);setSel(null);}} style={{width:"100%",display:"flex",alignItems:"center",gap:10,padding:"11px 12px",border:"none",cursor:"pointer",background:nav===n.id?"rgba(255,255,255,.22)":"transparent",color:"white",borderRadius:11,fontWeight:nav===n.id?900:700,fontSize:14,fontFamily:"inherit",marginBottom:3,textAlign:"left"}}><span style={{fontSize:17}}>{n.icon}</span>{n.label}</button>)}</nav>
         <div style={{padding:"14px 18px",borderTop:"1px solid rgba(255,255,255,.12)"}}><div style={{fontSize:11,color:"rgba(255,255,255,.5)",fontWeight:700,marginBottom:7}}>{clsLocal?.teacherName||"Teacher"}</div><button onClick={onBack} style={{background:"rgba(255,255,255,.15)",border:"none",borderRadius:9,padding:"7px 12px",color:"white",fontWeight:800,fontSize:12,cursor:"pointer",fontFamily:"inherit",width:"100%"}}>Sign Out</button></div>
       </div>
@@ -1387,7 +1393,7 @@ function Dashboard({code,cls,roster=[],students={},loading,dbMode,onRefresh,onBa
         {nav==="students"&&<>
           {hasAct&&<div style={{background:"white",borderRadius:18,padding:18,boxShadow:"0 2px 12px rgba(0,0,0,.06)",marginBottom:16}}><div style={{fontWeight:900,fontSize:14,marginBottom:12}}>Activity — Last 7 Days</div><MiniBars data={actData} xKey="day" color="#27AE60" h={130}/></div>}
           {emoData.length>0&&<div style={{background:"white",borderRadius:18,padding:18,boxShadow:"0 2px 12px rgba(0,0,0,.06)",marginBottom:16}}><div style={{fontWeight:900,fontSize:14,marginBottom:12}}>Class Emotion Overview</div><MiniBars data={emoData} xKey="name" h={140}/></div>}
-          {roster.length===0&&<div style={{background:"white",borderRadius:18,padding:36,textAlign:"center",boxShadow:"0 2px 12px rgba(0,0,0,.06)"}}><div style={{fontSize:50,marginBottom:10}}>🎒</div><div style={{fontWeight:800,fontSize:17,marginBottom:5}}>No students yet!</div><div style={{fontSize:13,color:"#aaa",fontWeight:700}}>Share the class code to get started.</div>{dbMode==="supabase"&&LAST_ERR&&<div style={{marginTop:14,background:"#FFF5F5",border:"2px solid #FFC0C0",borderRadius:12,padding:"12px 14px",textAlign:"left",fontSize:12.5,fontWeight:700,color:"#CC3333",lineHeight:1.6}}><b>The server reported a problem:</b><br/>{LAST_ERR}</div>}{dbMode==="supabase"&&!LAST_ERR&&<div style={{marginTop:14,background:"#F0F8FF",border:"2px solid #BdE0FF",borderRadius:12,padding:"12px 14px",textAlign:"left",fontSize:12.5,fontWeight:700,color:"#2671B8",lineHeight:1.6}}>Connected to the classroom server, and it returned no students for code <b>{code}</b>. If a student already joined, check in Supabase that the <i>classrooms</i> row for {code} has your <i>teacher_id</i> filled in — a blank teacher_id makes the roster invisible.</div>}{dbMode!=="supabase"&&<div style={{marginTop:16,background:"#FFF3E0",border:"2px solid #FFD700",borderRadius:14,padding:"14px 16px",textAlign:"left",fontSize:12.5,fontWeight:700,color:"#8a6d00",lineHeight:1.6}}><b>Why are my students missing?</b><br/>Demo mode stores data only in <i>this</i> browser on <i>this</i> device. Students who joined on their own device are saved on their device, so they cannot appear here.<br/><br/>This copy of the app has no classroom server configured, so cross-device classrooms are unavailable.</div>}</div>}
+          {roster.length===0&&<div style={{background:"white",borderRadius:18,padding:36,textAlign:"center",boxShadow:"0 2px 12px rgba(0,0,0,.06)"}}><div style={{fontSize:50,marginBottom:10}}>🎒</div><div style={{fontWeight:800,fontSize:17,marginBottom:5}}>No students yet!</div><div style={{fontSize:13,color:"#aaa",fontWeight:700}}>Share the class code to get started.</div>{dbMode==="supabase"&&LAST_ERR&&<div style={{marginTop:14,background:"#FFF5F5",border:"2px solid #FFC0C0",borderRadius:12,padding:"12px 14px",textAlign:"left",fontSize:12.5,fontWeight:700,color:"#CC3333",lineHeight:1.6}}><b>The server reported a problem:</b><br/>{LAST_ERR}</div>}{dbMode==="supabase"&&!LAST_ERR&&<div style={{marginTop:14,background:"#F0F8FF",border:"2px solid #BdE0FF",borderRadius:12,padding:"12px 14px",textAlign:"left",fontSize:12.5,fontWeight:700,color:"#2671B8",lineHeight:1.6}}>No students have joined class <b>{code}</b> yet. Students join from the Students screen with this code.</div>}{dbMode!=="supabase"&&<div style={{marginTop:16,background:"#FFF3E0",border:"2px solid #FFD700",borderRadius:14,padding:"14px 16px",textAlign:"left",fontSize:12.5,fontWeight:700,color:"#8a6d00",lineHeight:1.6}}><b>Why are my students missing?</b><br/>Demo mode stores data only in <i>this</i> browser on <i>this</i> device. Students who joined on their own device are saved on their device, so they cannot appear here.<br/><br/>This copy of the app has no classroom server configured, so cross-device classrooms are unavailable.</div>}</div>}
           {roster.length>0&&<div style={{background:"white",borderRadius:18,boxShadow:"0 2px 12px rgba(0,0,0,.06)",overflowX:"auto",marginBottom:16}}><table style={{width:"100%",borderCollapse:"collapse",minWidth:640}}><thead><tr style={{background:"#F8F9FA"}}>{["Student","Stars","Streak","Tasks","Tokens","Last Emotion","Active",""].map(h=><th key={h} style={{padding:"11px 14px",textAlign:"left",fontSize:12,fontWeight:800,color:"#888",borderBottom:"1.5px solid #f0f0f0",whiteSpace:"nowrap"}}>{h}</th>)}</tr></thead><tbody>{roster.map((s,idx)=>{const d=students[s.id]||{};const tasks=(d.schedule||[]).filter(t=>t.done).length;const le=(d.emotionLog||[]).slice(-1)[0];return <tr key={s.id} onClick={()=>{setSel(sel===s.id?null:s.id);setRmArm(false);if(sel!==s.id)loadNotes(s.id);}} style={{cursor:"pointer",background:sel===s.id?"#E8F8F0":idx%2===0?"white":"#FAFAFA",borderBottom:"1px solid #f5f5f5",transition:"background .2s"}}><td style={{padding:"11px 14px"}}><div style={{display:"flex",alignItems:"center",gap:9}}><div style={{width:32,height:32,borderRadius:"50%",background:"#F0FFF4",display:"flex",alignItems:"center",justifyContent:"center",fontSize:19}}>{s.avatar}</div><div style={{fontWeight:800,fontSize:13}}>{dispName(s.name,NM,s.id)}</div></div></td><td style={{padding:"11px 14px"}}><span style={{fontWeight:900,color:"#F1C40F"}}>⭐ {d.stars||0}</span></td><td style={{padding:"11px 14px"}}><span style={{fontWeight:800,fontSize:13}}>🔥 {d.streak||0}</span></td><td style={{padding:"11px 14px"}}><span style={{fontWeight:800,fontSize:13}}>{tasks}/{schedList.length}</span><div style={{width:55,height:4,background:"#f0f0f0",borderRadius:2,marginTop:3,overflow:"hidden"}}><div style={{width:(schedList.length?(tasks/schedList.length)*100:0)+"%",height:"100%",background:"#27AE60",borderRadius:2}}/></div></td><td style={{padding:"11px 14px"}}><span style={{fontWeight:800,fontSize:13}}>{d.tokens||0}/{clsLocal?.tokenGoal||5}</span></td><td style={{padding:"11px 14px"}}>{le?<span style={{fontSize:15}}>{le.emoji} <span style={{fontSize:12,color:"#888",fontWeight:700}}>{le.label}</span></span>:<span style={{fontSize:12,color:"#ccc"}}>—</span>}</td><td style={{padding:"11px 14px",fontSize:12,color:"#aaa",fontWeight:700,whiteSpace:"nowrap"}}>{ago(s.lastSeen)}</td><td style={{padding:"11px 14px"}}><button onClick={e=>{e.stopPropagation();setSel(sel===s.id?null:s.id);setRmArm(false);if(sel!==s.id)loadNotes(s.id);}} style={{background:"#f0f0f0",border:"none",borderRadius:7,padding:"4px 10px",cursor:"pointer",fontWeight:800,fontSize:12,fontFamily:"inherit",color:"#888"}}>{sel===s.id?"Close":"Details"}</button></td></tr>;})}</tbody></table></div>}
           {sel&&sd&&si&&<div style={{background:"white",borderRadius:18,padding:22,boxShadow:"0 4px 20px rgba(39,174,96,.15)",border:"2px solid #27AE60",animation:"slideIn .3s ease-out"}}>
             <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:18,flexWrap:"wrap"}}><div style={{width:48,height:48,borderRadius:"50%",background:"#F0FFF4",display:"flex",alignItems:"center",justifyContent:"center",fontSize:26}}>{si.avatar}</div><div style={{flex:1,minWidth:140}}><div style={{fontWeight:900,fontSize:18}}>{dispName(si.name,NM,si.id)}</div><div style={{fontSize:12,color:"#aaa",fontWeight:700}}>Last active {ago(si.lastSeen)}</div></div><button onClick={()=>exportStudent(si.id)} style={{background:"#EAF6FF",border:"2px solid #BdE0FF",borderRadius:9,padding:"5px 13px",cursor:"pointer",fontWeight:800,fontSize:12,fontFamily:"inherit",color:"#2671B8"}}>Export JSON</button><button onClick={()=>removeStudent(si.id)} style={{background:rmArm?"#FF7675":"#FFF5F5",border:"2px solid "+(rmArm?"#FF7675":"#FFC0C0"),borderRadius:9,padding:"5px 13px",cursor:"pointer",fontWeight:800,fontSize:12,fontFamily:"inherit",color:rmArm?"white":"#CC3333"}}>{rmArm?"Confirm delete?":"Delete data"}</button><button onClick={()=>setSel(null)} style={{background:"#f0f0f0",border:"none",borderRadius:9,padding:"5px 13px",cursor:"pointer",fontWeight:800,fontFamily:"inherit",color:"#888"}}>Close</button></div>
@@ -1422,7 +1428,7 @@ function Dashboard({code,cls,roster=[],students={},loading,dbMode,onRefresh,onBa
         {nav==="sched"&&<div>
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:6,flexWrap:"wrap",gap:8}}><h2 style={{fontSize:19,fontWeight:900,color:"#1A3A2A"}}>Class Schedule</h2><button onClick={saveSched} style={{background:"#27AE60",border:"none",borderRadius:12,padding:"9px 20px",cursor:"pointer",color:"white",fontWeight:900,fontSize:13,fontFamily:"inherit"}}>Save Schedule</button></div>
           <div style={{fontSize:12,color:"#888",fontWeight:700,marginBottom:14}}>These are the activities students can choose from. Each student builds their own day from this list and puts it in the order they like — so there are no fixed times here.</div>
-          <Ok msg={schedMsg==="ok"?"Schedule saved! Students will see it on their next load.":""}/><Err msg={schedMsg==="err"?"Could not save. If you connected before this update, re-run focus-bridge-schema-secure.sql (safe to run twice), then try again.":""}/>
+          <Ok msg={schedMsg==="ok"?"Schedule saved! Students will see it on their next load.":""}/><Err msg={schedMsg==="err"?"Could not save the schedule. Please try again.":""}/>
           <div style={{background:"white",borderRadius:18,padding:16,boxShadow:"0 2px 12px rgba(0,0,0,.06)"}}>
             {ed.map((t,i)=><div key={t.id} style={{borderBottom:i<ed.length-1?"1px solid #f5f5f5":"none",padding:"10px 0"}}>
               <div style={{display:"flex",gap:8,alignItems:"center",flexWrap:"wrap"}}>
@@ -1475,6 +1481,11 @@ function Dashboard({code,cls,roster=[],students={},loading,dbMode,onRefresh,onBa
             </div>
             <Ok msg={setMsg==="ok"?"Saved! Name display and settings updated.":""}/><Err msg={setMsg==="err"?"Could not save. Check your connection.":""}/>
             <Btn onClick={saveSettings} col="#27AE60" small>Save Settings</Btn>
+          </div>
+          <div style={{background:"white",borderRadius:18,padding:22,boxShadow:"0 2px 12px rgba(0,0,0,.06)",marginBottom:14}}>
+            <div style={{fontWeight:900,fontSize:14,marginBottom:6}}>Tell us what you think</div>
+            <div style={{fontSize:12,color:"#888",fontWeight:700,marginBottom:12,lineHeight:1.7}}>Something not working, confusing, or missing for your class? Every message is read, and it shapes the next update.</div>
+            <FeedbackLink who="teacher"/>
           </div>
           {dbMode==="supabase"&&<div style={{background:"white",borderRadius:18,padding:22,boxShadow:"0 2px 12px rgba(0,0,0,.06)",marginBottom:14,border:"2px solid #FFC0C0"}}>
             <div style={{fontWeight:900,fontSize:14,marginBottom:6,color:"#CC3333"}}>Delete my account</div>
@@ -1533,8 +1544,6 @@ const HOME={
   async saveSchedule(tasks){return sSet("home-sched",tasks);},
   async addStory(story){const ex=await sGet("home-stories")||[];return sSet("home-stories",[...ex,story]);},
   async deleteStory(sid){const ex=await sGet("home-stories")||[];return sSet("home-stories",ex.filter(s=>s.id!==sid));},
-  async getRegion(){return sGet("home-region");},
-  async setRegion(v){return sSet("home-region",v);},
   async deleteEverything(){await sDel("home-profile");await sDel("home-student");await sDel("home-sched");await sDel("home-stories");await sDel("home-region");return true;},
 };
 
@@ -1640,17 +1649,24 @@ function HomeSetup({onBack,onReady}){
 
 // Grown-ups area for home mode (behind a parental gate): progress, schedule,
 // reward, data export and delete. All local.
+// "Send feedback": opens the device's email app, addressed to us, with a subject
+// that says who is writing and from where, so tester reports can be told apart.
+function FeedbackLink({who}){
+  const ua=(typeof navigator!=="undefined"&&navigator.userAgent)||"";
+  const where=/FocusBridgeAndroid/.test(ua)?"Android app":/FocusBridgeiOS/.test(ua)?"iOS app":"web";
+  const subject=encodeURIComponent("Focus Bridge feedback ("+who+", "+where+")");
+  return <a href={"mailto:"+FEEDBACK_EMAIL+"?subject="+subject} style={{display:"inline-block",background:"#27AE60",color:"white",borderRadius:12,padding:"11px 20px",fontWeight:900,fontSize:13,textDecoration:"none",fontFamily:"inherit"}}>💬 Send feedback</a>;
+}
+
 function HomeParent({cls,onBack,onChanged,onDeleteAll}){
   const [gate,setGate]=useState(true);
   const [child,setChild]=useState(null);
   const [ed,setEd]=useState([]);const [pickFor,setPickFor]=useState(null);const [schedMsg,setSchedMsg]=useState("");
   const [reward,setReward]=useState(cls?.tokenReward||"");const [goal,setGoal]=useState(cls?.tokenGoal||5);const [setMsg,setSetMsg]=useState("");
   const [delArm,setDelArm]=useState(false);
-  const [zip3,setZip3]=useState("");const [regionSent,setRegionSent]=useState(null);
 
   useEffect(()=>{(async()=>{
     setChild(await HOME.getStudent());
-    setRegionSent(await HOME.getRegion());
     const cs=await HOME.getSchedule();const base=(cs&&cs.length)?cs:SD;
     setEd(base.map(t=>({id:t.id,emoji:t.emoji,label:t.label,time:t.time,mins:t.mins||5})));
   })();},[]);
@@ -1662,7 +1678,6 @@ function HomeParent({cls,onBack,onChanged,onDeleteAll}){
   const saveSched=async()=>{const clean=ed.map((t,i)=>({id:t.id,emoji:t.emoji,label:t.label.trim()||("Task "+(i+1)),time:t.time.trim()||"9:00 AM",mins:Math.max(1,parseInt(t.mins)||5)}));await HOME.saveSchedule(clean);setSchedMsg("ok");setTimeout(()=>setSchedMsg(""),3500);};
   const saveReward=async()=>{const g=Math.min(10,Math.max(1,parseInt(goal)||5));await HOME.updateProfile({tokenReward:reward.trim()||"Special time!",tokenGoal:g});setSetMsg("ok");onChanged&&onChanged();setTimeout(()=>setSetMsg(""),3000);};
   const exportAll=async()=>{const prof=await HOME.getProfile();const st=await HOME.getStudent();download("focus-bridge-home-data.json",JSON.stringify({profile:prof,progress:st,exportedAt:new Date().toISOString()},null,2));};
-  const shareRegion=async()=>{if(zip3.length!==3)return;ping("region-"+zip3);await HOME.setRegion(zip3);setRegionSent(zip3);};
   const doDelete=async()=>{if(!delArm){setDelArm(true);setTimeout(()=>setDelArm(false),3000);return;}await HOME.deleteEverything();await DB.clearSession();onDeleteAll();};
 
   if(gate)return <div style={{minHeight:"100vh",background:"#F0F9F4",fontFamily:"Nunito,sans-serif"}}><style>{CSS}</style><ParentalGate onPass={()=>setGate(false)} onCancel={onBack}/></div>;
@@ -1703,14 +1718,9 @@ function HomeParent({cls,onBack,onChanged,onDeleteAll}){
       </div>
 
       <div style={{background:"white",borderRadius:18,padding:20,boxShadow:"0 2px 12px rgba(0,0,0,.06)",marginBottom:16}}>
-        <div style={{fontWeight:900,fontSize:15,marginBottom:6}}>Help us show where Focus Bridge is used <span style={{fontSize:12,fontWeight:800,color:"#aaa"}}>(optional)</span></div>
-        <div style={{fontSize:12,color:"#888",fontWeight:700,marginBottom:12,lineHeight:1.6}}>If you'd like, share the first 3 digits of your ZIP code. This tells us the general region only — never your street, town, or anything about your child. It is sent as an anonymous count with no name or ID attached, and you can skip this entirely.</div>
-        {regionSent?<div style={{background:"#F0FFF4",border:"2px solid #A8E6CF",borderRadius:12,padding:"10px 14px",fontSize:13,fontWeight:800,color:"#27AE60"}}>Thank you — region shared ({regionSent}xx)</div>:
-        <div style={{display:"flex",gap:9,flexWrap:"wrap",alignItems:"center"}}>
-          <input value={zip3} onChange={e=>setZip3(e.target.value.replace(/\D/g,"").slice(0,3))} inputMode="numeric" placeholder="935" style={{width:110,padding:"11px",border:"2px solid #e8e8e8",borderRadius:12,fontFamily:"inherit",fontWeight:900,fontSize:20,textAlign:"center",letterSpacing:"3px"}} onFocus={e=>e.target.style.borderColor="#27AE60"} onBlur={e=>e.target.style.borderColor="#e8e8e8"}/>
-          <button onClick={shareRegion} disabled={zip3.length!==3} style={{background:zip3.length===3?"#27AE60":"#ddd",border:"none",borderRadius:12,padding:"11px 20px",cursor:zip3.length===3?"pointer":"not-allowed",fontWeight:900,fontSize:13,color:"white",fontFamily:"inherit"}}>Share region</button>
-          <span style={{fontSize:12,fontWeight:700,color:"#bbb"}}>First 3 digits only</span>
-        </div>}
+        <div style={{fontWeight:900,fontSize:15,marginBottom:6}}>Tell us what you think</div>
+        <div style={{fontSize:12,color:"#888",fontWeight:700,marginBottom:12,lineHeight:1.6}}>Something not working, confusing, or missing? Every message is read, and it shapes the next update.</div>
+        <FeedbackLink who="parent"/>
       </div>
 
       <div style={{background:"white",borderRadius:18,padding:20,boxShadow:"0 2px 12px rgba(0,0,0,.06)"}}>

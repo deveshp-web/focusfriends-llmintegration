@@ -114,12 +114,6 @@ public class MainActivity extends Activity {
         }
 
         @Override
-        @SuppressWarnings("deprecation")   // the only callback Android 6 calls
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            return leaveIfExternal(Uri.parse(url));
-        }
-
-        @Override
         public void onPageStarted(WebView view, String url, android.graphics.Bitmap favicon) {
             bridge.setPage(url);
         }

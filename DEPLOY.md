@@ -29,9 +29,23 @@ nothing else here will surprise anyone.
 ## 1. Back up the database
 
 Rolling the site back is easy, but rolling the database back means restoring a
-backup. Take one first. On a paid plan, Supabase keeps daily backups under
-**Database → Backups**. On the free plan, dump it yourself with `pg_dump` and
-the connection string from **Project Settings → Database**.
+backup. Take one first.
+
+- **Free plan** (no dashboard backups): in **Table Editor**, open each of the
+  six tables (`classrooms`, `students`, `notes`, `stories`, `consent`,
+  `audit_log`) and choose **Export → Export table as CSV**. That copies every
+  record. Teacher logins are kept separately by Supabase Auth, and the
+  upgrade doesn't touch them.
+- **Paid plan:** Supabase keeps daily backups under **Database → Backups**.
+
+The upgrade runs as one transaction, so a failure part-way changes nothing.
+The backup is a safety net, not a step you expect to need.
+
+**On the free plan, check the project isn't paused.** Supabase pauses free
+projects after about a week without database activity. Home mode never
+contacts the database, so a quiet week is easy. If the dashboard says the
+project is paused, click **Restore** before anything else. During a closed
+test, sign in as your demo teacher every few days to keep it awake.
 
 ## 2. Upgrade the database
 
@@ -106,12 +120,12 @@ connects read-aloud, saving and copying to the app.
 1. Build `app-release.aab` (android/README.md) and upload it to your
    **closed testing** track as a new release of the same app. Testers get it
    as an update, and the 14-day clock keeps running.
-2. Fix the privacy policy before you apply for production. `privacy.html`
-   is still marked *"Draft — pending legal review"* and has blanks:
-   `[DATE]`, `[DESCRIBE YOUR VERIFICATION METHOD]`, `[REGION]`,
-   `[RETENTION PERIOD]`, `[TIMEFRAME]`, `[CONTACT]` and
-   `[NAME / ROLE] — [EMAIL] — [MAILING ADDRESS]`. Play requires a complete
-   policy for any app that reaches children, and the reviewer reads it.
+2. Keep the privacy policy true. `privacy.html` was finalized on
+   2026-10-09 to match what the app does. Play requires a complete policy
+   for any app that reaches children, and the reviewer reads it. It promises
+   **no analytics**, so switching on the GoatCounter counts (`FB_ANALYTICS`)
+   means updating the policy first. The same goes for adding any new
+   service the page talks to.
 3. Update **App content → Data safety**. The app includes classroom mode, so
    it does collect data, and the form must say so. A starting point (check
    it against your own reading and your attorney's):

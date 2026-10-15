@@ -27,11 +27,15 @@ android {
 
     defaultConfig {
         applicationId = "com.focusbridge"   // the Play listing's package: must never change
-        minSdk = 23
+        // 24 (Android 7.0): the lowest Play's automatic integrity protection,
+        // switched on for this app, accepts. Play refuses uploads below it.
+        minSdk = 24
         targetSdk = 36
-        // Must go up with every upload. The TWA builds were 1-3.
-        versionCode = 4
-        versionName = "1.1.0"
+        // Must go up with every upload. The TWA builds were 1-3; 4 was the first
+        // WebView build; 5 shipped mid-test with the feedback link and plain
+        // error messages (both on the website side).
+        versionCode = 5
+        versionName = "1.1.1"
         buildConfigField("String", "START_URL", "\"$liveSite\"")
     }
 

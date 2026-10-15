@@ -74,7 +74,9 @@ Keep `signing.keystore` and `signing-key-info.txt` somewhere safe and backed
 up. Without them you can never update this app again.
 
 **Every upload needs a higher `versionCode`** in `app/build.gradle.kts`. The
-TWA builds were 1–3; this one is 4.
+TWA builds were 1–3. Version 4 was the first WebView build, and version 5 is
+the same app shipped as a mid-test update: its changes (a feedback link, plain
+error messages) are on the website, which the app shows.
 
 ## Uploading to Play
 
