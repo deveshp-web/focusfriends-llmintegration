@@ -6,11 +6,11 @@ membership.
 
 ## Before anything else
 
-- **The privacy policy must be finished.** `https://focusbridge.org/privacy.html`
-  is still marked "Draft — pending legal review", with blanks for the date,
-  consent method, data region, retention period, response time, and contact
-  name, email and address. App Review reads it, and for an app used by
-  children an unfinished policy is a likely rejection.
+- **The privacy policy must be live and true.** It was finalized on
+  2026-10-09; make sure that version is the one at
+  `https://focusbridge.org/privacy.html` (upload the rebuilt site). App
+  Review reads it. It promises no analytics, so switching analytics on
+  means updating the policy first.
 - **The website and its database must be up to date.** The app shows the live
   site, so anything broken there is broken in the app. See DEPLOY.md in the
   main repository.
@@ -82,7 +82,7 @@ username and password. Then in **Notes**, something like:
 > feelings, follow a picture schedule and use calming tools, and helps their
 > teachers see patterns over time.
 >
-> Without signing in: tap "Start Playing!" for the at-home experience. All
+> Without signing in: tap "Start Here!" for the at-home experience. All
 > of its data stays on the device.
 >
 > Classroom features: tap "Teachers" and sign in with the account above to
